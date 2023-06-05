@@ -86,7 +86,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li> -->
                     <li class="nav-item">
-                        <a href="http://localhost/e-tender_jmto/validator/dashboard" class="nav-link">
+                        <a href="<?= base_url() ?>validator/dashboard" class="nav-link">
                             <span class="text-navy">
                                 <i class="fas fa-tachometer-alt mr-2"></i>
                                 Dashboard
@@ -124,14 +124,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                         <ul class="dropdown-menu border-0 shadow">
                             <li>
-                                <a href="http://localhost/e-tender_jmto/validator/rekanan_baru" class="dropdown-item">
+                                <a href="<?= base_url() ?>validator/rekanan_baru" class="dropdown-item">
                                     <i class="fas fa-user-plus mr-2"></i>
                                     Daftar Rekanan Terbaru
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a href="http://localhost/e-tender_jmto/validator/rekanan_blm_validasi" class="dropdown-item">
+                                <a href="<?= base_url() ?>validator/rekanan_blm_validasi" class="dropdown-item">
                                     <i class="fas fa-user-shield mr-2"></i>
                                     Data Status Rekanan Tervalidasi
                                 </a>

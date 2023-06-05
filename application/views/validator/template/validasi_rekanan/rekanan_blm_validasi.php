@@ -3,27 +3,27 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h5> <img src="<?php echo base_url(); ?>assets/frontend/dist/img/jm1.png" class="brand-image img-circle elevation-3">
-                <span class="text-primary">
-                    <strong>Jasamarga Tollroad Operator</strong>
-                </span>
-            </h5>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">
-                    <h6>
-                        <a>
-                            <span class="text-secondary">
-                                <i class="fas fa-business-time"></i>
-                                <strong>22-Mei-2023 || 22.30.04</strong>
-                            </span>
-                        </a>
-                    </h6>
-                </li>
-            </ol>
-          </div><!-- /.col -->
+            <div class="col-sm-6">
+                <h5> <img src="<?php echo base_url(); ?>assets/frontend/dist/img/jm1.png" class="brand-image img-circle elevation-3">
+                    <span class="text-primary">
+                        <strong>Jasamarga Tollroad Operator</strong>
+                    </span>
+                </h5>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <h6>
+                            <a>
+                                <span class="text-secondary">
+                                    <i class="fas fa-business-time"></i>
+                                    <strong>22-Mei-2023 || 22.30.04</strong>
+                                </span>
+                            </a>
+                        </h6>
+                    </li>
+                </ol>
+            </div><!-- /.col -->
         </div><!-- /.row -->
     </div>
     <!-- /.content-header -->
@@ -136,7 +136,7 @@
                                                             <th style="width:80px">Kualifikasi</th>
                                                             <th style="width:130px">Status Dokumen Upload</th>
                                                             <th style="width:120px">Status Dokumen Cek</th>
-                                                            <th  style="width:140px" class="text-center">Actions</th>
+                                                            <th style="width:140px" class="text-center">Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -159,7 +159,7 @@
                                                                 </h6>
                                                             </td>
                                                             <td>
-                                                                <a href="http://localhost/e-tender_jmto/validator/cek_dokumen">
+                                                                <a href="<?= base_url() ?>validator/cek_dokumen">
                                                                     <button type="button" class="btn btn-warning btn-sm">
                                                                         <i class="fas fa-share-square mr-2"></i>
                                                                         Check
@@ -190,7 +190,7 @@
                                                                 </h6>
                                                             </td>
                                                             <td>
-                                                                <a href="http://localhost/e-tender_jmto/validator/cek_dokumen">
+                                                                <a href="<?= base_url() ?>validator/cek_dokumen">
                                                                     <button type="button" class="btn btn-warning btn-sm">
                                                                         <i class="fas fa-share-square mr-2"></i>
                                                                         Check
@@ -221,7 +221,7 @@
                                                                 </h6>
                                                             </td>
                                                             <td>
-                                                                <a href="http://localhost/e-tender_jmto/validator/cek_dokumen">
+                                                                <a href="<?= base_url() ?>validator/cek_dokumen">
                                                                     <button type="button" class="btn btn-warning btn-sm">
                                                                         <i class="fas fa-share-square mr-2"></i>
                                                                         Check
@@ -252,7 +252,7 @@
                                                                 </h6>
                                                             </td>
                                                             <td>
-                                                                <a href="http://localhost/e-tender_jmto/validator/cek_dokumen">
+                                                                <a href="<?= base_url() ?>validator/cek_dokumen">
                                                                     <button type="button" class="btn btn-warning btn-sm" disabled>
                                                                         <i class="fas fa-share-square mr-2"></i>
                                                                         Check
@@ -265,9 +265,8 @@
                                                             </td>
                                                         </tr>
                                                     </tbody>
-                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -277,10 +276,11 @@
             </div>
         </div>
     </div>
-    <!-- /.content -->
+</div>
+<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
- <!-- <section class="content">
+<!-- <section class="content">
      <div class="container-fluid">
      
      </div>

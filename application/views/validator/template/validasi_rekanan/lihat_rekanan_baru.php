@@ -3,27 +3,27 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h5> <img src="<?php echo base_url(); ?>assets/frontend/dist/img/jm1.png" class="brand-image img-circle elevation-3">
-                <span class="text-primary">
-                    <strong>Jasamarga Tollroad Operator</strong>
-                </span>
-            </h5>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">
-                    <h6>
-                        <a>
-                            <span class="text-secondary">
-                                <i class="fas fa-business-time"></i>
-                                <strong>22-Mei-2023 || 22.30.04</strong>
-                            </span>
-                        </a>
-                    </h6>
-                </li>
-            </ol>
-          </div><!-- /.col -->
+            <div class="col-sm-6">
+                <h5> <img src="<?php echo base_url(); ?>assets/frontend/dist/img/jm1.png" class="brand-image img-circle elevation-3">
+                    <span class="text-primary">
+                        <strong>Jasamarga Tollroad Operator</strong>
+                    </span>
+                </h5>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <h6>
+                            <a>
+                                <span class="text-secondary">
+                                    <i class="fas fa-business-time"></i>
+                                    <strong>22-Mei-2023 || 22.30.04</strong>
+                                </span>
+                            </a>
+                        </h6>
+                    </li>
+                </ol>
+            </div><!-- /.col -->
         </div><!-- /.row -->
     </div>
     <!-- /.content-header -->
@@ -41,10 +41,10 @@
                             </strong>
                         </h5>
                         <div class="card-tools">
-                            <a href="http://localhost/e-tender_jmto/validator/rekanan_baru">
+                            <a href="<?= base_url() ?>validator/rekanan_baru">
                                 <button type="button" class="btn btn-info btn-sm">
                                     <i class="fas fa-caret-square-left mr-2"></i>
-                                        Kembali Ke Tabel Daftar Rekanan Terbaru
+                                    Kembali Ke Tabel Daftar Rekanan Terbaru
                                 </button>
                             </a>
                         </div>
@@ -72,7 +72,7 @@
                                                 <b>Email</b> <a class="float-right">kreatifintelegensi@gmail.com</a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Status Dokumen</b> 
+                                                <b>Status Dokumen</b>
                                                 <a class="float-right">
                                                     <span class="badge badge-danger">
                                                         <strong>Belum Lengkap</strong>
@@ -80,14 +80,14 @@
                                                 </a>
                                             </li>
                                             <li class="list-group-item">
-                                                    <b>Status Tender Terundang</b>
+                                                <b>Status Tender Terundang</b>
                                                 <a class="float-right">
                                                     <span class="badge badge-warning">
                                                         <strong>Belum Tervalidasi</strong>
                                                     </span>
                                                 </a>
                                             </li>
-                                        </u>
+                                            </u>
                                     </div>
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>

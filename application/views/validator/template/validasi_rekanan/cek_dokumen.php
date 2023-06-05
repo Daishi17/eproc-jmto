@@ -3,27 +3,27 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h5> <img src="<?php echo base_url(); ?>assets/frontend/dist/img/jm1.png" class="brand-image img-circle elevation-3">
-                <span class="text-primary">
-                    <strong>Jasamarga Tollroad Operator</strong>
-                </span>
-            </h5>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">
-                    <h6>
-                        <a>
-                            <span class="text-secondary">
-                                <i class="fas fa-business-time"></i>
-                                <strong>22-Mei-2023 || 22.30.04</strong>
-                            </span>
-                        </a>
-                    </h6>
-                </li>
-            </ol>
-          </div><!-- /.col -->
+            <div class="col-sm-6">
+                <h5> <img src="<?php echo base_url(); ?>assets/frontend/dist/img/jm1.png" class="brand-image img-circle elevation-3">
+                    <span class="text-primary">
+                        <strong>Jasamarga Tollroad Operator</strong>
+                    </span>
+                </h5>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <h6>
+                            <a>
+                                <span class="text-secondary">
+                                    <i class="fas fa-business-time"></i>
+                                    <strong>22-Mei-2023 || 22.30.04</strong>
+                                </span>
+                            </a>
+                        </h6>
+                    </li>
+                </ol>
+            </div><!-- /.col -->
         </div><!-- /.row -->
     </div>
     <!-- /.content-header -->
@@ -41,10 +41,10 @@
                             </strong>
                         </h5>
                         <div class="card-tools">
-                            <a href="http://localhost/e-tender_jmto/validator/rekanan_blm_validasi">
+                            <a href="<?= base_url() ?>validator/rekanan_blm_validasi">
                                 <button type="button" class="btn btn-info btn-sm">
                                     <i class="fas fa-caret-square-left mr-2"></i>
-                                        Kembali Ke Tabel Daftar Status Rekanan Tervalidasi
+                                    Kembali Ke Tabel Daftar Status Rekanan Tervalidasi
                                 </button>
                             </a>
                         </div>
@@ -112,7 +112,7 @@
                                                                             <a class="nav-link active" id="custom-tabs-four-nib-tab" data-toggle="pill" href="#custom-tabs-four-nib" role="tab" aria-controls="custom-tabs-four-nib" aria-selected="true">
                                                                                 <i class="fas fa-file-word mr-2"></i>
                                                                                 <strong>
-                                                                                    NIB 
+                                                                                    NIB
                                                                                 </strong>
                                                                             </a>
                                                                         </li>
@@ -121,7 +121,7 @@
                                                                                 <i class="fas fa-file-powerpoint mr-2"></i>
                                                                                 <strong>
                                                                                     SIUP
-                                                                                    
+
                                                                                 </strong>
                                                                             </a>
                                                                         </li>
@@ -130,7 +130,7 @@
                                                                                 <i class="fas fa-file-excel mr-2"></i>
                                                                                 <strong>
                                                                                     SBU
-                                                                                    
+
                                                                                 </strong>
                                                                             </a>
                                                                         </li>
@@ -198,7 +198,7 @@
                                                                                                 <th style="width: 350px">File Dokumen</th>
                                                                                                 <th class="text-center" style="width: 120px">Status Validasi</th>
                                                                                                 <th class="text-center" style="width: 230px">Action</th>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -235,7 +235,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
@@ -268,7 +268,7 @@
                                                                                                 <th style="width: 150px">Kualifikasi</th>
                                                                                                 <th class="text-center" style="width: 150px">Status Validasi</th>
                                                                                                 <th class="text-center" style="width: 220px">Action</th>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -291,7 +291,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <td>46512</td>
@@ -312,7 +312,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <td>47413</td>
@@ -333,7 +333,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
@@ -346,10 +346,10 @@
                                                                                     </ul>
                                                                                 </div>
                                                                             </div>
-                                                                            
+
                                                                         </div>
                                                                         <div class="tab-pane fade" id="custom-tabs-four-siup" role="tabpanel" aria-labelledby="custom-tabs-four-siup-tab">
-                                                                            
+
                                                                             <div class="card card-outline card-warning">
                                                                                 <div class="card-header">
                                                                                     <h6 class="card-title">
@@ -367,7 +367,7 @@
                                                                                                 <th style="width: 350px">File Dokumen</th>
                                                                                                 <th class="text-center" style="width: 120px">Status Validasi</th>
                                                                                                 <th class="text-center" style="width: 230px">Action</th>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -404,7 +404,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
@@ -437,7 +437,7 @@
                                                                                                 <th style="width: 150px">Kualifikasi</th>
                                                                                                 <th class="text-center" style="width: 150px">Status Validasi</th>
                                                                                                 <th class="text-center" style="width: 220px">Action</th>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -460,7 +460,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <td>46512</td>
@@ -481,7 +481,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <td>47413</td>
@@ -502,7 +502,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
@@ -518,7 +518,7 @@
 
                                                                         </div>
                                                                         <div class="tab-pane fade" id="custom-tabs-four-sbu" role="tabpanel" aria-labelledby="custom-tabs-four-sbu-tab">
-                                                                            
+
                                                                             <div class="card card-outline card-success">
                                                                                 <div class="card-header">
                                                                                     <h6 class="card-title">
@@ -536,7 +536,7 @@
                                                                                                 <th style="width: 350px">File Dokumen</th>
                                                                                                 <th class="text-center" style="width: 120px">Status Validasi</th>
                                                                                                 <th class="text-center" style="width: 230px">Action</th>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -573,7 +573,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
@@ -606,7 +606,7 @@
                                                                                                 <th style="width: 150px">Kualifikasi</th>
                                                                                                 <th class="text-center" style="width: 150px">Status Validasi</th>
                                                                                                 <th class="text-center" style="width: 220px">Action</th>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -629,7 +629,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <td>BG009</td>
@@ -650,7 +650,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <td>BS009</td>
@@ -671,7 +671,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
@@ -705,7 +705,7 @@
                                                                                                 <th style="width: 350px">File Dokumen</th>
                                                                                                 <th class="text-center" style="width: 120px">Status Validasi</th>
                                                                                                 <th class="text-center" style="width: 230px">Action</th>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -742,7 +742,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
@@ -751,7 +751,7 @@
 
                                                                         </div>
                                                                         <div class="tab-pane fade" id="custom-tabs-four-akta" role="tabpanel" aria-labelledby="custom-tabs-four-akta-tab">
-                                                                            
+
                                                                             <div class="card card-outline card-info">
                                                                                 <div class="card-header">
                                                                                     <h6 class="card-title">
@@ -769,7 +769,7 @@
                                                                                                 <th style="width: 350px">File Dokumen</th>
                                                                                                 <th class="text-center" style="width: 120px">Status Validasi</th>
                                                                                                 <th class="text-center" style="width: 230px">Action</th>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -806,7 +806,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
@@ -830,7 +830,7 @@
                                                                                                 <th style="width: 350px">File Dokumen</th>
                                                                                                 <th class="text-center" style="width: 120px">Status Validasi</th>
                                                                                                 <th class="text-center" style="width: 230px">Action</th>
-                                                                                                
+
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -867,7 +867,7 @@
                                                                                                         Non Validation
                                                                                                     </button>
                                                                                                 </td> -->
-                                                                                                
+
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
