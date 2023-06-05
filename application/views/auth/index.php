@@ -143,7 +143,7 @@
         <form class="p-3 mt-3" action="<?= base_url('auth') ?>" method="post">
             <div class="form-field d-flex align-items-center">
                 <i class="fas fa fa-user"></i>
-                <input type="text" name="userName" id="userName" placeholder="Email Atau Npwp">
+                <input type="text" name="userName" id="userName" placeholder="Email Atau NIP">
             </div>
             <div class="form-field d-flex align-items-center">
                 <i class="fas fa fa-key"></i>
