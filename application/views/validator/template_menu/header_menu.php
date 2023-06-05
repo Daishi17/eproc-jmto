@@ -102,13 +102,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                         <ul class="dropdown-menu border-0 shadow">
                             <li>
-                                <a href="#" class="dropdown-item">
+                                <a href="<?= base_url('validator/data_kbli') ?>" class="dropdown-item">
                                     <i class="fas fa-file-word mr-2"></i>
                                     Data KBLI
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="dropdown-item">
+                                <a href="<?= base_url('validator/data_sbu') ?>" class="dropdown-item">
                                     <i class="fas fa-file-powerpoint mr-2"></i>
                                     Data SBU
                                 </a>
@@ -137,7 +137,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="dropdown-item">
+                                <a href="<?= base_url() ?>validator/rekanan_terundang" class="dropdown-item">
                                     <i class="fas fa-user-check mr-2"></i>
                                     Data Rekanan Terudang
                                 </a>

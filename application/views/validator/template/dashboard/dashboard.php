@@ -3,27 +3,27 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h5> <img src="<?php echo base_url(); ?>assets/frontend/dist/img/jm1.png" class="brand-image img-circle elevation-3">
-                <span class="text-primary">
-                    <strong>Jasamarga Tollroad Operator</strong>
-                </span>
-            </h5>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">
-                    <h6>
-                        <a>
-                            <span class="text-secondary">
-                                <i class="fas fa-business-time"></i>
-                                <strong>22-Mei-2023 || 22.30.04</strong>
-                            </span>
-                        </a>
-                    </h6>
-                </li>
-            </ol>
-          </div><!-- /.col -->
+            <div class="col-sm-6">
+                <h5> <img src="<?php echo base_url(); ?>assets/frontend/dist/img/jm1.png" class="brand-image img-circle elevation-3">
+                    <span class="text-primary">
+                        <strong>Jasamarga Tollroad Operator</strong>
+                    </span>
+                </h5>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <h6>
+                            <a>
+                                <span class="text-secondary">
+                                    <i class="fas fa-business-time"></i>
+                                    <strong>22-Mei-2023 || 22.30.04</strong>
+                                </span>
+                            </a>
+                        </h6>
+                    </li>
+                </ol>
+            </div><!-- /.col -->
         </div><!-- /.row -->
     </div>
     <!-- /.content-header -->
@@ -65,8 +65,8 @@
                                                                 <b>100</b>
                                                             </h5>
                                                         </span>
-                                                        <a href="http://localhost/e-tender_jmto/validator/rekanan_baru" class="info-box-footer">
-                                                            Informasi Lebih Lanjut 
+                                                        <a href="<?= base_url() ?>validator/rekanan_baru" class="info-box-footer">
+                                                            Informasi Lebih Lanjut
                                                             <i class="fas fa-arrow-circle-right"></i>
                                                         </a>
                                                     </div>
@@ -84,8 +84,8 @@
                                                                 <b>30</b>
                                                             </h5>
                                                         </span>
-                                                        <a href="http://localhost/e-tender_jmto/validator/rekanan_blm_validasi" class="info-box-footer">
-                                                            Informasi Lebih Lanjut 
+                                                        <a href="<?= base_url() ?>validator/rekanan_blm_validasi" class="info-box-footer">
+                                                            Informasi Lebih Lanjut
                                                             <i class="fas fa-arrow-circle-right"></i>
                                                         </a>
                                                     </div>
@@ -103,8 +103,8 @@
                                                                 <b>240</b>
                                                             </h5>
                                                         </span>
-                                                        <a href="#" class="info-box-footer">
-                                                            Informasi Lebih Lanjut 
+                                                        <a href="<?= base_url() ?>validator/rekanan_terundang" class="info-box-footer">
+                                                            Informasi Lebih Lanjut
                                                             <i class="fas fa-arrow-circle-right"></i>
                                                         </a>
                                                     </div>
@@ -123,7 +123,7 @@
                                                             </h5>
                                                         </span>
                                                         <a href="#" class="info-box-footer">
-                                                            Informasi Lebih Lanjut 
+                                                            Informasi Lebih Lanjut
                                                             <i class="fas fa-arrow-circle-right"></i>
                                                         </a>
                                                     </div>
@@ -166,7 +166,7 @@
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="chart">
-                                                        <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                                            <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                                                         </div>
                                                     </div>
                                                     <!-- /.card-body -->
