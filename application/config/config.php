@@ -29,7 +29,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 // $config['base_url']    = "$root";
 
 // $config['base_url']   = 'http://localhost/e-tender_jmto/';
-$config['base_url']   = 'https://jmto-eproc.kintekindo.net';
+$config['base_url']   = 'https://jmto-eproc.kintekindo.net/';
 
 
 /*
