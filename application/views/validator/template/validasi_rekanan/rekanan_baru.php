@@ -25,6 +25,12 @@
                                             Tabel Data Daftar Rekanan Terbaru
                                         </h5>
                                     </div>
+                                    <?php if ($this->session->flashdata('berhasil')) { ?>
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+                                            <?= $this->session->flashdata('berhasil'); ?>
+                                        </div>
+                                    <?php } ?>
                                     <div class="card-body">
                                         <div class="card card-outline collapsed-card card-navy">
                                             <div class="card-header">
@@ -76,12 +82,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        <?php if ($this->session->flashdata('berhasil')) { ?>
-                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
 
-                                                <?= $this->session->flashdata('berhasil'); ?>
-                                            </div>
-                                        <?php } ?>
                                         <div class="card card-outline card-primary">
                                             <div class="card-header">
                                                 <h5 class="card-title">Tabel Data Rekanan Terbaru</h5>
@@ -111,20 +112,29 @@
                                                                 <td>Jasa Lainnya, Jasa Pemborongan</td>
                                                                 <td><?= $value['bentuk_usaha'] ?></td>
                                                                 <td><?= $value['kualifikasi_usaha'] ?></td>
-                                                                <td><?= $value['tgl_daftar'] ?></td>
+                                                                <td><?= date('d-m-Y', strtotime($value['tgl_daftar'])) ?></td>
                                                                 <td>
-                                                                    <a href="<?= base_url() ?>validator/rekanan_baru" class="btn btn-info btn-sm">
+                                                                    <a href="<?= base_url() ?>validator/rekanan_baru/detil_rekanan_baru/<?= $value['id_url_vendor'] ?>" class="btn btn-info btn-sm">
                                                                         <i class="fas fa-glasses mr-2"></i>
-                                                                        View
+                                                                        Detil
                                                                     </a>
                                                                     <a href="<?= base_url() ?>validator/rekanan_baru/terima/<?= $value['id_url_vendor'] ?>" class="btn btn-success btn-sm">
-                                                                        <i class="fas fa-glasses mr-2"></i>
+                                                                        <i class="fas fa-check-square mr-2"></i>
                                                                         Terima
                                                                     </a>
-                                                                    <a href="<?= base_url() ?>validator/rekanan_baru" class="btn btn-danger btn-sm">
-                                                                        <i class="fas fa-glasses mr-2"></i>
-                                                                        Tolak
-                                                                    </a>
+                                                                    <?php
+                                                                    if ($value['sts_aktif'] == NULL) { ?>
+                                                                        <a href="<?= base_url() ?>validator/rekanan_baru/tolak/<?= $value['id_url_vendor'] ?>" class="btn btn-danger btn-sm">
+                                                                            <i class="fas fa-ban mr-2"></i>
+                                                                            Tolak
+                                                                        </a>
+                                                                    <?php } else { ?>
+                                                                        <div class="badge badge-danger">
+                                                                            <!-- <i class="fas fa-times mr-2"></i> -->
+                                                                            Penyedia Di Tolak
+                                                                        </div>
+                                                                    <?php    }  ?>
+
                                                                 </td>
                                                             </tr>
                                                         <?php   }  ?>

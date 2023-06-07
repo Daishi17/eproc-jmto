@@ -1,32 +1,6 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h5> <img src="<?php echo base_url(); ?>assets/frontend/dist/img/jm1.png" class="brand-image img-circle elevation-3">
-                    <span class="text-primary">
-                        <strong>Jasamarga Tollroad Operator</strong>
-                    </span>
-                </h5>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">
-                        <h6>
-                            <a>
-                                <span class="text-secondary">
-                                    <i class="fas fa-business-time"></i>
-                                    <strong>22-Mei-2023 || 22.30.04</strong>
-                                </span>
-                            </a>
-                        </h6>
-                    </li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div>
-    <!-- /.content-header -->
+
 
     <!-- Main content -->
     <div class="content text-sm">
@@ -58,18 +32,23 @@
                                             <img class="profile-user-img img-fluid img-circle" src="<?php echo base_url(); ?>assets/frontend/dist/img/logo usaha.png" alt="User profile picture">
                                         </div>
                                         <h5 class="profile-username text-center text-sm">
-                                            <strong>Kreatif Intelegensi Teknologi</strong>
+                                            <strong><?= $detil_vendor['nama_usaha'] ?></strong>
                                         </h5>
-                                        <p class="text-muted text-center">Jasa Lainnya || Jasa Konsultasi || Jasa Pemborongan</p>
+                                        <p class="text-muted text-center">
+                                            <?php foreach ($kualifikasi as $key => $value) { ?>
+                                                <?php $kualifikasi = $this->db->query("SELECT * FROM tbl_jenis_usaha WHERE id_jenis_usaha = $value")->row_array(); ?>
+                                                <?php echo $kualifikasi['nama_jenis_usaha'] ?> <br>
+                                            <?php    } ?>
+                                        </p>
                                         <ul class="list-group list-group-unbordered mb-3">
                                             <li class="list-group-item">
-                                                <b>Kualifikasi Usaha</b> <a class="float-right">Menengah</a>
+                                                <b>Kualifikasi Usaha</b> <a class="float-right"><?= $detil_vendor['kualifikasi_usaha'] ?></a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>NPWP</b> <a class="float-right">95.725.637.3-411.000</a>
+                                                <b>NPWP</b> <a class="float-right"><?= $detil_vendor['npwp'] ?></a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Email</b> <a class="float-right">kreatifintelegensi@gmail.com</a>
+                                                <b>Email</b> <a class="float-right"><?= $detil_vendor['email'] ?></a>
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Status Dokumen</b>
@@ -110,7 +89,7 @@
                                                     </th>
                                                     <td class="col-sm-10">
                                                         <i class="fas fa-building mr-2"></i>
-                                                        Perseroan Terbatas (PT)
+                                                        <?= $detil_vendor['bentuk_usaha'] ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -119,7 +98,7 @@
                                                     </th>
                                                     <td class="col-sm-10">
                                                         <i class="fas fa-road mr-2"></i>
-                                                        Jl. Kodiklat TNI No. 15 Raya Puspitek
+                                                        <?= $detil_vendor['alamat'] ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -128,7 +107,7 @@
                                                     </th>
                                                     <td class="col-sm-10">
                                                         <i class="fas fa-map mr-2"></i>
-                                                        Banten
+                                                        <?= $detil_vendor['nama_provinsi'] ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -137,7 +116,7 @@
                                                     </th>
                                                     <td class="col-sm-10">
                                                         <i class="fas fa-map-signs mr-2"></i>
-                                                        Tangerang Selatan
+                                                        <?= $detil_vendor['nama_kabupaten'] ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -146,7 +125,7 @@
                                                     </th>
                                                     <td class="col-sm-10">
                                                         <i class="fas fa-route mr-2"></i>
-                                                        Serpong
+                                                        <?= $detil_vendor['nama_kecamatan'] ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -155,7 +134,7 @@
                                                     </th>
                                                     <td class="col-sm-10">
                                                         <i class="fas fa-map-marker-alt mr-3"></i>
-                                                        Buaran
+                                                        <?= $detil_vendor['kelurahan'] ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -164,7 +143,7 @@
                                                     </th>
                                                     <td class="col-sm-10">
                                                         <i class="fas fa-map-pin mr-3"></i>
-                                                        15310
+                                                        <?= $detil_vendor['kode_pos'] ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -173,7 +152,7 @@
                                                     </th>
                                                     <td class="col-sm-10">
                                                         <i class="fas fa-phone-alt mr-2"></i>
-                                                        0811-8333-433
+                                                        <?= $detil_vendor['no_telpon'] ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -182,7 +161,13 @@
                                                     </th>
                                                     <td class="col-sm-10">
                                                         <i class="fas fa-laptop-house mr-2"></i>
-                                                        Tidak Ada
+                                                        <?php if ($detil_vendor['sts_kantor_cabang'] == 1) { ?>
+                                                            Kantor Cabang
+                                                        <?php  } else { ?>
+                                                            Bukan Kantor Cabang
+                                                        <?php    } ?>
+
+
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -190,22 +175,26 @@
                                                         Alamat Kantor Cabang
                                                     </th>
                                                     <td class="col-sm-10">
-                                                        -
+                                                        <?php if ($detil_vendor['sts_kantor_cabang'] == 1) { ?>
+                                                            <?= $detil_vendor['alamat_kantor_cabang'] ?>
+                                                        <?php  } else { ?>
+                                                            -
+                                                        <?php    } ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-sm-2 bg-light">
-                                                        Actions
+                                                        Aksi
                                                     </th>
                                                     <td class="col-sm-10">
-                                                        <button type="button" class="btn btn-success btn-sm">
+                                                        <a href="<?= base_url() ?>validator/rekanan_baru/terima/<?= $detil_vendor['id_url_vendor'] ?>" class="btn btn-success btn-sm">
                                                             <i class="fas fa-check-square mr-2"></i>
-                                                            Accepted
-                                                        </button>
-                                                        <button type="button" class="btn btn-danger btn-sm">
+                                                            Terima
+                                                        </a>
+                                                        <a href="<?= base_url() ?>validator/rekanan_baru/tolak/<?= $detil_vendor['id_url_vendor'] ?>" class="btn btn-danger btn-sm">
                                                             <i class="fas fa-ban mr-2"></i>
-                                                            Rejected
-                                                        </button>
+                                                            Tolak
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </table>

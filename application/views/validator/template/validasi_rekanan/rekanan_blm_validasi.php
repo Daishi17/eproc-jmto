@@ -114,38 +114,119 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Kreatif Intelegensi Teknologi</td>
-                                                            <td>Jasa Lainnya, Jasa Konsultasi</td>
-                                                            <td>Menengah</td>
-                                                            <td>
-                                                                <h6>
-                                                                    <span class="badge badge-success">
-                                                                        <strong>Sudah Upload Dokumen</strong>
-                                                                    </span>
-                                                                </h6>
-                                                            </td>
-                                                            <td>
-                                                                <h6>
-                                                                    <span class="badge badge-warning">
-                                                                        <strong>Belum Tervalidasi</strong>
-                                                                    </span>
-                                                                </h6>
-                                                            </td>
-                                                            <td>
-                                                                <a href="<?= base_url() ?>validator/cek_dokumen">
-                                                                    <button type="button" class="btn btn-warning btn-sm">
-                                                                        <i class="fas fa-share-square mr-2"></i>
-                                                                        Check
-                                                                    </button>
-                                                                </a>
-                                                                <button type="button" class="btn btn-primary btn-sm" disabled>
-                                                                    <i class="fas fa-paper-plane mr-2"></i>
-                                                                    Invited
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
+                                                        <?php foreach ($vendor as $key => $value) { ?>
+                                                            <?php $id_vendor =  $value['id_vendor'] ?>
+                                                            <tr>
+                                                                <td><?= $value['nama_usaha'] ?></td>
+                                                                <td>
+                                                                    <?php $kualifikasi =  str_split($value['id_jenis_usaha']) ?>
+                                                                    <?php foreach ($kualifikasi as $key => $value2) { ?>
+                                                                        <?php $kualifikasi = $this->db->query("SELECT * FROM tbl_jenis_usaha WHERE id_jenis_usaha = $value2")->row_array(); ?>
+                                                                        <?php echo $kualifikasi['nama_jenis_usaha'] ?> <br>
+                                                                    <?php    } ?>
+                                                                </td>
+                                                                <td><?= $value['kualifikasi_usaha'] ?></td>
+                                                                <?php
+                                                                $nib = $this->db->query("SELECT COUNT(*) as NIB FROM tbl_vendor_nib WHERE id_vendor = $id_vendor")->row_array();
+                                                                $siup = $this->db->query("SELECT COUNT(*) as SIUP FROM tbl_vendor_siup WHERE id_vendor = $id_vendor")->row_array();
+                                                                $sbu = $this->db->query("SELECT COUNT(*) as SBU FROM tbl_vendor_sbu WHERE id_vendor = $id_vendor")->row_array();
+                                                                $siujk = $this->db->query("SELECT COUNT(*) as SIUJK FROM tbl_vendor_siujk WHERE id_vendor = $id_vendor")->row_array();
+                                                                ?>
+                                                                <?php $total = $nib['NIB'] + $siup['SIUP'] + $sbu['SBU'] + $siujk['SIUJK']   ?>
+                                                                <td>
+                                                                    <h6>
+                                                                        <?php if ($total > 0) { ?>
+                                                                            <span class="badge badge-success">
+                                                                                <strong>Sudah Upload Dokumen</strong>
+                                                                            </span>
+                                                                        <?php   } else { ?>
+                                                                            <span class="badge badge-warning">
+                                                                                <strong>Belum Upload Dokumen</strong>
+                                                                            </span>
+                                                                        <?php  }  ?>
+
+                                                                    </h6>
+                                                                </td>
+                                                                <td>
+                                                                    <h6>
+                                                                        <?php if ($total == 0) { ?>
+                                                                            <span class="badge badge-secondary">
+                                                                                <strong>Belum Upload</strong>
+                                                                            </span>
+                                                                        <?php } else {  ?>
+                                                                            <?php if ($total == 4) { ?>
+                                                                                <?php if ($value['sts_dokumen_cek'] == 1) { ?>
+                                                                                    <span class="badge badge-success">
+                                                                                        <strong>Sudah Valid</strong>
+                                                                                    </span>
+                                                                                <?php    } else { ?>
+                                                                                    <span class="badge badge-danger">
+                                                                                        <strong>Tidak Valid</strong>
+                                                                                    </span>
+                                                                                <?php   }  ?>
+
+                                                                            <?php } else if ($total == 3) { ?>
+                                                                                <?php if ($value['sts_dokumen_cek'] == 1) { ?>
+                                                                                    <span class="badge badge-danger">
+                                                                                        <strong>Belum Lengkap</strong>
+                                                                                    </span>
+                                                                                <?php   } else { ?>
+                                                                                    <span class="badge badge-danger">
+                                                                                        <strong>Tidak Valid</strong>
+                                                                                    </span>
+                                                                                <?php   }  ?>
+                                                                            <?php  } else if ($total == 2) {  ?>
+                                                                                <span class="badge badge-danger">
+                                                                                    <strong>Belum Upload</strong>
+                                                                                </span>
+                                                                            <?php } else if ($total == 1) { ?>
+                                                                                <?php if ($value['sts_dokumen_cek'] == 1) { ?>
+                                                                                    <span class="badge badge-info">
+                                                                                        <strong>Belum Lengkap</strong>
+                                                                                    </span>
+                                                                                <?php } else if ($value['sts_dokumen_cek'] == 2) { ?>
+                                                                                    <span class="badge badge-warning">
+                                                                                        <strong>Belum Di Validasi</strong>
+                                                                                    </span>
+                                                                                <?php }  ?>
+
+                                                                            <?php } ?>
+                                                                        <?php } ?>
+                                                                    </h6>
+                                                                </td>
+                                                                <td>
+                                                                    <?php if ($total == 4 && $value['sts_dokumen_cek'] == 1) { ?>
+                                                                        <a href="<?= base_url() ?>validator/cek_dokumen">
+                                                                            <button type="button" class="btn btn-warning btn-sm">
+                                                                                <i class="fas fa-share-square mr-2"></i>
+                                                                                Check
+                                                                            </button>
+                                                                        </a>
+                                                                        <button type="button" class="btn btn-primary btn-sm">
+                                                                            <i class="fas fa-paper-plane mr-2"></i>
+                                                                            Invited
+                                                                        </button>
+                                                                        </span>
+                                                                    <?php } else { ?>
+                                                                        <a href="<?= base_url() ?>validator/cek_dokumen">
+                                                                            <button type="button" class="btn btn-warning btn-sm">
+                                                                                <i class="fas fa-share-square mr-2"></i>
+                                                                                Check
+                                                                            </button>
+                                                                        </a>
+                                                                        <button type="button" class="btn btn-primary btn-sm" disabled>
+                                                                            <i class="fas fa-paper-plane mr-2"></i>
+                                                                            Invited
+                                                                        </button>
+                                                                    <?php  } ?>
+
+
+                                                                </td>
+                                                            </tr>
+                                                        <?php    } ?>
+
+
+                                                        <!-- <tr>
                                                             <td>Karya Cita</td>
                                                             <td>Jasa Lainnya, Jasa Pemborongan</td>
                                                             <td>Kecil</td>
@@ -237,7 +318,7 @@
                                                                     Invited
                                                                 </button>
                                                             </td>
-                                                        </tr>
+                                                        </tr> -->
                                                     </tbody>
                                             </div>
                                         </div>
