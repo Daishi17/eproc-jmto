@@ -1,32 +1,6 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h5> <img src="<?php echo base_url(); ?>assets/frontend/dist/img/jm1.png" class="brand-image img-circle elevation-3">
-                    <span class="text-primary">
-                        <strong>Jasamarga Tollroad Operator</strong>
-                    </span>
-                </h5>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">
-                        <h6>
-                            <a>
-                                <span class="text-secondary">
-                                    <i class="fas fa-business-time"></i>
-                                    <strong>22-Mei-2023 || 22.30.04</strong>
-                                </span>
-                            </a>
-                        </h6>
-                    </li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div>
-    <!-- /.content-header -->
+
 
     <!-- Main content -->
     <div class="content text-sm">
@@ -102,6 +76,12 @@
                                                 </form>
                                             </div>
                                         </div>
+                                        <?php if ($this->session->flashdata('berhasil')) { ?>
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+                                                <?= $this->session->flashdata('berhasil'); ?>
+                                            </div>
+                                        <?php } ?>
                                         <div class="card card-outline card-primary">
                                             <div class="card-header">
                                                 <h5 class="card-title">Tabel Data Rekanan Terbaru</h5>
@@ -124,29 +104,30 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Kreatif Intelegensi Teknologi</td>
-                                                            <td>Jasa Lainnya, Jasa Pemborongan</td>
-                                                            <td>Perseroan Terbatas (PT)</td>
-                                                            <td>Menegah</td>
-                                                            <td>03/06/2023</td>
-                                                            <td>
-                                                                <a href="<?= base_url() ?>validator/lihat_rekanan_baru">
-                                                                    <button type="button" class="btn btn-info btn-sm">
+                                                        <?php
+                                                        foreach ($data_vendor as $key => $value) { ?>
+                                                            <tr>
+                                                                <td><?= $value['nama_usaha'] ?></td>
+                                                                <td>Jasa Lainnya, Jasa Pemborongan</td>
+                                                                <td><?= $value['bentuk_usaha'] ?></td>
+                                                                <td><?= $value['kualifikasi_usaha'] ?></td>
+                                                                <td><?= $value['tgl_daftar'] ?></td>
+                                                                <td>
+                                                                    <a href="<?= base_url() ?>validator/rekanan_baru" class="btn btn-info btn-sm">
                                                                         <i class="fas fa-glasses mr-2"></i>
                                                                         View
-                                                                    </button>
-                                                                </a>
-                                                                <button type="button" class="btn btn-success btn-sm">
-                                                                    <i class="fas fa-check-square mr-2"></i>
-                                                                    Accepted
-                                                                </button>
-                                                                <button type="button" class="btn btn-danger btn-sm">
-                                                                    <i class="fas fa-ban mr-2"></i>
-                                                                    Rejected
-                                                                </button>
-                                                            </td>
-                                                        </tr>
+                                                                    </a>
+                                                                    <a href="<?= base_url() ?>validator/rekanan_baru/terima/<?= $value['id_url_vendor'] ?>" class="btn btn-success btn-sm">
+                                                                        <i class="fas fa-glasses mr-2"></i>
+                                                                        Terima
+                                                                    </a>
+                                                                    <a href="<?= base_url() ?>validator/rekanan_baru" class="btn btn-danger btn-sm">
+                                                                        <i class="fas fa-glasses mr-2"></i>
+                                                                        Tolak
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        <?php   }  ?>
                                                     </tbody>
                                             </div>
                                         </div>
