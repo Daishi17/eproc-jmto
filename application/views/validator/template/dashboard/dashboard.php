@@ -37,7 +37,7 @@
                                                                 <b>100</b>
                                                             </h5>
                                                         </span>
-                                                        <a href="http://localhost/e-tender_jmto/validator/rekanan_baru" class="info-box-footer">
+                                                        <a href="<?= base_url() ?>validator/rekanan_baru" class="info-box-footer">
                                                             Informasi Lebih Lanjut
                                                             <i class="fas fa-arrow-circle-right"></i>
                                                         </a>
@@ -56,7 +56,7 @@
                                                                 <b>30</b>
                                                             </h5>
                                                         </span>
-                                                        <a href="http://localhost/e-tender_jmto/validator/rekanan_blm_validasi" class="info-box-footer">
+                                                        <a href="<?= base_url() ?>validator/rekanan_blm_validasi" class="info-box-footer">
                                                             Informasi Lebih Lanjut
                                                             <i class="fas fa-arrow-circle-right"></i>
                                                         </a>
@@ -75,7 +75,7 @@
                                                                 <b>240</b>
                                                             </h5>
                                                         </span>
-                                                        <a href="http://localhost/e-tender_jmto/validator/rekanan_terundang" class="info-box-footer">
+                                                        <a href="<?= base_url() ?>validator/rekanan_terundang" class="info-box-footer">
                                                             Informasi Lebih Lanjut
                                                             <i class="fas fa-arrow-circle-right"></i>
                                                         </a>
