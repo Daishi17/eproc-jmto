@@ -80,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <div class="collapse navbar-collapse order-3 container" id="navbarCollapse">
                 <ul class="navbar-nav">
-                    <li class="nav-item" style="margin-left:-110px">
+                    <li class="nav-item" style="margin-left:-80px">
                         <a class="nav-link">
                             <span class="text-navy"><i class="fas fa-align-justify"></i></span>
                         </a>
