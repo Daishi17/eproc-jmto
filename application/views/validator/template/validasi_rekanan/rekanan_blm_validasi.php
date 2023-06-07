@@ -167,7 +167,7 @@
 
                                                                             <?php } else if ($total == 3) { ?>
                                                                                 <?php if ($value['sts_dokumen_cek'] == 1) { ?>
-                                                                                    <span class="badge badge-danger">
+                                                                                    <span class="badge badge-info">
                                                                                         <strong>Belum Lengkap</strong>
                                                                                     </span>
                                                                                 <?php   } else { ?>
@@ -176,9 +176,15 @@
                                                                                     </span>
                                                                                 <?php   }  ?>
                                                                             <?php  } else if ($total == 2) {  ?>
-                                                                                <span class="badge badge-danger">
-                                                                                    <strong>Belum Upload</strong>
-                                                                                </span>
+                                                                                <?php if ($value['sts_dokumen_cek'] == 1) { ?>
+                                                                                    <span class="badge badge-info">
+                                                                                        <strong>Belum Lengkap</strong>
+                                                                                    </span>
+                                                                                <?php } else if ($value['sts_dokumen_cek'] == 2) { ?>
+                                                                                    <span class="badge badge-warning">
+                                                                                        <strong>Belum Di Validasi</strong>
+                                                                                    </span>
+                                                                                <?php }  ?>
                                                                             <?php } else if ($total == 1) { ?>
                                                                                 <?php if ($value['sts_dokumen_cek'] == 1) { ?>
                                                                                     <span class="badge badge-info">
