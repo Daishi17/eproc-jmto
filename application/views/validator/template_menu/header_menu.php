@@ -152,7 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                        <a style="font-size: 13px;" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
                             <span class="text-navy">
                                 <i class="fas fa-business-time mr-2"></i>
                                 Transaksi Tender
