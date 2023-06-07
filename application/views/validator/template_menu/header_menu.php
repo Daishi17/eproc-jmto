@@ -80,11 +80,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <div class="collapse navbar-collapse order-3 container" id="navbarCollapse">
                 <ul class="navbar-nav">
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link">
                             <span class="text-navy"><i class="fas fa-align-justify"></i></span>
                         </a>
-                    </li> -->
+                    </li>
                     <li class="nav-item">
                         <a href="<?= base_url() ?>validator/dashboard" class="nav-link">
                             <span class="text-navy">
@@ -161,11 +161,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link">
                             <span class="text-navy"><i class="fas fa-align-justify"></i></span>
                         </a>
-                    </li> -->
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <span class="text-navy">
