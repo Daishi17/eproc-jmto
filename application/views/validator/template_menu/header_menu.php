@@ -80,13 +80,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <div class="collapse navbar-collapse order-3 container" id="navbarCollapse">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item" style="margin-left:-110px">
                         <a class="nav-link">
                             <span class="text-navy"><i class="fas fa-align-justify"></i></span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a style="font-size: 13px;" href="<?= base_url() ?>validator/dashboard" class="nav-link">
+                        <a style="font-size:14px" href="<?= base_url() ?>validator/dashboard" class="nav-link">
                             <span class="text-navy">
                                 <i class="fas fa-tachometer-alt mr-2"></i>
                                 Dashboard
@@ -94,7 +94,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a style="font-size: 13px;" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                        <a style="font-size:14px" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
                             <span class="text-navy">
                                 <i class="far fa-folder-open mr-2"></i>
                                 Data Master
@@ -102,13 +102,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                         <ul class="dropdown-menu border-0 shadow">
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url('validator/data_kbli') ?>" class="dropdown-item">
+                                <a style="font-size:14px" href="<?= base_url('validator/data_kbli') ?>" class="dropdown-item">
                                     <i class="fas fa-file-word mr-2"></i>
                                     Data KBLI
                                 </a>
                             </li>
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url('validator/data_sbu') ?>" class="dropdown-item">
+                                <a style="font-size:14px" href="<?= base_url('validator/data_sbu') ?>" class="dropdown-item">
                                     <i class="fas fa-file-powerpoint mr-2"></i>
                                     Data SBU
                                 </a>
@@ -116,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a style="font-size: 13px;" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                        <a style="font-size:14px" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
                             <span class="text-navy">
                                 <i class="fas fa-hospital-user mr-2"></i>
                                 Informasi Data Rekanan
@@ -124,27 +124,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                         <ul class="dropdown-menu border-0 shadow">
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url() ?>validator/rekanan_baru" class="dropdown-item">
+                                <a style="font-size:14px" href="<?= base_url() ?>validator/rekanan_baru" class="dropdown-item">
                                     <i class="fas fa-user-plus mr-2"></i>
                                     Daftar Rekanan Terbaru
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url() ?>validator/rekanan_blm_validasi" class="dropdown-item">
+                                <a style="font-size:14px" href="<?= base_url() ?>validator/rekanan_blm_validasi" class="dropdown-item">
                                     <i class="fas fa-user-shield mr-2"></i>
                                     Data Status Rekanan Tervalidasi
                                 </a>
                             </li>
                             <li>
-                                <a style="font-size: 13px;" href="<?= base_url() ?>validator/rekanan_terundang" class="dropdown-item">
+                                <a style="font-size:14px" href="<?= base_url() ?>validator/rekanan_terundang" class="dropdown-item">
                                     <i class="fas fa-user-check mr-2"></i>
                                     Data Rekanan Terudang
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a style="font-size: 13px;" href="#" class="dropdown-item">
+                                <a style="font-size:14px" href="#" class="dropdown-item">
                                     <i class="fas fa-user-tag mr-2"></i>
                                     Daftar Hitam Rekanan
                                 </a>
@@ -152,7 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a style="font-size: 13px;" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                        <a style="font-size:14px" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
                             <span class="text-navy">
                                 <i class="fas fa-business-time mr-2"></i>
                                 Transaksi Tender
@@ -167,24 +167,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a style="font-size: 13px;" class="nav-link" data-toggle="dropdown" href="#">
+                        <a style="font-size:14px" class="nav-link" data-toggle="dropdown" href="#">
                             <span class="text-navy">
                                 <i class="fas fa-caret-square-down"></i>
                                 Guide || FAQ
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <a style="font-size: 13px;" href="#" class="dropdown-item">
+                            <a style="font-size:14px" href="#" class="dropdown-item">
                                 <i class="far fa-file-pdf mr-2"></i>Dokumen User Guide
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a style="font-size: 13px;" href="#" class="dropdown-item">
+                            <a style="font-size:14px" href="#" class="dropdown-item">
                                 <i class="nav-icon fas fa-headset mr-2"></i> FAQ
                             </a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a style="font-size: 13px;" class="navbar-brand nav-link" data-toggle="dropdown" href="#">
+                        <a style="font-size:14px" class="navbar-brand nav-link" data-toggle="dropdown" href="#">
                             <img src="<?php echo base_url(); ?>assets/frontend/dist/img/avatar5.png" class="brand-image img-circle elevation-3">
                             <span class="text-navy text-sm">
                                 User: <strong>Validator / Panitia</strong>
