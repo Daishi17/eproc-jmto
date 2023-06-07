@@ -171,8 +171,8 @@
                                                                                         <strong>Belum Lengkap</strong>
                                                                                     </span>
                                                                                 <?php   } else { ?>
-                                                                                    <span class="badge badge-danger">
-                                                                                        <strong>Tidak Valid</strong>
+                                                                                    <span class="badge badge-warning">
+                                                                                        <strong>Belum Di Validasi</strong>
                                                                                     </span>
                                                                                 <?php   }  ?>
                                                                             <?php  } else if ($total == 2) {  ?>
