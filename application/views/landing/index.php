@@ -57,13 +57,12 @@
                                 <!-- Navbar START -->
                                 <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                                     <ul class="navbar-nav">
-                                        <li class="nav-item dropdown">
+                                        <!-- <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Home</i></a>
-                                        </li>
-                                        <li class="nav-item dropdown">
+                                        </li> -->
+                                        <!-- <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Pages</i><i class="fa fa-chevron-down"></i>
                                             </a>
-                                            <!-- Dropdown Menu -->
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="about-us.html"><i>About Us</i></a></li>
                                                 <li><a class="dropdown-item" href="teachers.html">Teachers</a></li>
@@ -78,42 +77,48 @@
                                                 <li><a class="dropdown-item" href="privacy-policy.html">Privacy Policy</a></li>
                                                 <li><a class="dropdown-item" href="terms-and-conditions.html">Terms & Conditions</a></li>
                                             </ul>
-                                        </li>
-                                        <li class="nav-item dropdown">
+                                        </li> -->
+                                        <!-- <li class="nav-item dropdown">
                                             <a class="nav-link  dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Course</i><i class="fa fa-chevron-down"></i>
                                             </a>
-                                            <!-- Dropdown Menu -->
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="course.html"><i>Course</i></a></li>
                                                 <li><a class="dropdown-item" href="course-detail.html">Course Detail</a></li>
                                             </ul>
-                                        </li>
-                                        <li class="nav-item dropdown">
+                                        </li> -->
+                                        <!-- <li class="nav-item dropdown">
                                             <a class="nav-link  dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Event</i><i class="fa fa-chevron-down"></i>
                                             </a>
-                                            <!-- Dropdown Menu -->
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="events-list.html">Events List</a></li>
                                                 <li><a class="dropdown-item" href="events-grid.html">Events Grid</a></li>
                                                 <li><a class="dropdown-item" href="event-detail.html">Event Detail</a></li>
                                             </ul>
-                                        </li>
-                                        <li class="nav-item dropdown">
+                                        </li> -->
+                                        <!-- <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Blog</i><i class="fa fa-chevron-down"></i>
                                             </a>
-                                            <!-- Dropdown Menu -->
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="blog.html"><i>Blog</i></a></li>
                                                 <li><a class="dropdown-item" href="blog-detail.html"><i>Blog Detail</i></a></li>
                                             </ul>
-                                        </li>
-                                        <li class="nav-item">
+                                        </li> -->
+                                        <!-- <li class="nav-item">
                                             <a class="nav-link" href="contact-us.html"><i>Contact Us</i></a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                                 <!-- Navbar END-->
-                                <a class="btn btn-dark text-black d-lg-flex d-none" href="<?= base_url('auth') ?>"><i>LOGIN</i> </a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle btn btn-dark text-black d-lg-flex d-none" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>LOGIN</i><i class="fa fa-chevron-down"></i>
+                                    </a>
+                                    <!-- Dropdown Menu -->
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="https://jmto-vms.kintekindo.net/auth"><i> Penyedia</i></a></li>
+                                        <li><a class="dropdown-item" href="https://jmto-eproc.kintekindo.net/auth"><i> Non Penyedia</i></a></li>
+                                    </ul>
+                                </li>
+                                <a href="https://jmto-vms.kintekindo.net/registrasi" class="btn btn-warning text-white btn-round ml-3"><i>REGISTRASI PENYEDIA</i></a>
                             </nav>
                         </div>
                     </div>
@@ -123,29 +128,124 @@
     </header>
     <!--=================================
     Header -->
+    <div class="sticky-container">
+        <style>
+            /* Ikon media sosial */
+            .sticky-container {
+                padding: 0px;
+                margin: 0px;
+                position: fixed;
+                right: -130px;
+                top: 230px;
+                width: 210px;
+                z-index: 1100;
+            }
 
+            .sticky li {
+                list-style-type: none;
+                background-color: #fff;
+                color: #efefef;
+                height: 43px;
+                padding: 0px;
+                margin: 0px 0px 1px 0px;
+                -webkit-transition: all 0.25s ease-in-out;
+                -moz-transition: all 0.25s ease-in-out;
+                -o-transition: all 0.25s ease-in-out;
+                transition: all 0.25s ease-in-out;
+                cursor: pointer;
+            }
+
+            .sticky li:hover {
+                margin-left: -115px;
+            }
+
+            .sticky li img {
+                float: left;
+                margin: 5px 4px;
+                margin-right: 5px;
+            }
+
+            .sticky li p {
+                padding-top: 5px;
+                margin: 0px;
+                line-height: 16px;
+                font-size: 11px;
+            }
+
+            .sticky li p a {
+                text-decoration: none;
+                color: #2C3539;
+            }
+
+            .sticky li p a:hover {
+                text-decoration: underline;
+            }
+        </style>
+        <ul class="sticky">
+            <li>
+                <img src="<?= base_url('assets/img/volume_logo.png') ?>" width="32" height="32">
+                <p><a href="javascript:;" onclick="matikan()">Kelik Untuk <br>Backsound</a></p>
+            </li>
+            <li>
+                <img src="<?= base_url('assets/img/wa_logo.png') ?>" width="32" height="32">
+                <p><a href="#" target="_blank">Kontak Kami<br>08978201075</a></p>
+            </li>
+        </ul>
+    </div>
     <!--=================================
     banner -->
-    <section class="banner align-items-center d-flex space-ptb bg-holder h-100vh bg-overlay-black-40 jarallax" style="overflow: hidden;" data-jarallax='{"speed": 0.4}' data-video-src="https://www.youtube.com/watch?v=bmyYwQr__B8&t=17s">
+    <section id="video1" class="banner align-items-center d-flex space-ptb bg-holder h-100vh bg-overlay-black-40" style="display: block;" data-jarallax='{"speed": 0.6}' data-jarallax-video="https://www.youtube.com/watch?v=bmyYwQr__B8&t=17s">
         <!-- Background Vimeo Parallax -->
-        <div class="jarallax" data-video-src="https://www.youtube.com/watch?v=bmyYwQr__B8&t=17s" data-speed="1"></div>
+        <div style="margin-top: 500px;margin-left:20px">
+            <i class="text-white" style="font-size: 14px;font-weight:bold;">E - PROCUREMENT JMTO</i>
+        </div>
         <div class="container">
             <div class="row justify-content-center text-center mb-0 pb-md-4">
                 <div class="col-xl-12">
-                    <center>
-                        <i class="text-white" style="font-size: 50px;">WELCOME TO</i><br><i class="text-white" style="font-size: 50px;">E - PROCUREMENT</i>
-                        <br> <i class="text-white" style="font-size: 50px;">JMTO</i>
-                    </center>
+
                 </div>
             </div>
             <div class="row justify-content-center text-center pt-0 pt-md-4">
                 <div class="col-xl-12">
-                    <a href="https://jmto-vms.kintekindo.net/registrasi" class="btn btn-outline-warning text-white btn-round"><i>PENDAFTARAN PENYEDIA</i></a>
+
                 </div>
             </div>
         </div>
-
     </section>
+
+
+    <section style="display: none;" id="video2" class="slider-04 bg-overlay-dark-50 bg-holder jarallax" data-speed='1' data-video-src="https://www.youtube.com/watch?v=bmyYwQr__B8&t=17s">
+        <!-- Background Vimeo Parallax -->
+        <div style="margin-top: 500px;margin-left:20px">
+            <i class="text-white" style="font-size: 14px;font-weight:bold;">E - PROCUREMENT JMTO</i>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center text-center mb-0 pb-md-4">
+                <div class="col-xl-12">
+
+                </div>
+            </div>
+            <div class="row justify-content-center text-center pt-0 pt-md-4">
+                <div class="col-xl-12">
+
+                </div>
+            </div>
+        </div>
+        <div class="sticky-container">
+            <ul class="sticky">
+                <li>
+                    <img src="<?= base_url('assets/img/volume_logo.png') ?>" width="32" height="32">
+                    <p><a href="javascript:;" onclick="matikan()">Kelik Untuk <br>Backsound</a></p>
+                </li>
+                <li>
+                    <img src="<?= base_url('assets/img/wa_logo.png') ?>" width="32" height="32">
+                    <p><a href="#" target="_blank">Kontak Kami<br>08978201075</a></p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
     <!--=================================
     banner -->
     <div class="footer-bottom bg-dark py-4">
@@ -249,7 +349,6 @@
     <!--=================================
     Category -->
 
-
     <!--=================================
     Gallery -->
     <section class="space-ptb">
@@ -314,7 +413,7 @@
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active bg-dark text-white" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i>PENGADAAN BARANG</i></a>
-                            <a class="nav-item nav-link bg-warning text-white" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><i>PENGADAAN JASA PEMBORONGAN</i></a>
+                            <a class="nav-item nav-link bg-warning text-white" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><i>PENGADAAN JASA KONSULTASI</i></a>
                             <a class="nav-item nav-link bg-dark text-white" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i>PENGADAAN JASA KONTRUKSI</i></a>
                             <a class="nav-item nav-link bg-warning text-white" id="nav-design-tab" data-toggle="tab" href="#nav-design" role="tab" aria-controls="nav-design" aria-selected="false"><i>PENGADAAN JASA LAINYA</i></a>
                         </div>
@@ -352,7 +451,7 @@
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="section-title mb-4">
-                                <h3 class="title">DATA PENGADAAN JASA PEMBORONGAN</h3>
+                                <h3 class="title">DATA PENGADAAN JASA KONSULTASI</h3>
                                 <p class="mb-0">Data Tender Pengadaan Barang Yang Ada Pada E-procurement JMTO.</p>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -562,15 +661,36 @@
 </body>
 
 <script>
-    $('.jarallax').jarallax({
-        volume: 1,
-    });
-</script>
-
-<script>
     $(document).ready(function() {
         $('.table_berita').DataTable();
     });
+</script>
+<script>
+    $('.jarallax').jarallax({
+        videoVolume: 1000,
+        onInit: function() {
+            var self = this;
+            var video = self.video;
+            video.unmute();
+        }
+    });
+
+    function hidupkan() {
+        $('.jarallax').jarallax({
+            videoVolume: 1000,
+            onInit: function() {
+                var self = this;
+                var video = self.video;
+                video.unmute();
+            }
+        });
+        $('#video1').hide()
+        $('#video2').show()
+    }
+
+    function matikan() {
+        location.reload('<?= base_url() ?>')
+    }
 </script>
 
 </html>

@@ -22,7 +22,7 @@
         }
 
         body {
-            background-image: url("https://jmto.co.id/images/headline/1631845312WhatsApp Image 2021-09-17 at 08.30.02.jpeg");
+            background-image: url("<?= base_url('assets/img/vms_logo.png')?>");
             background-color: #cccccc;
             /* Full height */
             height: 100%;
@@ -40,7 +40,6 @@
             padding: 40px 30px 30px 30px;
             background-color: #ecf0f3;
             border-radius: 15px;
-            box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
         }
 
         .logo {
@@ -137,7 +136,7 @@
             <img src="https://survey.jasamarga.co.id/landing/images/logo.png" alt="">
         </div>
         <div class="text-center mt-4 name">
-            E-Procurement JMTO <br>
+            Login <br>
             Non - Penyedia
         </div>
         <form class="p-3 mt-3" action="<?= base_url('auth') ?>" method="post">

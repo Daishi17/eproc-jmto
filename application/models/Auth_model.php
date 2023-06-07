@@ -8,7 +8,7 @@ class Auth_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_pegawai');
-        $this->db->where('nip', $username);
+        $this->db->where('email', $username);
         return $this->db->get()->row();
     }
 

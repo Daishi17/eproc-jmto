@@ -195,7 +195,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <span class="text-primary">
                                     <strong>
                                         <i class="fas fa-user-lock mr-2"></i>
-                                        Anton Septian F
+                                        <?= $this->session->userdata('nama_pegawai');?>
                                     </strong>
                                 </span>
                             </span>
