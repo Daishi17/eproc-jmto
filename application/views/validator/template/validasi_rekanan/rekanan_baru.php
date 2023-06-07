@@ -96,8 +96,8 @@
                                                 <table id="example1" class="table table-bordered table-striped table-sm">
                                                     <thead>
                                                         <tr>
-                                                            <th style="width:300px">Nama Perusahan / Individu</th>
-                                                            <th style="width:200px">Jenis Usaha</th>
+                                                            <th style="width:250px">Nama Perusahan / Individu</th>
+                                                            <th style="width:150px">Jenis Usaha</th>
                                                             <th style="width:200px">Bentuk Usaha</th>
                                                             <th style="width:90px">Kualifikasi</th>
                                                             <th style="width:100px">Tanggal Daftar</th>
