@@ -17,33 +17,23 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <input type="hidden" name="url_get_nib" value="<?= base_url('validator/data_sbu/get_data_sbu') ?>">
+                    <input type="hidden" name="url_get_row" value="<?= base_url('validator/data_sbu/get_row_data/') ?>">
+                    <input type="hidden" name="url_post" value="<?= base_url('validator/data_sbu/post_data') ?> ">
+                    <input type="hidden" name="url_aktifkan_sbu" value="<?= base_url('validator/data_sbu/aktifkan_sbu') ?> ">
                     <table id="example1" class="table table-bordered table-sm table-striped">
                         <thead class="bg-secondary">
                             <tr>
+                                <th style="width:5%;"><small class="text-white">No</small></th>
                                 <th style="width:10%;"><small class="text-white">Kode SBU</small></th>
-                                <th style="width:70%;"><small class="text-white">Jenis SBU</small></th>
+                                <th style="width:35%;"><small class="text-white">Jenis SBU</small></th>
+                                <th style="width:15%;"><small class="text-white">Status Data</small></th>
                                 <th style="width:20%;"><small class="text-white">
                                         <div class="text-center">More Options</div>
                                     </small></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><small>62019</small></td>
-                                <td><small>Aktivitas Pemrograman Komputer Lainnya</small></td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-tambah">
-                                            <i class="fa-solid fa-users-viewfinder px-1"></i>
-                                            <small><b>View</b></small>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm shadow-lg">
-                                            <i class="fa-solid fa-trash-can px-1"></i>
-                                            <small>Delete</small>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>

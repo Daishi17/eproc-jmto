@@ -10,7 +10,7 @@
                         </span>
                     </div>
                     <div class="bd-highlight">
-                        <a class="btn btn-primary btn-sm shadow-lg" href="http://localhost/etender-jmto/validator/rekanan_tervalidasi" role="button">
+                        <a class="btn btn-primary btn-sm shadow-lg" href="<?= base_url() ?>validator/rekanan_tervalidasi" role="button">
                             << Kembali Kemenu Sebelumnya </a>
                     </div>
                 </div>
@@ -28,12 +28,13 @@
                             <div class="row">
                                 <div class="col">
                                     <table class="table table-bordered table-sm">
+                                        <input type="hidden" value="<?= $vendor['id_url_vendor'] ?>" name="id_url_vendor">
                                         <tr>
                                             <th class="bg-light"><small>Nama Perusahaan / Perorangan</small></th>
                                             <td>
                                                 <small>
                                                     <i class="fa-solid fa-city px-1"></i>
-                                                    Kreatif Intelegensi Teknologi
+                                                    <?= $vendor['nama_usaha'] ?>
                                                 </small>
                                             </td>
                                         </tr>
@@ -42,7 +43,7 @@
                                             <td>
                                                 <small>
                                                     <i class="fa-solid fa-industry px-1"></i>
-                                                    Jasa Lainnya, Jasa Konsultasi, Jasa Pengadaan Barang
+                                                    <?= $nama_izin_usaha ?>
                                                 </small>
                                             </td>
                                         </tr>
@@ -51,7 +52,7 @@
                                             <td>
                                                 <small>
                                                     <i class="fa-solid fa-square-poll-vertical fa-lg px-1"></i>
-                                                    Menengah - (M1)
+                                                    <?= $vendor['kualifikasi_usaha'] ?>
                                                 </small>
                                             </td>
                                         </tr>
@@ -64,10 +65,17 @@
                     <div class="card border-warning shadow-sm">
                         <div class="card-header">
                             <div class="nav nav-tabs mb-3 bg-warning" id="nav-tab" role="tablist">
+
+                                <input type="hidden" name="url_get_vendor" value="<?= base_url('validator/rekanan_tervalidasi/get_dokumen_vendor/') ?>">
+                                <input type="hidden" name="url_download_siup" value="<?= base_url('validator/rekanan_tervalidasi/url_download_siup/') ?>">
+
                                 <button class="nav-link active" id="nav-siup-tab" data-bs-toggle="tab" data-bs-target="#nav-siup" type="button" role="tab" aria-controls="nav-siup" aria-selected="true">
                                     <i class="fa-regular fa-file-powerpoint"></i>
                                     <small><b>SIUP</b></small>
                                 </button>
+
+                                <input type="hidden" name="url_get_vendor" value="<?= base_url('validator/rekanan_tervalidasi/get_dokumen_vendor/') ?>">
+                                <input type="hidden" name="url_download_nib" value="<?= base_url('validator/rekanan_tervalidasi/url_download_nib/') ?>">
                                 <button class="nav-link" id="nav-nib-tab" data-bs-toggle="tab" data-bs-target="#nav-nib" type="button" role="tab" aria-controls="nav-nib" aria-selected="false">
                                     <i class="fa-regular fa-file-word"></i>
                                     <small><b>NIB/TDP</b></small>
@@ -98,9 +106,11 @@
                                 </button>
                             </div>
                             <div class="tab-content p-3 border bg-light" id="nav-tabContent">
+                                <!-- siupku -->
                                 <div class="tab-pane fade active show" id="nav-siup" role="tabpanel" aria-labelledby="nav-siup-tab">
                                     <div class="row">
                                         <div class="col">
+                                            <input type="hidden" name="url_kbli_siup" value="<?= base_url('validator/rekanan_tervalidasi/get_kbli_siup/') ?>">
                                             <table class="table table-bordered table-sm">
                                                 <thead class="bg-info">
                                                     <tr>
@@ -111,41 +121,14 @@
                                                         <th class="text-center"><small>More Options<small></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><small>23123123123</small></td>
-                                                        <td><small>Seumur Hidup</small></td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-light btn-sm text-start col-sm-12 shadow-lg">
-                                                                <i class="fa-solid fa-file-pdf px-1"></i>
-                                                                Nama File .pdf
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-warning btn-sm shadow-lg" disabled>
-                                                                <i class="fa-solid fa-lock-open px-1"></i>
-                                                                Dekripsi File
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge bg-secondary">Belum Tervalidasi</span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <button type="button" class="btn btn-success btn-sm shadow-lg">
-                                                                <i class="fa-solid fa-square-check px-1"></i>
-                                                                <small>Validation</small>
-                                                            </button>
-                                                            <button type="button" class="btn btn-danger btn-sm shadow-lg">
-                                                                <i class="fa-solid fa-rectangle-xmark px-1"></i>
-                                                                <small>Not Validation</small>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
+                                                <tbody id="load_siup">
+
                                                 </tbody>
                                             </table>
-                                            <table class="table table-bordered table-sm">
+                                            <table class="table table-bordered table-sm" id="tbl_kbli_siup">
                                                 <thead class="bg-info">
                                                     <tr>
+                                                        <th><small>No<small></th>
                                                         <th><small>Kode KBLI<small></th>
                                                         <th><small>Jenis KBLI<small></th>
                                                         <th><small>Kualifikasi KBLI<small></th>
@@ -154,7 +137,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <!-- <tr>
                                                         <td><small>62019</small></td>
                                                         <td><small>Aktivitas Pemrograman Komputer Lainnya</small></td>
                                                         <td><small>Menengah - (M1)</small></td>
@@ -171,15 +154,17 @@
                                                                 <small>Not Validation</small>
                                                             </button>
                                                         </td>
-                                                    </tr>
+                                                    </tr> -->
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- nibku -->
                                 <div class="tab-pane fade" id="nav-nib" role="tabpanel" aria-labelledby="nav-nib-tab">
                                     <div class="row">
                                         <div class="col">
+                                            <input type="hidden" name="url_kbli_nib" value="<?= base_url('validator/rekanan_tervalidasi/get_kbli_nib/') ?>">
                                             <table class="table table-bordered table-sm">
                                                 <thead class="bg-danger">
                                                     <tr>
@@ -190,8 +175,8 @@
                                                         <th class="text-center"><small>More Options<small></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
+                                                <tbody id="load_nib">
+                                                    <!-- <tr>
                                                         <td><small>23123123123</small></td>
                                                         <td><small>Seumur Hidup</small></td>
                                                         <td>
@@ -219,12 +204,13 @@
                                                                 <small>Not Validation</small>
                                                             </button>
                                                         </td>
-                                                    </tr>
+                                                    </tr> -->
                                                 </tbody>
                                             </table>
-                                            <table class="table table-bordered table-sm">
+                                            <table class="table table-bordered table-sm" id="tbl_kbli_nib">
                                                 <thead class="bg-danger">
                                                     <tr>
+                                                        <th><small>No<small></th>
                                                         <th><small>Kode KBLI<small></th>
                                                         <th><small>Jenis KBLI<small></th>
                                                         <th><small>Kualifikasi KBLI<small></th>
@@ -233,24 +219,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td><small>62019</small></td>
-                                                        <td><small>Aktivitas Pemrograman Komputer Lainnya</small></td>
-                                                        <td><small>Menengah - (M1)</small></td>
-                                                        <td>
-                                                            <span class="badge bg-secondary">Belum Tervalidasi</span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <button type="button" class="btn btn-success btn-sm shadow-lg">
-                                                                <i class="fa-solid fa-square-check px-1"></i>
-                                                                <small>Validation</small>
-                                                            </button>
-                                                            <button type="button" class="btn btn-danger btn-sm shadow-lg">
-                                                                <i class="fa-solid fa-rectangle-xmark px-1"></i>
-                                                                <small>Not Validation</small>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -686,3 +655,5 @@
         </div>
     </div>
 </main>
+
+<?php $this->load->view('validator/data_rekanan/modal'); ?>

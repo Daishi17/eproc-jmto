@@ -54,21 +54,27 @@
                         </div>
                     </div>
                     <hr>
-                    <table id="example1" class="table table-bordered table-sm table-striped">
+                    <input type="hidden" name="url_get_rekanan_baru" value="<?= base_url('validator/rekanan_baru/get_rekanan_baru') ?>">
+                    <input type="hidden" name="url_get_rekanan_baru_by_id" value="<?= base_url('validator/rekanan_baru/get_id_rekanan_baru/') ?>">
+                    <input type="hidden" name="url_terima_rekanan_baru" value="<?= base_url('validator/rekanan_baru/terima') ?>">
+                    <table id="tbl_rekanan_baru" class="table table-bordered table-sm table-striped">
                         <thead class="bg-secondary">
                             <tr>
+                                <th><small class="text-white">No</small></th>
                                 <th style="width:20%;"><small class="text-white">Nama Rekanan</small></th>
                                 <th style="width:20%;"><small class="text-white">Jenis Usaha</small></th>
                                 <th style="width:20%;"><small class="text-white">Bentuk Usaha</small></th>
                                 <th style="width:10%;"><small class="text-white">Kualifikasi</small></th>
                                 <th style="width:10%;"><small class="text-white">Tgl. Daftar</small></th>
                                 <th style="width:20%;"><small class="text-white">
-                                        <div class="text-center">More Options</div>
-                                    </small></th>
+                                        <div class="text-center">Aksi</div>
+                                    </small>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!-- <tr>
+                                <td><small>1</small></td>
                                 <td><small>Kreatif Intelegensi Teknologi</small></td>
                                 <td><small>Jasa lainnya, Jasa Konsultasi, Jasa Pengadaan Barang</small></td>
                                 <td><small>Perseroan Terbatas (PT)</small></td>
@@ -90,13 +96,14 @@
                                         </button>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="modal fade" tabindex="-1" id="modal-xl-view">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
@@ -128,7 +135,7 @@
                                                     <td>
                                                         <small>
                                                             <i class="fa-solid fa-city px-1"></i>
-                                                            Kreatif Intelegensi Teknologi
+                                                            <label for="" id="nama_usaha"></label>
                                                         </small>
                                                     </td>
                                                 </tr>
@@ -137,7 +144,7 @@
                                                     <td>
                                                         <small>
                                                             <i class="fa-solid fa-industry px-1"></i>
-                                                            Jasa Lainnya, Jasa Konsultasi, Jasa Pengadaan Barang
+                                                            <label for="" id="id_jenis_usaha"></label>
                                                         </small>
                                                     </td>
                                                 </tr>
@@ -146,7 +153,7 @@
                                                     <td>
                                                         <small>
                                                             <i class="fa-solid fa-square-poll-vertical fa-lg px-1"></i>
-                                                            Menengah - (M1)
+                                                            <label for="" id="kualifikasi_usaha"></label>
                                                         </small>
                                                     </td>
                                                 </tr>
@@ -155,7 +162,7 @@
                                                     <td>
                                                         <small>
                                                             <i class="fa-solid fa-address-card px-1"></i>
-                                                            12.322.222.2-222.222
+                                                            <label for="" id="npwp"></label>
                                                         </small>
                                                     </td>
                                                 </tr>
@@ -164,7 +171,7 @@
                                                     <td>
                                                         <small>
                                                             <i class="fa-solid fa-envelope fa-lg px-1"></i>
-                                                            kreatifintelegensi@gmail.com
+                                                            <label for="" id="email"></label>
                                                         </small>
                                                     </td>
                                                 </tr>
@@ -173,7 +180,7 @@
                                                     <td>
                                                         <small>
                                                             <i class="fa-solid fa-tags fa-lg px-1"></i>
-                                                            Perseroan Terbatas (PT)
+                                                            <label for="" id="bentuk_usaha"></label>
                                                         </small>
                                                     </td>
                                                 </tr>
@@ -182,7 +189,7 @@
                                                     <td>
                                                         <small>
                                                             <i class="fa-solid fa-road px-1"></i>
-                                                            Jl. Kodiklat TNI No.15 Serpong
+                                                            <label for="" id="alamat"></label>
                                                         </small>
                                                     </td>
                                                 </tr>
@@ -191,7 +198,7 @@
                                                     <td>
                                                         <small>
                                                             <i class="fa-solid fa-landmark px-1"></i>
-                                                            Banten
+                                                            <label for="" id="nama_provinsi"></label>
                                                         </small>
                                                     </td>
                                                 </tr>
@@ -199,11 +206,11 @@
                                                     <th class="bg-light" colspan="2">
                                                         <button type="button" class="btn btn-success btn-sm shadow-lg">
                                                             <i class="fa-solid fa-square-check px-1"></i>
-                                                            <small>Accepted</small>
+                                                            <small>Terima</small>
                                                         </button>
                                                         <button type="button" class="btn btn-danger btn-sm shadow-lg">
                                                             <i class="fa-solid fa-trash-can px-1"></i>
-                                                            <small>Delete</small>
+                                                            <small>Tolak</small>
                                                         </button>
                                                     </th>
                                                 </tr>

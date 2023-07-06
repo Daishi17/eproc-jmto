@@ -34,7 +34,7 @@
         <script src="<?php echo base_url(); ?>/assets/plugins-lte/datatables-buttons/js/buttons.html5.min.js"></script>
         <script src="<?php echo base_url(); ?>/assets/plugins-lte/datatables-buttons/js/buttons.print.min.js"></script>
         <script src="<?php echo base_url(); ?>/assets/plugins-lte/datatables-buttons/js/buttons.colVis.min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/datatable_master.js"></script>
+        <!-- <script src="<?php echo base_url(); ?>/assets/js/datatable_master.js"></script> -->
         </body>
 
         </html>

@@ -51,9 +51,13 @@
                         </div>
                     </div>
                     <hr>
-                    <table id="example1" class="table table-bordered table-sm table-striped">
+                    <input type="hidden" name="url_get_rekanan_tervalidasi" value="<?= base_url('validator/rekanan_tervalidasi/get_rekanan_tervalidasi') ?>">
+                    <input type="hidden" name="url_get_rekanan_tervalidasi_by_id" value="<?= base_url('validator/rekanan_tervalidasi/get_id_rekanan_tervalidasi/') ?>">
+                    <input type="hidden" name="url_terima_rekanan_tervalidasi" value="<?= base_url('validator/rekanan_tervalidasi/terima') ?>">
+                    <table id="tbl_rekanan_tervalidasi" class="table table-bordered table-sm table-striped">
                         <thead class="bg-secondary shadow-lg">
                             <tr>
+                                <th style="width:5%;"><small class="text-white">No</small></th>
                                 <th style="width:20%;"><small class="text-white">Nama Rekanan</small></th>
                                 <th style="width:18%;"><small class="text-white">Jenis Usaha</small></th>
                                 <th style="width:10%;"><small class="text-white">Kualifikasi</small></th>
@@ -65,7 +69,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!-- <tr>
                                 <td><small>Kreatif Intelegensi Teknologi</small></td>
                                 <td><small>Jasa lainnya, Jasa Konsultasi, Jasa Pengadaan Barang</small></td>
                                 <td><small>Menengah - (M1)</small></td>
@@ -88,7 +92,7 @@
 
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
