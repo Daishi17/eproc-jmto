@@ -71,23 +71,27 @@
                                                 <small><b>SIUP</b></small>
                                             </button>
 
-                                            <input type="hidden" name="url_get_vendor" value="<?= base_url('validator/rekanan_tervalidasi/get_dokumen_vendor/') ?>">
+
                                             <input type="hidden" name="url_download_nib" value="<?= base_url('validator/rekanan_tervalidasi/url_download_nib/') ?>">
                                             <button class="nav-link" id="nav-nib-tab" data-bs-toggle="tab" data-bs-target="#nav-nib" type="button" role="tab" aria-controls="nav-nib" aria-selected="false">
                                                 <i class="fa-regular fa-file-word"></i>
                                                 <small><b>NIB/TDP</b></small>
                                             </button>
 
-                                            <input type="hidden" name="url_get_vendor" value="<?= base_url('validator/rekanan_tervalidasi/get_dokumen_vendor/') ?>">
+
                                             <input type="hidden" name="url_download_sbu" value="<?= base_url('validator/rekanan_tervalidasi/url_download_sbu/') ?>">
                                             <button class="nav-link" id="nav-sbu-tab" data-bs-toggle="tab" data-bs-target="#nav-sbu" type="button" role="tab" aria-controls="nav-sbu" aria-selected="false">
                                                 <i class="fa-regular fa-file-excel"></i>
                                                 <small><b>SBU</b></small>
                                             </button>
+
+
+                                            <input type="hidden" name="url_download_siujk" value="<?= base_url('validator/rekanan_tervalidasi/url_download_siujk/') ?>">
                                             <button class="nav-link" id="nav-siujk-tab" data-bs-toggle="tab" data-bs-target="#nav-siujk" type="button" role="tab" aria-controls="nav-siujk" aria-selected="false">
                                                 <i class="fa-regular fa-file-pdf"></i>
                                                 <small><b>SIUJK</b></small>
                                             </button>
+
                                             <button class="nav-link" id="nav-akta-tab" data-bs-toggle="tab" data-bs-target="#nav-akta" type="button" role="tab" aria-controls="nav-akta" aria-selected="true">
                                                 <i class="fa-regular fa-file-powerpoint"></i>
                                                 <small><b>Akta</b></small>
@@ -274,36 +278,24 @@
                                                                     <th class="text-center"><small>More Options<small></th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
+                                                            <tbody id="load_siujk">
+
+
+                                                            </tbody>
+                                                        </table>
+                                                        <input type="hidden" name="url_kbli_siujk" value="<?= base_url('validator/rekanan_tervalidasi/get_kbli_siujk/') ?>">
+                                                        <table class="table table-bordered table-sm" id="tbl_kbli_siujk">
+                                                            <thead class="bg-info">
                                                                 <tr>
-                                                                    <td><small>23123123123</small></td>
-                                                                    <td><small>Seumur Hidup</small></td>
-                                                                    <td>
-                                                                        <button type="button" class="btn btn-light btn-sm text-start col-sm-12 shadow-lg">
-                                                                            <i class="fa-solid fa-file-pdf px-1"></i>
-                                                                            Nama File .pdf
-                                                                        </button>
-                                                                    </td>
-                                                                    <td>
-                                                                        <button type="button" class="btn btn-warning btn-sm shadow-lg" disabled>
-                                                                            <i class="fa-solid fa-lock-open px-1"></i>
-                                                                            Dekripsi File
-                                                                        </button>
-                                                                    </td>
-                                                                    <td>
-                                                                        <span class="badge bg-secondary">Belum Tervalidasi</span>
-                                                                    </td>
-                                                                    <td class="text-center">
-                                                                        <button type="button" class="btn btn-success btn-sm shadow-lg">
-                                                                            <i class="fa-solid fa-square-check px-1"></i>
-                                                                            <small>Validation</small>
-                                                                        </button>
-                                                                        <button type="button" class="btn btn-danger btn-sm shadow-lg">
-                                                                            <i class="fa-solid fa-rectangle-xmark px-1"></i>
-                                                                            <small>Not Validation</small>
-                                                                        </button>
-                                                                    </td>
+                                                                    <th><small>No<small></th>
+                                                                    <th><small>Kode KBLI<small></th>
+                                                                    <th><small>Jenis KBLI<small></th>
+                                                                    <th><small>Kualifikasi KBLI<small></th>
+                                                                    <th><small>Status Validasi<small></th>
+                                                                    <th class="text-center"><small>More Options<small></th>
                                                                 </tr>
+                                                            </thead>
+                                                            <tbody>
                                                             </tbody>
                                                         </table>
                                                     </div>
