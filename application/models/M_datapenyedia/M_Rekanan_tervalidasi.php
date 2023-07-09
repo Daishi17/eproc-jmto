@@ -340,4 +340,120 @@ class M_Rekanan_tervalidasi extends CI_Model
         return $this->db->count_all_results();
     }
     // end nib
+
+
+    // sbu
+    public function get_row_sbu($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_sbu');
+        $this->db->where('tbl_vendor_sbu.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_sbu_kbli($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_sbu');
+        $this->db->where('tbl_vendor_kbli_sbu.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_sbu_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_sbu');
+        $this->db->where('tbl_vendor_sbu.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_sbu_kbli_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_sbu');
+        $this->db->where('tbl_vendor_kbli_sbu.id_url_kbli_sbu', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_enkrip_sbu($where, $data)
+    {
+        $this->db->update('tbl_vendor_sbu', $data, $where);
+        return $this->db->affected_rows();
+    }
+
+    public function update_enkrip_kbli_sbu($where, $data)
+    {
+        $this->db->update('tbl_vendor_kbli_sbu', $data, $where);
+        return $this->db->affected_rows();
+    }
+
+
+    var $order_kbli_sbu = array('id_vendor', 'id_vendor', 'id_vendor', 'id_vendor', 'id_vendor', 'id_vendor');
+    private function _get_data_query_kbli_sbu($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_sbu');
+        $this->db->join('tbl_sbu', 'tbl_vendor_kbli_sbu.id_sbu = tbl_sbu.id_sbu', 'left');
+        $this->db->join('tbl_kualifikasi_sbu', 'tbl_vendor_kbli_sbu.id_kualifikasi_sbu = tbl_kualifikasi_sbu.id_kualifikasi_sbu', 'left');
+        $this->db->where('tbl_vendor_kbli_sbu.id_vendor', $id_vendor);
+        $i = 0;
+        foreach ($this->order_kbli_sbu as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order_kbli_sbu) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order_kbli_sbu[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_vendor_kbli_sbu.id_vendor', 'ASC');
+        }
+    }
+
+    public function gettable_kbli_sbu($id_vendor) //nam[ilin data pake ini
+    {
+        $this->_get_data_query_kbli_sbu($id_vendor); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function count_filtered_kbli_sbu($id_vendor)
+    {
+        $this->_get_data_query_kbli_sbu($id_vendor); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_all_kbli_sbu($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_sbu');
+        $this->db->join('tbl_sbu', 'tbl_vendor_kbli_sbu.id_sbu = tbl_sbu.id_sbu', 'left');
+        $this->db->join('tbl_kualifikasi_sbu', 'tbl_vendor_kbli_sbu.id_kualifikasi_sbu = tbl_kualifikasi_sbu.id_kualifikasi_sbu', 'left');
+        $this->db->where('tbl_vendor_kbli_sbu.id_vendor', $id_vendor);
+        return $this->db->count_all_results();
+    }
+    // end sbu
 }

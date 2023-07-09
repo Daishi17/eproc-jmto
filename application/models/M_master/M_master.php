@@ -83,7 +83,8 @@ class M_master extends CI_Model
         return $query->row_array();
     }
 
-
+    // sbu master
+    var $order_sbu =  array('id_sbu', 'kode_sbu', 'nama_sbu', 'id_sbu');
     private function _get_data_query_sbu()
     {
         $this->db->select('*');
@@ -105,13 +106,13 @@ class M_master extends CI_Model
                     );
                 }
 
-                if (count($this->order) - 1 == $i)
+                if (count($this->order_sbu) - 1 == $i)
                     $this->db->group_end();
             }
             $i++;
         }
         if (isset($_POST['order'])) {
-            $this->db->order_by($this->order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+            $this->db->order_by($this->order_sbu[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
             $this->db->order_by('tbl_sbu.id_sbu', 'ASC');
         }
@@ -161,4 +162,5 @@ class M_master extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+    // end sbu master
 }

@@ -116,4 +116,26 @@ class Data_kbli extends CI_Controller
 		}
 		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 	}
+
+	function nonaktifkan_kbli()
+	{
+		$id = $this->input->post('id_kbli');
+		$where = [
+			'id_kbli' => $id
+		];
+		$data = [
+			'sts_aktif' => 0
+		];
+		$query = $this->M_master->update_kbli($data, $where);
+		if ($query) {
+			$response = [
+				'message' => 'Berhasil'
+			];
+		} else {
+			$response = [
+				'message' => 'Gagal'
+			];
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
 }

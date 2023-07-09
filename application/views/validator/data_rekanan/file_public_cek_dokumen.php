@@ -168,6 +168,83 @@
                     }
 
                     // end nib
+
+                    // sbu
+                    if (response['row_sbu'].id_vendor) {
+                        var html_sbu = '';
+                        if (response['row_sbu'].sts_validasi == null) {
+                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                                '<a href="javascript:;"  onclick="NonValid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                            var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                        } else if (response['row_sbu'].sts_validasi == 1) {
+                            var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1" ></i><small>Valid</small></button> ' +
+                                '<a href="javascript:;"  onclick="NonValid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                            var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                        } else if (response['row_sbu'].sts_validasi == 2) {
+                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                                '<a href="javascript:;"  onclick="NonValid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                            var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                        }
+                        if (response['row_sbu'].sts_token_dokumen == 1) {
+                            var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sbu(\'' + response['row_sbu'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                            $('.token_generate_sbu').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sbu']['token_dokumen'] + '</textarea></div>');
+                        } else if (response['row_sbu'].sts_token_dokumen == 2) {
+                            var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_sbu']['file_dokumen'] + '</a>';
+                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sbu(\'' + response['row_sbu'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                            $('.token_generate_sbu').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sbu']['token_dokumen'] + '</textarea></div>');
+                        }
+                        if (response['row_sbu'].sts_seumur_hidup == 1) {
+                            var tgl_berlaku = '<label>Seumur Hidup</label>'
+                        } else {
+                            var tgl_berlaku = '<label>' + response['row_sbu'].tgl_berlaku + '</label>'
+                        }
+                        html_sbu += '<tr>' +
+                            '<td>' + response['row_sbu'].nomor_surat + '</td>' +
+                            '<td>' + tgl_berlaku + '</td>' +
+                            '<td>' + dokumen + '</td>' +
+                            '<td>' + dekrip + '</td>' +
+                            '<td>' + sts_validasi + '</td>' +
+                            '<td class="text-center">' + tombol_validasi +
+                            '</td>' +
+                            '</tr>';
+                        $('#load_sbu').html(html_sbu);
+
+                        var url_kbli_sbu = $('[name="url_kbli_sbu"]').val()
+                        $(document).ready(function() {
+                            $('#tbl_kbli_sbu').DataTable({
+                                "responsive": true,
+                                "ordering": true,
+                                "processing": true,
+                                "serverSide": true,
+                                "dom": 'Bfrtip',
+                                "bDestroy": true,
+                                "autoWidth": false,
+                                "buttons": ["excel", "pdf", "print", "colvis"],
+                                "order": [],
+                                "ajax": {
+                                    "url": url_kbli_sbu + response['row_sbu'].id_vendor,
+                                    "type": "POST",
+                                },
+                                "columnDefs": [{
+                                    "target": [-1],
+                                    "orderable": false
+                                }],
+                                "oLanguage": {
+                                    "sSearch": "Pencarian : ",
+                                    "sEmptyTable": "Data Tidak Tersedia",
+                                    "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                    "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                    "sProcessing": "Memuat Data...."
+                                }
+                            })
+                        });
+                    } else {
+
+                    }
+
+                    // end sbu
                 } else {
 
 
@@ -526,12 +603,12 @@
             $('#modal_valid_nib').modal('show')
             $('[name="url_validasi_nib"]').val();
             $('[name="id_url_nib"]').val(id_url);
-            $('#kbli_valid').val(type)
+            $('#kbli_valid_nib').val(type)
         } else {
             $('#modal_valid_nib').modal('show')
             $('[name="url_validasi_nib"]').val();
             $('[name="id_url_nib"]').val(id_url);
-            $('#kbli_valid').val('')
+            $('#kbli_valid_nib').val('')
         }
 
     }
@@ -541,12 +618,12 @@
             $('#modal_nonvalid_nib').modal('show')
             $('[name="url_validasi_nib"]').val();
             $('[name="id_url_nib"]').val(id_url);
-            $('#kbli_nonvalid').val(type)
+            $('#kbli_nonvalid_nib').val(type)
         } else {
             $('#modal_nonvalid_nib').modal('show')
             $('[name="url_validasi_nib"]').val();
             $('[name="id_url_nib"]').val(id_url);
-            $('#kbli_nonvalid').val('')
+            $('#kbli_nonvalid_nib').val('')
         }
 
     }
@@ -639,4 +716,235 @@
     })
 
     // END JS NIB CRUD
+
+
+    // JS sbu CRUD
+    function DekripEnkrip_sbu(id_url, type) {
+        if (type == 'dekrip') {
+            var id_url_sbu = $('[name="id_url_sbu"]').val(id_url)
+            $('#modal_dekrip_sbu').modal('show');
+        } else {
+            var id_url_sbu = $('[name="id_url_sbu"]').val(id_url)
+            $('#modal_enkrip_sbu').modal('show');
+        }
+
+    }
+
+    function GenerateEnkrip_sbu() {
+        var url_encryption_sbu = $('[name="url_encryption_sbu"]').val();
+        var modal_enkrip_sbu = $('#modal_enkrip_sbu');
+        var id_url = $('[name="id_url_sbu"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_sbu + id_url,
+            dataType: "JSON",
+            data: $('#form_enkrip_sbu').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], 'Token Tidak Valid!', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Enkripsi!',
+                        html: 'Proses Enkripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Enkripsi!', '', 'success')
+                            load_data()
+                            // $('#button_dekrip_generate').css('display', 'block');
+                            // $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            modal_enkrip_sbu.modal('hide');
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    function GenerateDekrip_sbu() {
+        var url_encryption_sbu = $('[name="url_encryption_sbu"]').val();
+        var modal_dekrip_sbu = $('#modal_dekrip_sbu');
+        var id_url = $('[name="id_url_sbu"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_sbu + id_url,
+            dataType: "JSON",
+            data: $('#form_dekrip_sbu').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], 'Token Tidak Valid!', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Enkripsi!',
+                        html: 'Proses Enkripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Enkripsi!', '', 'success')
+                            load_data()
+                            // $('#button_dekrip_generate').css('display', 'block');
+                            // $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            modal_dekrip_sbu.modal('hide');
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+
+    function Valid_sbu(id_url, type = '') {
+        if (type == 'terima_kbli') {
+            $('#modal_valid_sbu').modal('show')
+            $('[name="url_validasi_sbu"]').val();
+            $('[name="id_url_sbu"]').val(id_url);
+            $('#kbli_valid_sbu').val(type)
+        } else {
+            $('#modal_valid_sbu').modal('show')
+            $('[name="url_validasi_sbu"]').val();
+            $('[name="id_url_sbu"]').val(id_url);
+            $('#kbli_valid_sbu').val('')
+        }
+
+    }
+
+    function NonValid_sbu(id_url, type = '') {
+        if (type == 'tolak_kbli') {
+            $('#modal_nonvalid_sbu').modal('show')
+            $('[name="url_validasi_sbu"]').val();
+            $('[name="id_url_sbu"]').val(id_url);
+            $('#kbli_nonvalid_sbu').val(type)
+        } else {
+            $('#modal_nonvalid_sbu').modal('show')
+            $('[name="url_validasi_sbu"]').val();
+            $('[name="id_url_sbu"]').val(id_url);
+            $('#kbli_nonvalid_sbu').val('')
+        }
+
+    }
+
+    function DownloadFile_sbu(id_url) {
+        var url_download_sbu = $('[name="url_download_sbu"]').val()
+        location.href = url_download_sbu + id_url;
+    }
+
+    var form_valid_sbu = $('#form_valid_sbu');
+    form_valid_sbu.on('submit', function(e) {
+        e.preventDefault();
+        var url_post = $('[name="url_validasi_sbu"]').val()
+        $.ajax({
+            url: url_post,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_valid_sbu').modal('hide')
+                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        load_data()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
+
+    var form_nonvalid_sbu = $('#form_nonvalid_sbu');
+    form_nonvalid_sbu.on('submit', function(e) {
+        e.preventDefault();
+        var url_post = $('[name="url_validasi_sbu"]').val()
+        $.ajax({
+            url: url_post,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_nonvalid_sbu').modal('hide')
+                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        load_data()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
+
+    // END JS sbu CRUD
 </script>

@@ -1,5 +1,5 @@
 <script>
-    var url_get_nib = $('[name="url_get_nib"').val();
+    var url_get_sbu = $('[name="url_get_sbu"').val();
     $(document).ready(function() {
         $('#example1').DataTable({
             "responsive": false,
@@ -11,7 +11,7 @@
             "buttons": ["excel", "pdf", "print", "colvis"],
             "order": [],
             "ajax": {
-                "url": url_get_nib,
+                "url": url_get_sbu,
                 "type": "POST",
             },
             "columnDefs": [{
@@ -38,7 +38,7 @@
         var url_get_row = $('[name="url_get_row"]').val()
         if (type == 'add') {
             $('#modal-xl-tambah').modal('show')
-            form_kbli[0].reset();
+            form_sbu[0].reset();
             $('[name="type"').val('add')
         } else {
             $.ajax({
@@ -49,15 +49,15 @@
                     if (type == 'edit') {
 
                         $('#modal-xl-tambah').modal('show')
-                        $('[name="kode_kbli"').val(response.kode_kbli)
-                        $('[name="nama_kbli"').val(response.nama_kbli)
-                        $('[name="id_kbli"').val(response.id_kbli)
+                        $('[name="kode_sbu"').val(response.kode_sbu)
+                        $('[name="nama_sbu"').val(response.nama_sbu)
+                        $('[name="id_sbu"').val(response.id_sbu)
                         $('[name="type"').val('edit')
 
                     } else if (type == 'aktif') {
-                        Question_aktifkan(id, response.nama_kbli)
+                        Question_aktifkan(id, response.nama_sbu)
                     } else if (type == 'nonaktif') {
-                        Question_nonaktifkan(id, response.nama_kbli)
+                        Question_nonaktifkan(id, response.nama_sbu)
                     }
 
                 }
@@ -67,31 +67,31 @@
 
     }
 
-    function Question_aktifkan(id, nama_kbli) {
-        var url_aktifkan_kbli = $('[name="url_aktifkan_kbli"]').val()
+    function Question_aktifkan(id, nama_sbu) {
+        var url_aktifkan_sbu = $('[name="url_aktifkan_sbu"]').val()
         Swal.fire({
             title: 'Apakah Anda Yakin Ingin Aktifkan Data ? ',
-            text: nama_kbli,
+            text: nama_sbu,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Terima!',
+            confirmButtonText: 'Ya',
             cancelButtonText: 'Batal!',
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
                     type: "POST",
-                    url: url_aktifkan_kbli,
+                    url: url_aktifkan_sbu,
                     data: {
-                        id_kbli: id,
+                        id_sbu: id,
                     },
                     dataType: "JSON",
                     success: function(response) {
                         if (response == 'success') {
                             Swal.fire(
                                 'Berhasil!',
-                                'Jenis KBLI ' + nama_kbli + ' Berhasil Di Aktifkan!',
+                                'Jenis KBLI ' + nama_sbu + ' Berhasil Di Aktifkan!',
                                 'success'
                             )
                             reload_table();
@@ -103,31 +103,31 @@
         })
     }
 
-    function Question_nonaktifkan(id, nama_kbli) {
-        var url_nonaktifkan_kbli = $('[name="url_nonaktifkan_kbli"]').val()
+    function Question_nonaktifkan(id, nama_sbu) {
+        var url_nonaktifkan_sbu = $('[name="url_nonaktifkan_sbu"]').val()
         Swal.fire({
-            title: 'Apakah Anda Yakin Ingin Aktifkan Data ? ',
-            text: nama_kbli,
+            title: 'Apakah Anda Yakin Ingin Non-Aktifkan Data ? ',
+            text: nama_sbu,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Terima!',
+            confirmButtonText: 'Ya',
             cancelButtonText: 'Batal!',
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
                     type: "POST",
-                    url: url_nonaktifkan_kbli,
+                    url: url_nonaktifkan_sbu,
                     data: {
-                        id_kbli: id,
+                        id_sbu: id,
                     },
                     dataType: "JSON",
                     success: function(response) {
                         if (response == 'success') {
                             Swal.fire(
                                 'Berhasil!',
-                                'Jenis KBLI ' + nama_kbli + ' Berhasil Di Aktifkan!',
+                                'Jenis KBLI ' + nama_sbu + ' Berhasil Di Non-Aktifkan!',
                                 'success'
                             )
                             reload_table();
@@ -139,8 +139,8 @@
         })
     }
 
-    var form_kbli = $('#form_kbli');
-    form_kbli.on('submit', function(e) {
+    var form_sbu = $('#form_sbu');
+    form_sbu.on('submit', function(e) {
         e.preventDefault();
         var url_post = $('[name="url_post"]').val()
         $.ajax({
@@ -167,9 +167,9 @@
                     willClose: () => {
                         clearInterval(timerInterval)
                         $('#modal-xl-tambah').modal('hide')
-                        form_kbli[0].reset();
+                        form_sbu[0].reset();
                         reload_table()
-                        Swal.fire('Data Berhasil Di Aktifkan!', '', 'success')
+                        Swal.fire('Data Berhasil Di Masukkan!', '', 'success')
                     }
                 }).then((result) => {
                     /* Read more about handling dismissals below */

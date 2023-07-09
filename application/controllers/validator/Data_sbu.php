@@ -14,7 +14,7 @@ class Data_sbu extends CI_Controller
 		$this->load->view('template_new/header');
 		$this->load->view('validator/data_master/data_sbu');
 		$this->load->view('template_new/footer');
-		$this->load->view('validator/data_master/file_public_kbli');
+		$this->load->view('validator/data_master/file_public_sbu');
 	}
 
 	function get_data_sbu()
@@ -102,6 +102,28 @@ class Data_sbu extends CI_Controller
 		];
 		$data = [
 			'sts_aktif' => 1
+		];
+		$query = $this->M_master->update_sbu($data, $where);
+		if ($query) {
+			$response = [
+				'message' => 'Berhasil'
+			];
+		} else {
+			$response = [
+				'message' => 'Gagal'
+			];
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
+	function nonaktifkan_sbu()
+	{
+		$id = $this->input->post('id_sbu');
+		$where = [
+			'id_sbu' => $id
+		];
+		$data = [
+			'sts_aktif' => 0
 		];
 		$query = $this->M_master->update_sbu($data, $where);
 		if ($query) {

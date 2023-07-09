@@ -21,6 +21,7 @@
                     <input type="hidden" name="url_get_row" value="<?= base_url('validator/data_kbli/get_row_data/') ?>">
                     <input type="hidden" name="url_post" value="<?= base_url('validator/data_kbli/post_data') ?> ">
                     <input type="hidden" name="url_aktifkan_kbli" value="<?= base_url('validator/data_kbli/aktifkan_kbli') ?> ">
+                    <input type="hidden" name="url_nonaktifkan_kbli" value="<?= base_url('validator/data_kbli/nonaktifkan_kbli') ?> ">
                     <table id="example1" class="table table-bordered table-sm table-striped">
                         <thead class="bg-secondary">
                             <tr>
@@ -87,8 +88,8 @@
                             <div class="card-body">
                                 <div class="row">
                                     <form id="form_kbli">
-                                        <input type="text" name="id_kbli">
-                                        <input type="hiddedn" name="type" value="add">
+                                        <input type="hidden" name="id_kbli">
+                                        <input type="hidden" name="type" value="add">
                                         <div class="col-sm-12">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
