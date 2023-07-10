@@ -9,20 +9,32 @@ class Auth extends CI_Controller
         parent::__construct();
         $this->load->helper(array('url', 'form'));
         $this->load->library(array('form_validation'));
+        $this->load->library(array('form_validation', 'recaptcha'));
     }
 
+
     public function index()
-    {
-        $this->form_validation->set_rules('userName', 'Username', 'required|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim');
-        $email = $this->input->post('userName');
-        $password = $this->input->post('password');
-        if ($this->form_validation->run() == TRUE) {
-            $this->role_login->login($email, $password);
-        } else {
-            $this->load->view('auth/index');
-        }
-    }
+	{
+		$this->form_validation->set_rules('userName', 'Username', 'required|trim');
+		$this->form_validation->set_rules('password', 'Password', 'required|trim');
+		$recaptcha = $this->input->post('g-recaptcha-response');
+		if (!empty($recaptcha)) {
+			$response = $this->recaptcha->verifyResponse($recaptcha);
+			if (isset($response['success']) and $response['success'] === true) {
+				if ($this->form_validation->run() == false) {
+					$this->session->set_flashdata('salah', 'Username Atau Password Salah');
+					redirect('auth');
+				} else {
+					$username = $this->input->post('userName');
+					$password = $this->input->post('password');
+					$this->role_login->login($username, $password);
+				}
+			}
+		}
+		$data['widget'] = $this->recaptcha->getWidget();
+		$data['script'] = $this->recaptcha->getScriptTag();
+		$this->load->view('auth/index', $data);
+	}
 
     public function logout()
     {

@@ -727,6 +727,80 @@
                 } else {
 
                 }
+
+                if (response['row_neraca'].id_vendor) {
+                    $(document).ready(function() {
+                        var url_get_neraca = $('[name="url_get_neraca"]').val();
+                        console.log(url_get_neraca + response['row_neraca'].id_vendor);
+                        $('#tbl_neraca').DataTable({
+                            "ordering": true,
+                            "autoWidth": false,
+                            "processing": true,
+                            "serverSide": true,
+                            "bDestroy": true,
+                            "dom": 'Bfrtip',
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_get_neraca + response['row_neraca'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        }).buttons().container().appendTo('#tbl_neraca .col-md-6:eq(0)');
+                    });
+
+                } else {
+
+                }
+
+                if (response['row_keuangan'].id_vendor) {
+                    $(document).ready(function() {
+                        var url_get_keuangan = $('[name="url_get_keuangan"]').val();
+                        console.log(url_get_keuangan + response['row_keuangan'].id_vendor);
+                        $('#tbl_keuangan').DataTable({
+                            "ordering": true,
+                            "autoWidth": false,
+                            "processing": true,
+                            "serverSide": true,
+                            "bDestroy": true,
+                            "dom": 'Bfrtip',
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_get_keuangan + response['row_keuangan'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        }).buttons().container().appendTo('#tbl_keuangan .col-md-6:eq(0)');
+                    });
+
+                } else {
+
+                }
+
+
             }
         })
     }
@@ -3462,7 +3536,7 @@
                     },
                     willClose: () => {
                         clearInterval(timerInterval)
-                        $('#modal_valid_pengalaman').modal('hide')
+                        $('#modal_valid_spt').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
                         load_data()
                     }
@@ -3479,7 +3553,7 @@
     var form_nonvalid_spt = $('#form_nonvalid_spt');
     form_nonvalid_spt.on('submit', function(e) {
         e.preventDefault();
-        var url_post = $('[name="url_validasi_pengalaman"]').val()
+        var url_post = $('[name="url_validasi_spt"]').val()
         $.ajax({
             url: url_post,
             method: "POST",
@@ -3503,7 +3577,7 @@
                     },
                     willClose: () => {
                         clearInterval(timerInterval)
-                        $('#modal_nonvalid_pengalaman').modal('hide')
+                        $('#modal_nonvalid_spt').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
                         load_data()
                     }
@@ -3624,4 +3698,537 @@
         location.href = url_download_spt + id_url;
     }
     // end pajak spt
+
+    // pajak neraca
+    function byid_neraca(id, type) {
+        if (type == 'lihat') {
+            saveData = 'lihat';
+        }
+        if (type == 'dekrip') {
+            saveData = 'dekrip';
+        }
+        if (type == 'enkrip') {
+            saveData = 'enkrip';
+        }
+        var url_get_neraca_by_id = $('[name="url_get_neraca_by_id"]').val();
+        var modal_edit_neraca = $('#modal_edit_neraca')
+        var modal_dekrip_neraca = $('#modal_dekrip_neraca');
+        var modal_enkrip_neraca = $('#modal_enkrip_neraca');
+        $.ajax({
+            type: "GET",
+            url: url_get_neraca_by_id + id,
+            dataType: "JSON",
+            success: function(response) {
+                if (type == 'lihat') {
+                    modal_edit_neraca.modal('show')
+                    // $('#nomor_surat').val(response['row_neraca'].nomor_surat)
+                    // $('#tahun_lapor').val(response['row_neraca'].tahun_lapor)
+                    // $('#jenis_neraca').val(response['row_neraca'].jenis_neraca)
+                    // $('#tgl_penyampaian').val(response['row_neraca'].tgl_penyampaian)
+                    $('[name="id_url"]').val(response['row_neraca'].id_url_neraca)
+
+
+                } else if (type == 'dekrip') {
+                    modal_dekrip_neraca.modal('show');
+                    $('[name="id_url_neraca"]').val(response['row_neraca'].id_url_neraca);
+                    $('.button_enkrip_neraca').html('<a href="javascript:;" onclick="DekripEnkrip_neraca(\'' + response['row_neraca'].file_dokumen_neraca + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
+                    var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-info btn-block">' +
+                        response['row_neraca'].file_dokumen_neraca + '</a>';
+                    $('.token_generate_neraca').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_neraca'].id_url_neraca + '</textarea></div>');
+                } else if (type == 'enkrip') {
+                    modal_enkrip_neraca.modal('show');
+                    $('[name="id_url_neraca"]').val(response['row_neraca'].id_url_neraca);
+                    $('.button_enkrip_neraca').html('<a href="javascript:;" onclick="DekripEnkrip_neraca(\'' + response['row_neraca'].id_url_neraca + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
+                    var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_neraca(\'' + response['row_neraca'].id_url_neraca + '\')" class="btn btn-sm btn-warning btn-block">' + response['row_neraca'].file_dokumen_neraca + '</a>';
+                    $('.token_generate_neraca').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_neraca'].id_url_neraca + '</textarea></div>');
+                }
+            }
+        })
+    }
+
+    function Valid_neraca(id_url, type = '') {
+        if (type == 'terima_kbli') {
+            $('#modal_valid_neraca').modal('show')
+            $('[name="url_validasi_neraca"]').val();
+            $('[name="id_url_neraca"]').val(id_url);
+            $('#kbli_valid_neraca').val(type)
+        } else {
+            $('#modal_valid_neraca').modal('show')
+            $('[name="url_validasi_neraca"]').val();
+            $('[name="id_url_neraca"]').val(id_url);
+            $('#kbli_valid_neraca').val('')
+        }
+
+    }
+
+    function NonValid_neraca(id_url, type = '') {
+        if (type == 'tolak_kbli') {
+            $('#modal_nonvalid_neraca').modal('show')
+            $('[name="url_validasi_neraca"]').val();
+            $('[name="id_url_neraca"]').val(id_url);
+            $('#kbli_nonvalid_neraca').val(type)
+        } else {
+            $('#modal_nonvalid_neraca').modal('show')
+            $('[name="url_validasi_neraca"]').val();
+            $('[name="id_url_neraca"]').val(id_url);
+            $('#kbli_nonvalid_neraca').val('')
+        }
+    }
+
+    var form_valid_neraca = $('#form_valid_neraca');
+    form_valid_neraca.on('submit', function(e) {
+        e.preventDefault();
+        var url_post = $('[name="url_validasi_neraca"]').val()
+        $.ajax({
+            url: url_post,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_valid_neraca').modal('hide')
+                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        load_data()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
+
+    var form_nonvalid_neraca = $('#form_nonvalid_neraca');
+    form_nonvalid_neraca.on('submit', function(e) {
+        e.preventDefault();
+        var url_post = $('[name="url_validasi_neraca"]').val()
+        $.ajax({
+            url: url_post,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_nonvalid_neraca').modal('hide')
+                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        load_data()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
+
+
+    function GenerateDekrip_neraca() {
+        var url_encryption_neraca = $('[name="url_encryption_neraca"]').val();
+        var modal_dekrip_neraca = $('#modal_dekrip_neraca');
+        var id_url = $('[name="id_url_neraca"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_neraca + id_url,
+            dataType: "JSON",
+            data: $('#form_dekrip_neraca').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], '', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Deskripsi!',
+                        html: 'Proses Deksripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                            load_data();
+                            $('#button_dekrip_generate').css('display', 'block');
+                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            modal_dekrip_neraca.modal('hide');
+                            $('#form_dekrip_neraca')[0].reset()
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+
+    function GenerateEnkrip_neraca() {
+        var url_encryption_neraca = $('[name="url_encryption_neraca"]').val();
+        var modal_enkrip_neraca = $('#modal_enkrip_neraca');
+        var id_url = $('[name="id_url_neraca"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_neraca + id_url,
+            dataType: "JSON",
+            data: $('#form_enkrip_neraca').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], '', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Deskripsi!',
+                        html: 'Proses Deksripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                            load_data();
+                            $('#button_dekrip_generate').css('display', 'block');
+                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            $('#form_enkrip_neraca')[0].reset()
+                            modal_enkrip_neraca.modal('hide');
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    function DownloadFile_neraca(id_url, type) {
+        var url_download_neraca = $('[name="url_download_neraca"]').val()
+        location.href = url_download_neraca + id_url + '/' + type;
+    }
+
+
+
+
+      // pajak keuangan
+      function byid_keuangan(id, type) {
+        if (type == 'lihat') {
+            saveData = 'lihat';
+        }
+        if (type == 'dekrip') {
+            saveData = 'dekrip';
+        }
+        if (type == 'enkrip') {
+            saveData = 'enkrip';
+        }
+        var url_get_keuangan_by_id = $('[name="url_get_keuangan_by_id"]').val();
+        var modal_edit_keuangan = $('#modal_edit_keuangan')
+        var modal_dekrip_keuangan = $('#modal_dekrip_keuangan');
+        var modal_enkrip_keuangan = $('#modal_enkrip_keuangan');
+        $.ajax({
+            type: "GET",
+            url: url_get_keuangan_by_id + id,
+            dataType: "JSON",
+            success: function(response) {
+                if (type == 'lihat') {
+                    modal_edit_keuangan.modal('show')
+                    // $('#nomor_surat').val(response['row_keuangan'].nomor_surat)
+                    // $('#tahun_lapor').val(response['row_keuangan'].tahun_lapor)
+                    // $('#jenis_keuangan').val(response['row_keuangan'].jenis_keuangan)
+                    // $('#tgl_penyampaian').val(response['row_keuangan'].tgl_penyampaian)
+                    $('[name="id_url"]').val(response['row_keuangan'].id_url)
+
+
+                } else if (type == 'dekrip') {
+                    modal_dekrip_keuangan.modal('show');
+                    $('[name="id_url_keuangan"]').val(response['row_keuangan'].id_url);
+                    $('.button_enkrip_keuangan').html('<a href="javascript:;" onclick="DekripEnkrip_keuangan(\'' + response['row_keuangan'].file_dokumen_keuangan + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
+                    var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-info btn-block">' +
+                        response['row_keuangan'].file_dokumen_keuangan + '</a>';
+                    $('.token_generate_keuangan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_keuangan'].token_dokumen + '</textarea></div>');
+                } else if (type == 'enkrip') {
+                    modal_enkrip_keuangan.modal('show');
+                    $('[name="id_url_keuangan"]').val(response['row_keuangan'].id_url);
+                    $('.button_enkrip_keuangan').html('<a href="javascript:;" onclick="DekripEnkrip_keuangan(\'' + response['row_keuangan'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
+                    var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' + response['row_keuangan'].id_url + '\')" class="btn btn-sm btn-warning btn-block">' + response['row_keuangan'].file_dokumen_keuangan + '</a>';
+                    $('.token_generate_keuangan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_keuangan'].token_dokumen + '</textarea></div>');
+                }
+            }
+        })
+    }
+
+    function Valid_keuangan(id_url, type = '') {
+        if (type == 'terima_kbli') {
+            $('#modal_valid_keuangan').modal('show')
+            $('[name="url_validasi_keuangan"]').val();
+            $('[name="id_url_keuangan"]').val(id_url);
+            $('#kbli_valid_keuangan').val(type)
+        } else {
+            $('#modal_valid_keuangan').modal('show')
+            $('[name="url_validasi_keuangan"]').val();
+            $('[name="id_url_keuangan"]').val(id_url);
+            $('#kbli_valid_keuangan').val('')
+        }
+
+    }
+
+    function NonValid_keuangan(id_url, type = '') {
+        if (type == 'tolak_kbli') {
+            $('#modal_nonvalid_keuangan').modal('show')
+            $('[name="url_validasi_keuangan"]').val();
+            $('[name="id_url_keuangan"]').val(id_url);
+            $('#kbli_nonvalid_keuangan').val(type)
+        } else {
+            $('#modal_nonvalid_keuangan').modal('show')
+            $('[name="url_validasi_keuangan"]').val();
+            $('[name="id_url_keuangan"]').val(id_url);
+            $('#kbli_nonvalid_keuangan').val('')
+        }
+    }
+
+    var form_valid_keuangan = $('#form_valid_keuangan');
+    form_valid_keuangan.on('submit', function(e) {
+        e.preventDefault();
+        var url_post = $('[name="url_validasi_keuangan"]').val()
+        $.ajax({
+            url: url_post,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_valid_keuangan').modal('hide')
+                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        load_data()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
+
+    var form_nonvalid_keuangan = $('#form_nonvalid_keuangan');
+    form_nonvalid_keuangan.on('submit', function(e) {
+        e.preventDefault();
+        var url_post = $('[name="url_validasi_keuangan"]').val()
+        $.ajax({
+            url: url_post,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_nonvalid_keuangan').modal('hide')
+                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        load_data()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
+
+
+    function GenerateDekrip_keuangan() {
+        var url_encryption_keuangan = $('[name="url_encryption_keuangan"]').val();
+        var modal_dekrip_keuangan = $('#modal_dekrip_keuangan');
+        var id_url = $('[name="id_url_keuangan"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_keuangan + id_url,
+            dataType: "JSON",
+            data: $('#form_dekrip_keuangan').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], '', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Deskripsi!',
+                        html: 'Proses Deksripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                            load_data();
+                            $('#button_dekrip_generate').css('display', 'block');
+                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            modal_dekrip_keuangan.modal('hide');
+                            $('#form_dekrip_keuangan')[0].reset()
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+
+    function GenerateEnkrip_keuangan() {
+        var url_encryption_keuangan = $('[name="url_encryption_keuangan"]').val();
+        var modal_enkrip_keuangan = $('#modal_enkrip_keuangan');
+        var id_url = $('[name="id_url_keuangan"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_keuangan + id_url,
+            dataType: "JSON",
+            data: $('#form_enkrip_keuangan').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], '', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Deskripsi!',
+                        html: 'Proses Deksripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                            load_data();
+                            $('#button_dekrip_generate').css('display', 'block');
+                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            $('#form_enkrip_keuangan')[0].reset()
+                            modal_enkrip_keuangan.modal('hide');
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    function DownloadFile_keuangan(id_url, type) {
+        var url_download_keuangan = $('[name="url_download_keuangan"]').val()
+        location.href = url_download_keuangan + id_url + '/' + type;
+    }
 </script>
