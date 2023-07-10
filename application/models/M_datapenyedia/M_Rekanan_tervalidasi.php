@@ -575,6 +575,516 @@ class M_Rekanan_tervalidasi extends CI_Model
     // akta pendirian
     function get_row_akta_pendirian($id_vendor)
     {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_akta_pendirian');
+        $this->db->where('tbl_vendor_akta_pendirian.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_akta_pendirian_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_akta_pendirian');
+        $this->db->where('tbl_vendor_akta_pendirian.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_enkrip_akta_pendirian($where, $data)
+    {
+        $this->db->update('tbl_vendor_akta_pendirian', $data, $where);
+        return $this->db->affected_rows();
     }
     // end akta pendirian
+
+    // akta perubahan
+    function get_row_akta_perubahan($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_akta_perubahan');
+        $this->db->where('tbl_vendor_akta_perubahan.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_akta_perubahan_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_akta_perubahan');
+        $this->db->where('tbl_vendor_akta_perubahan.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_enkrip_akta_perubahan($where, $data)
+    {
+        $this->db->update('tbl_vendor_akta_perubahan', $data, $where);
+        return $this->db->affected_rows();
+    }
+    // end akta perubahan
+
+    // MANAJERIAL
+
+    public function get_row_pemilik_manajerial($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pemilik');
+        $this->db->where('tbl_vendor_pemilik.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_pemilik_manajerial_id($id_pemilik)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pemilik');
+        $this->db->where('tbl_vendor_pemilik.id_pemilik', $id_pemilik);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    var $order_pemilik =  array('id_vendor', 'nik', 'nama_pemilik', 'jns_pemilik', 'alamat_pemilik', 'npwp', 'warganegara', 'saham', 'file_ktp', 'id_vendor', 'id_vendor');
+
+    private function _get_data_query_pemilik_manjerial($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pemilik');
+        $this->db->where('tbl_vendor_pemilik.id_vendor', $id_vendor);
+        $this->db->order_by('tbl_vendor_pemilik.id_pemilik', 'DESC');
+        $i = 0;
+        foreach ($this->order_pemilik as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order_pemilik) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order_pemilik[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_vendor_pemilik.id_vendor', 'DESC');
+        }
+    }
+
+    public function gettable_pemilik_manajerial($id_vendor) //nam[ilin data pake ini
+    {
+        $this->_get_data_query_pemilik_manjerial($id_vendor); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function count_filtered_data_pemilik_manajerial($id_vendor)
+    {
+        $this->_get_data_query_pemilik_manjerial($id_vendor); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_all_data_pemilik_manajerial($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pemilik');
+        $this->db->where('tbl_vendor_pemilik.id_vendor', $id_vendor);
+        return $this->db->count_all_results();
+    }
+
+    public function get_row_excel_pemilik_manajerial_enkription($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('temp_vendor_pemilik');
+        $this->db->where('temp_vendor_pemilik.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_pemilik_manajerial_enkription($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pemilik');
+        $this->db->where('tbl_vendor_pemilik.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_pemilik_manajerial_enkription($where, $data)
+    {
+        $this->db->update('tbl_vendor_pemilik', $data, $where);
+        return $this->db->affected_rows();
+    }
+
+    // pengurus
+    var $order_pengurus =  array('id_vendor', 'nik', 'nama_pengurus', 'jabatan_pengurus', 'alamat_pengurus', 'npwp', 'warganegara', 'saham', 'file_ktp', 'id_vendor', 'id_vendor');
+
+    private function _get_data_query_pengurus_manjerial($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengurus');
+        $this->db->where('tbl_vendor_pengurus.id_vendor', $id_vendor);
+        $this->db->order_by('tbl_vendor_pengurus.id_pengurus', 'DESC');
+        $i = 0;
+        foreach ($this->order_pengurus as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order_pengurus) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order_pengurus[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_vendor_pengurus.id_vendor', 'DESC');
+        }
+    }
+
+    public function gettable_pengurus_manajerial($id_vendor) //nam[ilin data pake ini
+    {
+        $this->_get_data_query_pengurus_manjerial($id_vendor); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function count_filtered_data_pengurus_manajerial($id_vendor)
+    {
+        $this->_get_data_query_pengurus_manjerial($id_vendor); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_all_data_pengurus_manajerial($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengurus');
+        $this->db->where('tbl_vendor_pengurus.id_vendor', $id_vendor);
+        return $this->db->count_all_results();
+    }
+
+    public function get_row_pengurus_manajerial($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengurus');
+        $this->db->where('tbl_vendor_pengurus.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+
+    public function get_row_pengurus_manajerial_id($id_pengurus)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengurus');
+        $this->db->where('tbl_vendor_pengurus.id_pengurus', $id_pengurus);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_pengurus_manajerial_enkription($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengurus');
+        $this->db->where('tbl_vendor_pengurus.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_pengurus_manajerial_enkription($where, $data)
+    {
+        $this->db->update('tbl_vendor_pengurus', $data, $where);
+        return $this->db->affected_rows();
+    }
+    // end pengurus
+    // END MANAJERIAL
+
+    // pengalaman
+    var $order_pengalaman =  array('id_vendor', 'no_kontrak', 'nama_pekerjaan', 'id_jenis_usaha', 'tanggal_kontrak', 'instansi_pemberi', 'nilai_kontrak', 'id_vendor', 'id_vendor');
+
+    private function _get_data_query_pengalaman($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengalaman');
+        $this->db->where('tbl_vendor_pengalaman.id_vendor', $id_vendor);
+        $this->db->order_by('tbl_vendor_pengalaman.id_pengalaman', 'DESC');
+        $i = 0;
+        foreach ($this->order_pengalaman as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order_pengalaman) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order_pengalaman[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_vendor_pengalaman.id_vendor', 'DESC');
+        }
+    }
+
+    public function get_row_pengalaman($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengalaman');
+        $this->db->where('tbl_vendor_pengalaman.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function gettable_pengalaman($id_vendor) //nam[ilin data pake ini
+    {
+        $this->_get_data_query_pengalaman($id_vendor); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function count_filtered_data_pengalaman($id_vendor)
+    {
+        $this->_get_data_query_pengalaman($id_vendor); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_all_data_pengalaman($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengalaman');
+        $this->db->where('tbl_vendor_pengalaman.id_vendor', $id_vendor);
+        return $this->db->count_all_results();
+    }
+
+
+    public function get_row_pengalaman_id($id_pengalaman)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengalaman');
+        $this->db->where('tbl_vendor_pengalaman.id_pengalaman', $id_pengalaman);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_pengalaman_enkription($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengalaman');
+        $this->db->where('tbl_vendor_pengalaman.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_pengalaman_enkription($where, $data)
+    {
+        $this->db->update('tbl_vendor_pengalaman', $data, $where);
+        return $this->db->affected_rows();
+    }
+
+    // end pengalaman
+
+    // pajak sppkp
+    public function get_row_sppkp($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_sppkp');
+        $this->db->where('tbl_vendor_sppkp.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function get_row_sppkp_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_sppkp');
+        $this->db->where('tbl_vendor_sppkp.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function update_enkrip_sppkp($where, $data)
+    {
+        $this->db->update('tbl_vendor_sppkp', $data, $where);
+        return $this->db->affected_rows();
+    }
+    // end pajak sppkp
+
+    // pajak npwp
+    public function get_row_npwp($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_npwp');
+        $this->db->where('tbl_vendor_npwp.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function get_row_npwp_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_npwp');
+        $this->db->where('tbl_vendor_npwp.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function update_enkrip_npwp($where, $data)
+    {
+        $this->db->update('tbl_vendor_npwp', $data, $where);
+        return $this->db->affected_rows();
+    }
+    // end pajak npwp
+
+    // pajak spt
+    public function get_row_spt($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_spt');
+        $this->db->where('tbl_vendor_spt.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_spt_id($id_spt)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_spt');
+        $this->db->where('tbl_vendor_spt.id_vendor_spt', $id_spt);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_spt_id_url($id_spt)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_spt');
+        $this->db->where('tbl_vendor_spt.id_url', $id_spt);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    var $order_spt = array('id_vendor', 'nomor_surat', 'tahun_lapor', 'jenis_spt', 'tgl_penyampaian', 'file_dokumen', 'sts_validasi', 'id_vendor');
+
+    private function _get_data_query_spt($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_spt');
+        $this->db->where('tbl_vendor_spt.id_vendor', $id_vendor);
+        $this->db->order_by('tbl_vendor_spt.id_vendor_spt', 'DESC');
+        $i = 0;
+        foreach ($this->order_spt as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order_spt) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order_spt[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_vendor_spt.id_vendor', 'DESC');
+        }
+    }
+
+    public function gettable_spt($id_vendor) //nam[ilin data pake ini
+    {
+        $this->_get_data_query_spt($id_vendor); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function count_filtered_spt($id_vendor)
+    {
+        $this->_get_data_query_spt($id_vendor); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_all_spt($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_spt');
+        $this->db->where('tbl_vendor_spt.id_vendor', $id_vendor);
+        return $this->db->count_all_results();
+    }
+
+
+    public function get_row_spt_enkription($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_spt');
+        $this->db->where('tbl_vendor_spt.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_spt($where, $data)
+    {
+        $this->db->update('tbl_vendor_spt', $data, $where);
+        return $this->db->affected_rows();
+    }
+    // end pajak spt
 }
