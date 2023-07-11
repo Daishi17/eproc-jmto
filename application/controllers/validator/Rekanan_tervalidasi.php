@@ -140,6 +140,7 @@ class Rekanan_tervalidasi extends CI_Controller
 		$row_neraca = $this->M_Rekanan_tervalidasi->get_row_neraca($id_vendor['id_vendor']);
 		$row_keuangan = $this->M_Rekanan_tervalidasi->get_row_keuangan($id_vendor['id_vendor']);
 		$response = [
+			'id_vendor' => $id_vendor,
 			'row_siup' => $row_siup,
 			'row_nib' => $row_nib,
 			'row_sbu' => $row_sbu,
@@ -269,6 +270,19 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'SIUP',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_siup'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -285,7 +299,20 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'SIUP',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_siup'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			}
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 			$data = $this->M_Rekanan_tervalidasi->update_enkrip_siup($where, $data);
 		} else {
@@ -307,6 +334,18 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_siup'],
+					'jenis_dokumen' => 'SIUP-KBLI',
+					'nomor_kbli' => $id_vendor['kode_kbli'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_siup'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -323,7 +362,20 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_siup'],
+					'jenis_dokumen' => 'SIUP-KBLI',
+					'nomor_kbli' => $id_vendor['kode_kbli'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_siup'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			}
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 			$data = $this->M_Rekanan_tervalidasi->update_enkrip_kbli_siup($where, $data);
 		}
@@ -1319,9 +1371,8 @@ class Rekanan_tervalidasi extends CI_Controller
 	// END AKTA perubahan
 
 	// MANAJERIAL
-	public function get_data_pemilik_manajerial()
+	public function get_data_pemilik_manajerial($id_vendor)
 	{
-		$id_vendor = $this->session->userdata('id_vendor');
 		$resultss = $this->M_Rekanan_tervalidasi->gettable_pemilik_manajerial($id_vendor);
 		$data = [];
 		$no = $_POST['start'];
@@ -1477,9 +1528,8 @@ class Rekanan_tervalidasi extends CI_Controller
 	}
 
 	// pengurus
-	public function get_data_pengurus_manajerial()
+	public function get_data_pengurus_manajerial($id_vendor)
 	{
-		$id_vendor = $this->session->userdata('id_vendor');
 		$resultss = $this->M_Rekanan_tervalidasi->gettable_pengurus_manajerial($id_vendor);
 		$data = [];
 		$no = $_POST['start'];
@@ -1631,9 +1681,8 @@ class Rekanan_tervalidasi extends CI_Controller
 	// END MANAJERIAL
 
 	// pengalaman
-	public function get_data_pengalaman()
+	public function get_data_pengalaman($id_vendor)
 	{
-		$id_vendor = $this->session->userdata('id_vendor');
 		$resultss = $this->M_Rekanan_tervalidasi->gettable_pengalaman($id_vendor);
 		$data = [];
 		$no = $_POST['start'];
@@ -2448,7 +2497,7 @@ class Rekanan_tervalidasi extends CI_Controller
 		if ($type == 'neraca_sertifikat') {
 			$fileDownload = $get_row_enkrip['file_dokumen_sertifikat'];
 		}
-		
+
 
 		// Locate.
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/Neraca-' . $date . '/' . $fileDownload;
@@ -2461,234 +2510,234 @@ class Rekanan_tervalidasi extends CI_Controller
 		// Actual download.
 		readfile($file_url);
 	}
-		// pajak keuangan
-		function get_data_keuangan($id_vendor)
-		{
-			$result = $this->M_Rekanan_tervalidasi->gettable_keuangan($id_vendor);
-			$data = [];
-			$no = $_POST['start'];
-			foreach ($result as $rs) {
-				$row = array();
-				$row[] = ++$no;
-				$row[] = $rs->tahun_lapor;
-				if ($rs->sts_token_dokumen == 2) {
-					$row[] = '<label for="" style="white-space: nowrap; 
+	// pajak keuangan
+	function get_data_keuangan($id_vendor)
+	{
+		$result = $this->M_Rekanan_tervalidasi->gettable_keuangan($id_vendor);
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($result as $rs) {
+			$row = array();
+			$row[] = ++$no;
+			$row[] = $rs->tahun_lapor;
+			if ($rs->sts_token_dokumen == 2) {
+				$row[] = '<label for="" style="white-space: nowrap; 
 					width: 100px; 
 					overflow: hidden;
 					text-overflow: ellipsis;">' . $rs->file_laporan_auditor . '</label>';
-					$row[] = '<label for="" style="white-space: nowrap; 
+				$row[] = '<label for="" style="white-space: nowrap; 
 					width: 100px; 
 					overflow: hidden;
 					text-overflow: ellipsis;">' . $rs->file_laporan_keuangan . '</label>';
-				} else {
-					$row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' . $rs->id_url . '\'' . ',' . '\'' . 'keuangan_dokumen' . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_laporan_auditor . '</a>';
-					$row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' . $rs->id_url . '\'' . ',' . '\'' . 'keuangan_sertifikat' . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_laporan_keuangan . '</a>';
-				}
-				if ($rs->sts_token_dokumen == 2) {
-					$row[] = '<center>
+			} else {
+				$row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' . $rs->id_url . '\'' . ',' . '\'' . 'keuangan_dokumen' . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_laporan_auditor . '</a>';
+				$row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' . $rs->id_url . '\'' . ',' . '\'' . 'keuangan_sertifikat' . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_laporan_keuangan . '</a>';
+			}
+			if ($rs->sts_token_dokumen == 2) {
+				$row[] = '<center>
 					<a href="javascript:;" class="btn btn-success btn-sm shadow-lg" onClick="byid_keuangan(' . "'" . $rs->id_url . "','enkrip'" . ')"> <i class="fa-solid fa-lock px-1"></i> Enkrip</a></center>';
-				} else {
-					$row[] = '<center>
+			} else {
+				$row[] = '<center>
 					<a href="javascript:;" class="btn btn-warning btn-sm shadow-lg" onClick="byid_keuangan(' . "'" . $rs->id_url . "','dekrip'" . ')"> <i class="fa-solid fa-lock-open px-1"></i> Dekrip</a></center>';
-				}
-				// nanti main kondisi hitung dokumen dimari
-				if ($rs->sts_validasi == NULL) {
-					$row[] = '<small><span class="badge bg-secondary">Belum Di Periksa</span></small>';
-				} else if ($rs->sts_validasi == 1) {
-					$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
-				} else if ($rs->sts_validasi == 2) {
-					$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
-				}
-				if ($rs->sts_validasi == 0 || $rs->sts_validasi == NULL) {
-					$row[] = '<a href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_keuangan(' . "'" . $rs->id_url . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_keuangan(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
-				} else if ($rs->sts_validasi == 1) {
-					$row[] = '<button type="button" disabled class="btn btn-success btn-sm" ><i class="fa-solid fa-square-check px-1"></i> Valid</button><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_keuangan(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
-				} else {
-					$row[] = '<a href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_keuangan(' . "'" . $rs->id_url . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_keuangan(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
-				}
-	
-	
-	
-				$data[] = $row;
 			}
-			$output = array(
-				"draw" => $_POST['draw'],
-				"recordsTotal" => $this->M_Rekanan_tervalidasi->count_all_keuangan($id_vendor),
-				"recordsFiltered" => $this->M_Rekanan_tervalidasi->count_filtered_keuangan($id_vendor),
-				"data" => $data
-			);
-			$this->output->set_content_type('application/json')->set_output(json_encode($output));
-		}
-	
-		function get_keuangan_by_id($id_url)
-		{
-			$row_keuangan = $this->M_Rekanan_tervalidasi->get_row_keuangan_enkription($id_url);
-			$response = [
-				'row_keuangan' => $row_keuangan
-			];
-			$this->output->set_content_type('application/json')->set_output(json_encode($response));
-		}
-	
-		public function encryption_keuangan($id_url)
-		{
-			$id_url_keuangan = $this->input->post('id_url_keuangan');
-			$token_dokumen = $this->input->post('token_dokumen');
-			// $secret_token = $this->input->post('secret_token');
-	
-			$type = $this->input->post('type');
-	
-	
-			$get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_keuangan_enkription($id_url);
-			// $id_vendor = $get_row_enkrip['id_vendor'];
-			// $row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor($id_vendor);
-	
-	
-			$chiper = "AES-128-ECB";
-			$secret_token_dokumen1 = 'jmto.1' . $get_row_enkrip['id_url'];
-			$secret_token_dokumen2 = 'jmto.2' . $get_row_enkrip['id_url'];
-			$where = [
-				'id_url' => $id_url_keuangan
-			];
-			if ($type == 'dekrip') {
-				$file_laporan_auditor = openssl_decrypt($get_row_enkrip['file_laporan_auditor'], $chiper, $secret_token_dokumen1);
-				$file_laporan_keuangan = openssl_decrypt($get_row_enkrip['file_laporan_keuangan'], $chiper, $secret_token_dokumen2);
-				$data = [
-					'sts_token_dokumen' => 2,
-					'file_laporan_auditor' => $file_laporan_auditor,
-					'file_laporan_keuangan' => $file_laporan_keuangan,
-				];
-				if ($token_dokumen == $get_row_enkrip['token_dokumen']) {
-					$response = [
-						'message' => 'success'
-					];
-					$this->M_Rekanan_tervalidasi->update_keuangan($where, $data);
-				} else {
-					$response = [
-						'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
-					];
-				}
-				// st
+			// nanti main kondisi hitung dokumen dimari
+			if ($rs->sts_validasi == NULL) {
+				$row[] = '<small><span class="badge bg-secondary">Belum Di Periksa</span></small>';
+			} else if ($rs->sts_validasi == 1) {
+				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
+			} else if ($rs->sts_validasi == 2) {
+				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
+			}
+			if ($rs->sts_validasi == 0 || $rs->sts_validasi == NULL) {
+				$row[] = '<a href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_keuangan(' . "'" . $rs->id_url . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_keuangan(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
+			} else if ($rs->sts_validasi == 1) {
+				$row[] = '<button type="button" disabled class="btn btn-success btn-sm" ><i class="fa-solid fa-square-check px-1"></i> Valid</button><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_keuangan(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			} else {
-				$file_laporan_auditor = openssl_encrypt($get_row_enkrip['file_laporan_auditor'], $chiper, $secret_token_dokumen1);
-				$file_laporan_keuangan = openssl_encrypt($get_row_enkrip['file_laporan_keuangan'], $chiper, $secret_token_dokumen2);
-				$data = [
-					'sts_token_dokumen' => 1,
-					'file_laporan_auditor' => $file_laporan_auditor,
-					'file_laporan_keuangan' => $file_laporan_keuangan,
-				];
-				if ($token_dokumen == $get_row_enkrip['token_dokumen']) {
-					$response = [
-						'message' => 'success'
-					];
-					$this->M_Rekanan_tervalidasi->update_keuangan($where, $data);
-				} else {
-					$response = [
-						'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
-					];
-				}
+				$row[] = '<a href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_keuangan(' . "'" . $rs->id_url . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_keuangan(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			}
-	
-			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+
+
+
+			$data[] = $row;
 		}
-	
-	
-		function validation_keuangan()
-		{
-			$type = $this->input->post('type');
-			$type_kbli = $this->input->post('type_kbli');
-			$alasan_validator = $this->input->post('alasan_validator');
-			$id_url = $this->input->post('id_url_keuangan');
-			$nm_validator = $this->session->userdata('nama_pegawai');
-	
-			$id_vendor = $this->M_Rekanan_tervalidasi->get_row_keuangan_id_url($id_url);
-			$get_vendor = $id_vendor['id_vendor'];
-	
-			// 1 itu sesuai 2 itu tidak sesuai 3 itu revisi
-			if ($type == 'valid') {
-				$data = [
-					'alasan_validator' => $alasan_validator,
-					'sts_validasi' => 1,
-					'nama_validator' => $nm_validator,
-					'tgl_periksa' => date('Y-m-d H:i')
-				];
-				$where = [
-					'id_url' => $id_vendor['id_url']
-				];
-	
-				$data_vendor = [
-					'sts_dokumen_cek' => 1
-				];
-				$where_vendor = [
-					'id_vendor' => $get_vendor
-				];
-			} else {
-				$data = [
-					'alasan_validator' => $alasan_validator,
-					'sts_validasi' => 2,
-					'nama_validator' => $nm_validator,
-					'tgl_periksa' => date('Y-m-d H:i')
-				];
-				$where = [
-					'id_url' => $id_vendor['id_url']
-				];
-				$data_vendor = [
-					'sts_dokumen_cek' => 2
-				];
-				$where_vendor = [
-					'id_vendor' => $get_vendor
-				];
-			}
-			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
-			$data = $this->M_Rekanan_tervalidasi->update_keuangan($where, $data);
-	
-	
-			if ($data) {
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_Rekanan_tervalidasi->count_all_keuangan($id_vendor),
+			"recordsFiltered" => $this->M_Rekanan_tervalidasi->count_filtered_keuangan($id_vendor),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+	function get_keuangan_by_id($id_url)
+	{
+		$row_keuangan = $this->M_Rekanan_tervalidasi->get_row_keuangan_enkription($id_url);
+		$response = [
+			'row_keuangan' => $row_keuangan
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	public function encryption_keuangan($id_url)
+	{
+		$id_url_keuangan = $this->input->post('id_url_keuangan');
+		$token_dokumen = $this->input->post('token_dokumen');
+		// $secret_token = $this->input->post('secret_token');
+
+		$type = $this->input->post('type');
+
+
+		$get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_keuangan_enkription($id_url);
+		// $id_vendor = $get_row_enkrip['id_vendor'];
+		// $row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor($id_vendor);
+
+
+		$chiper = "AES-128-ECB";
+		$secret_token_dokumen1 = 'jmto.1' . $get_row_enkrip['id_url'];
+		$secret_token_dokumen2 = 'jmto.2' . $get_row_enkrip['id_url'];
+		$where = [
+			'id_url' => $id_url_keuangan
+		];
+		if ($type == 'dekrip') {
+			$file_laporan_auditor = openssl_decrypt($get_row_enkrip['file_laporan_auditor'], $chiper, $secret_token_dokumen1);
+			$file_laporan_keuangan = openssl_decrypt($get_row_enkrip['file_laporan_keuangan'], $chiper, $secret_token_dokumen2);
+			$data = [
+				'sts_token_dokumen' => 2,
+				'file_laporan_auditor' => $file_laporan_auditor,
+				'file_laporan_keuangan' => $file_laporan_keuangan,
+			];
+			if ($token_dokumen == $get_row_enkrip['token_dokumen']) {
 				$response = [
-					'message' => 'Berhasil!'
+					'message' => 'success'
 				];
+				$this->M_Rekanan_tervalidasi->update_keuangan($where, $data);
 			} else {
 				$response = [
-					'message' => 'Gagal!'
+					'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
 				];
 			}
-			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+			// st
+		} else {
+			$file_laporan_auditor = openssl_encrypt($get_row_enkrip['file_laporan_auditor'], $chiper, $secret_token_dokumen1);
+			$file_laporan_keuangan = openssl_encrypt($get_row_enkrip['file_laporan_keuangan'], $chiper, $secret_token_dokumen2);
+			$data = [
+				'sts_token_dokumen' => 1,
+				'file_laporan_auditor' => $file_laporan_auditor,
+				'file_laporan_keuangan' => $file_laporan_keuangan,
+			];
+			if ($token_dokumen == $get_row_enkrip['token_dokumen']) {
+				$response = [
+					'message' => 'success'
+				];
+				$this->M_Rekanan_tervalidasi->update_keuangan($where, $data);
+			} else {
+				$response = [
+					'maaf' => 'Maaf Anda Memerlukan Token Yang Valid',
+				];
+			}
 		}
 
-		public function url_download_keuangan()
-		{
-			$id_url = $this->uri->segment(4);
-			$type = $this->uri->segment(5);
-			$get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_keuangan_url($id_url);
-			$id_vendor = $get_row_enkrip['id_vendor'];
-			$row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor($id_vendor);
-			$date = date('Y');
-			if ($id_url == '') {
-				// tendang not found
-			}
-			if ($id_url == '') {
-				// tendang not found
-			}
-			
-			if ($type == 'keuangan_dokumen') {
-				$fileDownload = $get_row_enkrip['file_laporan_auditor'];
-			}
-			if ($type == 'keuangan_sertifikat') {
-				$fileDownload = $get_row_enkrip['file_laporan_keuangan'];
-			}
-			
-	
-			// Locate.
-			$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/Keuangan-' . $date . '/' . $fileDownload;
-	
-			// Configure.
-			header('Content-Type: application/octet-stream');
-			header("Content-Transfer-Encoding: Binary");
-			header("Content-disposition: attachment; filename=\"" . $fileDownload . "\"");
-	
-			// Actual download.
-			readfile($file_url);
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+
+	function validation_keuangan()
+	{
+		$type = $this->input->post('type');
+		$type_kbli = $this->input->post('type_kbli');
+		$alasan_validator = $this->input->post('alasan_validator');
+		$id_url = $this->input->post('id_url_keuangan');
+		$nm_validator = $this->session->userdata('nama_pegawai');
+
+		$id_vendor = $this->M_Rekanan_tervalidasi->get_row_keuangan_id_url($id_url);
+		$get_vendor = $id_vendor['id_vendor'];
+
+		// 1 itu sesuai 2 itu tidak sesuai 3 itu revisi
+		if ($type == 'valid') {
+			$data = [
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 1,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i')
+			];
+			$where = [
+				'id_url' => $id_vendor['id_url']
+			];
+
+			$data_vendor = [
+				'sts_dokumen_cek' => 1
+			];
+			$where_vendor = [
+				'id_vendor' => $get_vendor
+			];
+		} else {
+			$data = [
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 2,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i')
+			];
+			$where = [
+				'id_url' => $id_vendor['id_url']
+			];
+			$data_vendor = [
+				'sts_dokumen_cek' => 2
+			];
+			$where_vendor = [
+				'id_vendor' => $get_vendor
+			];
 		}
-		// end pajak keuangan
+		$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
+		$data = $this->M_Rekanan_tervalidasi->update_keuangan($where, $data);
+
+
+		if ($data) {
+			$response = [
+				'message' => 'Berhasil!'
+			];
+		} else {
+			$response = [
+				'message' => 'Gagal!'
+			];
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	public function url_download_keuangan()
+	{
+		$id_url = $this->uri->segment(4);
+		$type = $this->uri->segment(5);
+		$get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_keuangan_url($id_url);
+		$id_vendor = $get_row_enkrip['id_vendor'];
+		$row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor($id_vendor);
+		$date = date('Y');
+		if ($id_url == '') {
+			// tendang not found
+		}
+		if ($id_url == '') {
+			// tendang not found
+		}
+
+		if ($type == 'keuangan_dokumen') {
+			$fileDownload = $get_row_enkrip['file_laporan_auditor'];
+		}
+		if ($type == 'keuangan_sertifikat') {
+			$fileDownload = $get_row_enkrip['file_laporan_keuangan'];
+		}
+
+
+		// Locate.
+		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/Keuangan-' . $date . '/' . $fileDownload;
+
+		// Configure.
+		header('Content-Type: application/octet-stream');
+		header("Content-Transfer-Encoding: Binary");
+		header("Content-disposition: attachment; filename=\"" . $fileDownload . "\"");
+
+		// Actual download.
+		readfile($file_url);
+	}
+	// end pajak keuangan
 
 
 

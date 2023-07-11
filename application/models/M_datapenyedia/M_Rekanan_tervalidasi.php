@@ -145,6 +145,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_vendor_kbli_siup');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_siup.id_kbli = tbl_kbli.id_kbli', 'left');
         $this->db->where('tbl_vendor_kbli_siup.id_url_kbli_siup', $id_url);
         $query = $this->db->get();
         return $query->row_array();
@@ -1010,7 +1011,7 @@ class M_Rekanan_tervalidasi extends CI_Model
         return $query->row_array();
     }
 
-    
+
     public function get_row_spt_url($id_url)
     {
         $this->db->select('*');
@@ -1101,127 +1102,127 @@ class M_Rekanan_tervalidasi extends CI_Model
 
 
 
-     // pajak neraca
-     public function get_row_neraca($id_vendor)
-     {
-         $this->db->select('*');
-         $this->db->from('tbl_vendor_neraca_keuangan');
-         $this->db->where('tbl_vendor_neraca_keuangan.id_vendor', $id_vendor);
-         $query = $this->db->get();
-         return $query->row_array();
-     }
- 
-     public function get_row_neraca_id($id_neraca)
-     {
-         $this->db->select('*');
-         $this->db->from('tbl_vendor_neraca_keuangan');
-         $this->db->where('tbl_vendor_neraca_keuangan.id_neraca', $id_neraca);
-         $query = $this->db->get();
-         return $query->row_array();
-     }
- 
-     public function get_row_neraca_id_url($id_url_neraca)
-     {
-         $this->db->select('*');
-         $this->db->from('tbl_vendor_neraca_keuangan');
-         $this->db->where('tbl_vendor_neraca_keuangan.id_url_neraca', $id_url_neraca);
-         $query = $this->db->get();
-         return $query->row_array();
-     }
- 
-     
-     public function get_row_neraca_url($id_url_neraca)
-     {
-         $this->db->select('*');
-         $this->db->from('tbl_vendor_neraca_keuangan');
-         $this->db->where('tbl_vendor_neraca_keuangan.id_url_neraca', $id_url_neraca);
-         $query = $this->db->get();
-         return $query->row_array();
-     }
- 
- 
-     var $order_neraca = array('id_vendor', 'nama_akuntan_public', 'tangga_laporan', 'id_vendor', 'id_vendor', 'id_vendor', 'id_vendor', 'id_vendor');
- 
-     private function _get_data_query_neraca($id_vendor)
-     {
-         $this->db->select('*');
-         $this->db->from('tbl_vendor_neraca_keuangan');
-         $this->db->where('tbl_vendor_neraca_keuangan.id_vendor', $id_vendor);
-         $this->db->order_by('tbl_vendor_neraca_keuangan.id_vendor', 'DESC');
-         $i = 0;
-         foreach ($this->order_neraca as $item) // looping awal
-         {
-             if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-             {
- 
-                 if ($i === 0) // looping awal
-                 {
-                     $this->db->group_start();
-                     $this->db->like($item, $_POST['search']['value']);
-                 } else {
-                     $this->db->or_like(
-                         $item,
-                         $_POST['search']['value']
-                     );
-                 }
- 
-                 if (count($this->order_neraca) - 1 == $i)
-                     $this->db->group_end();
-             }
-             $i++;
-         }
-         if (isset($_POST['order'])) {
-             $this->db->order_by($this->order_neraca[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-         } else {
-             $this->db->order_by('tbl_vendor_neraca_keuangan.id_vendor', 'DESC');
-         }
-     }
- 
-     public function gettable_neraca($id_vendor) //nam[ilin data pake ini
-     {
-         $this->_get_data_query_neraca($id_vendor); //ambil data dari get yg di atas
-         if ($_POST['length'] != -1) {
-             $this->db->limit($_POST['length'], $_POST['start']);
-         }
-         $query = $this->db->get();
-         return $query->result();
-     }
-     public function count_filtered_neraca($id_vendor)
-     {
-         $this->_get_data_query_neraca($id_vendor); //ambil data dari get yg di atas
-         $query = $this->db->get();
-         return $query->num_rows();
-     }
- 
-     public function count_all_neraca($id_vendor)
-     {
-         $this->db->select('*');
-         $this->db->from('tbl_vendor_neraca_keuangan');
-         $this->db->where('tbl_vendor_neraca_keuangan.id_vendor', $id_vendor);
-         return $this->db->count_all_results();
-     }
- 
- 
-     public function get_row_neraca_enkription($id_url_neraca)
-     {
-         $this->db->select('*');
-         $this->db->from('tbl_vendor_neraca_keuangan');
-         $this->db->where('tbl_vendor_neraca_keuangan.id_url_neraca', $id_url_neraca);
-         $query = $this->db->get();
-         return $query->row_array();
-     }
- 
-     public function update_neraca($where, $data)
-     {
-         $this->db->update('tbl_vendor_neraca_keuangan', $data, $where);
-         return $this->db->affected_rows();
-     }
-     // end pajak spt
+    // pajak neraca
+    public function get_row_neraca($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_neraca_keuangan');
+        $this->db->where('tbl_vendor_neraca_keuangan.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_neraca_id($id_neraca)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_neraca_keuangan');
+        $this->db->where('tbl_vendor_neraca_keuangan.id_neraca', $id_neraca);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_neraca_id_url($id_url_neraca)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_neraca_keuangan');
+        $this->db->where('tbl_vendor_neraca_keuangan.id_url_neraca', $id_url_neraca);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function get_row_neraca_url($id_url_neraca)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_neraca_keuangan');
+        $this->db->where('tbl_vendor_neraca_keuangan.id_url_neraca', $id_url_neraca);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    var $order_neraca = array('id_vendor', 'nama_akuntan_public', 'tangga_laporan', 'id_vendor', 'id_vendor', 'id_vendor', 'id_vendor', 'id_vendor');
+
+    private function _get_data_query_neraca($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_neraca_keuangan');
+        $this->db->where('tbl_vendor_neraca_keuangan.id_vendor', $id_vendor);
+        $this->db->order_by('tbl_vendor_neraca_keuangan.id_vendor', 'DESC');
+        $i = 0;
+        foreach ($this->order_neraca as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order_neraca) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order_neraca[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_vendor_neraca_keuangan.id_vendor', 'DESC');
+        }
+    }
+
+    public function gettable_neraca($id_vendor) //nam[ilin data pake ini
+    {
+        $this->_get_data_query_neraca($id_vendor); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function count_filtered_neraca($id_vendor)
+    {
+        $this->_get_data_query_neraca($id_vendor); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_all_neraca($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_neraca_keuangan');
+        $this->db->where('tbl_vendor_neraca_keuangan.id_vendor', $id_vendor);
+        return $this->db->count_all_results();
+    }
+
+
+    public function get_row_neraca_enkription($id_url_neraca)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_neraca_keuangan');
+        $this->db->where('tbl_vendor_neraca_keuangan.id_url_neraca', $id_url_neraca);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_neraca($where, $data)
+    {
+        $this->db->update('tbl_vendor_neraca_keuangan', $data, $where);
+        return $this->db->affected_rows();
+    }
+    // end pajak spt
 
 
 
 
-      // pajak keuangan
+    // pajak keuangan
     public function get_row_keuangan($id_vendor)
     {
         $this->db->select('*');
@@ -1249,7 +1250,7 @@ class M_Rekanan_tervalidasi extends CI_Model
         return $query->row_array();
     }
 
-    
+
     public function get_row_keuangan_url($id_url)
     {
         $this->db->select('*');
@@ -1335,4 +1336,12 @@ class M_Rekanan_tervalidasi extends CI_Model
         return $this->db->affected_rows();
     }
     // end pajak keuangan
+
+    // insert monitoring
+    function insert_monitoring($data_monitoring)
+    {
+        $this->db->insert('monitoring_dokumen', $data_monitoring);
+        return $this->db->affected_rows();
+    }
+    // end insert monitoring
 }

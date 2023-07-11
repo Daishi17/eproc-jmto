@@ -524,7 +524,7 @@
 
                 }
 
-                if (response['row_sppkp'].id_vendor) {
+                if (response['row_sppkp']) {
                     var html_sppkp = '';
                     if (response['row_sppkp'].sts_validasi == null) {
                         var tombol_validasi = '<a href="javascript:;" onclick="Valid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
@@ -567,7 +567,7 @@
 
                 }
 
-                if (response['row_npwp'].id_vendor) {
+                if (response['row_npwp']) {
                     var html_npwp = '';
                     if (response['row_npwp'].sts_validasi == null) {
                         var tombol_validasi = '<a href="javascript:;" onclick="Valid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
@@ -610,7 +610,7 @@
 
                 }
 
-                if (response['row_spt'].id_vendor) {
+                if (response['row_spt']) {
                     $(document).ready(function() {
                         var url_get_spt = $('[name="url_get_spt"]').val();
                         $('#tbl_spt').DataTable({
@@ -645,10 +645,9 @@
 
                 }
 
-                if (response['row_neraca'].id_vendor) {
+                if (response['row_neraca']) {
                     $(document).ready(function() {
                         var url_get_neraca = $('[name="url_get_neraca"]').val();
-                        console.log(url_get_neraca + response['row_neraca'].id_vendor);
                         $('#tbl_neraca').DataTable({
                             "ordering": true,
                             "autoWidth": false,
@@ -681,10 +680,9 @@
 
                 }
 
-                if (response['row_keuangan'].id_vendor) {
+                if (response['row_keuangan']) {
                     $(document).ready(function() {
                         var url_get_keuangan = $('[name="url_get_keuangan"]').val();
-                        console.log(url_get_keuangan + response['row_keuangan'].id_vendor);
                         $('#tbl_keuangan').DataTable({
                             "ordering": true,
                             "autoWidth": false,
