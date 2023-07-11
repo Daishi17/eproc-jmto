@@ -10,647 +10,712 @@
             url: url_get_vendor + id_url_vendor,
             dataType: "JSON",
             success: function(response) {
-                if (response) {
 
-                    // siup
-                    var html = '';
-                    if (response['row_siup']) {
-                        var html_siup = '';
-                        if (response['row_siup'].sts_validasi == null) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
-                        } else if (response['row_siup'].sts_validasi == 1) {
-                            var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
-                                '<a href="javascript:;" onclick="NonValid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
-                        } else if (response['row_siup'].sts_validasi == 2) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
-                        }
-                        if (response['row_siup'].sts_token_dokumen == 1) {
-                            var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siup(\'' + response['row_siup'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
-                            $('.token_generate_siup').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siup']['token_dokumen'] + '</textarea></div>');
-                        } else if (response['row_siup'].sts_token_dokumen == 2) {
-                            var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_siup']['file_dokumen'] + '</a>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siup(\'' + response['row_siup'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
-                            $('.token_generate_siup').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siup']['token_dokumen'] + '</textarea></div>');
-                        }
-                        if (response['row_siup'].sts_seumur_hidup == 1) {
-                            var tgl_berlaku = '<label>Seumur Hidup</label>'
-                        } else {
-                            var tgl_berlaku = '<label>' + response['row_siup'].tgl_berlaku + '</label>'
-                        }
-                        html_siup += '<tr>' +
-                            '<td>' + response['row_siup'].nomor_surat + '</td>' +
-                            '<td>' + tgl_berlaku + '</td>' +
-                            '<td>' + dokumen + '</td>' +
-                            '<td>' + dekrip + '</td>' +
-                            '<td>' + sts_validasi + '</td>' +
-                            '<td class="text-center">' + tombol_validasi +
-                            '</td>' +
-                            '</tr>';
-                        $('#load_siup').html(html_siup);
-
-                        var url_kbli_siup = $('[name="url_kbli_siup"]').val()
-                        $(document).ready(function() {
-                            $('#tbl_kbli_siup').DataTable({
-                                "responsive": true,
-                                "ordering": true,
-                                "processing": true,
-                                "serverSide": true,
-                                "dom": 'Bfrtip',
-                                "bDestroy": true,
-                                "autoWidth": false,
-                                "buttons": ["excel", "pdf", "print", "colvis"],
-                                "order": [],
-                                "ajax": {
-                                    "url": url_kbli_siup + response['row_siup'].id_vendor,
-                                    "type": "POST",
-                                },
-                                "columnDefs": [{
-                                    "target": [-1],
-                                    "orderable": false
-                                }],
-                                "oLanguage": {
-                                    "sSearch": "Pencarian : ",
-                                    "sEmptyTable": "Data Tidak Tersedia",
-                                    "sLoadingRecords": "Silahkan Tunggu - loading...",
-                                    "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
-                                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
-                                    "sProcessing": "Memuat Data...."
-                                }
-                            })
-                        });
-                    } else {
-
+                // siup
+                var html = '';
+                if (response['row_siup']) {
+                    var html_siup = '';
+                    if (response['row_siup'].sts_validasi == null) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else if (response['row_siup'].sts_validasi == 1) {
+                        var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
+                            '<a href="javascript:;" onclick="NonValid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                    } else if (response['row_siup'].sts_validasi == 2) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
                     }
-                    //  siujk
-                    if (response['row_siujk']) {
-                        var html_siujk = '';
-                        if (response['row_siujk'].sts_validasi == null) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
-                        } else if (response['row_siujk'].sts_validasi == 1) {
-                            var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
-                                '<a href="javascript:;" onclick="NonValid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
-                        } else if (response['row_siujk'].sts_validasi == 2) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
-                        }
-                        if (response['row_siujk'].sts_token_dokumen == 1) {
-                            var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siujk(\'' + response['row_siujk'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
-                            $('.token_generate_siujk').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siujk']['token_dokumen'] + '</textarea></div>');
-                        } else if (response['row_siujk'].sts_token_dokumen == 2) {
-                            var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_siujk']['file_dokumen'] + '</a>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siujk(\'' + response['row_siujk'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
-                            $('.token_generate_siujk').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siujk']['token_dokumen'] + '</textarea></div>');
-                        }
-                        if (response['row_siujk'].sts_seumur_hidup == 1) {
-                            var tgl_berlaku = '<label>Seumur Hidup</label>'
-                        } else {
-                            var tgl_berlaku = '<label>' + response['row_siujk'].tgl_berlaku + '</label>'
-                        }
-                        html_siujk += '<tr>' +
-                            '<td>' + response['row_siujk'].nomor_surat + '</td>' +
-                            '<td>' + tgl_berlaku + '</td>' +
-                            '<td>' + dokumen + '</td>' +
-                            '<td>' + dekrip + '</td>' +
-                            '<td>' + sts_validasi + '</td>' +
-                            '<td class="text-center">' + tombol_validasi +
-                            '</td>' +
-                            '</tr>';
-                        $('#load_siujk').html(html_siujk);
-
-                        var url_kbli_siujk = $('[name="url_kbli_siujk"]').val()
-                        $(document).ready(function() {
-                            $('#tbl_kbli_siujk').DataTable({
-                                "responsive": true,
-                                "ordering": true,
-                                "processing": true,
-                                "serverSide": true,
-                                "dom": 'Bfrtip',
-                                "bDestroy": true,
-                                "autoWidth": false,
-                                "buttons": ["excel", "pdf", "print", "colvis"],
-                                "order": [],
-                                "ajax": {
-                                    "url": url_kbli_siujk + response['row_siujk'].id_vendor,
-                                    "type": "POST",
-                                },
-                                "columnDefs": [{
-                                    "target": [-1],
-                                    "orderable": false
-                                }],
-                                "oLanguage": {
-                                    "sSearch": "Pencarian : ",
-                                    "sEmptyTable": "Data Tidak Tersedia",
-                                    "sLoadingRecords": "Silahkan Tunggu - loading...",
-                                    "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
-                                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
-                                    "sProcessing": "Memuat Data...."
-                                }
-                            })
-                        });
-                    } else {
-
+                    if (response['row_siup'].sts_token_dokumen == 1) {
+                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siup(\'' + response['row_siup'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                        $('.token_generate_siup').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siup']['token_dokumen'] + '</textarea></div>');
+                    } else if (response['row_siup'].sts_token_dokumen == 2) {
+                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_siup']['file_dokumen'] + '</a>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siup(\'' + response['row_siup'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                        $('.token_generate_siup').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siup']['token_dokumen'] + '</textarea></div>');
                     }
-
-                    // end siujk
-
-                    // sbu
-                    // sbu
-                    if (response['row_sbu']) {
-                        var html_sbu = '';
-                        if (response['row_sbu'].sts_validasi == null) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
-                        } else if (response['row_sbu'].sts_validasi == 1) {
-                            var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
-                                '<a href="javascript:;" onclick="NonValid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
-                        } else if (response['row_sbu'].sts_validasi == 2) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
-                        }
-                        if (response['row_sbu'].sts_token_dokumen == 1) {
-                            var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sbu(\'' + response['row_sbu'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
-                            $('.token_generate_sbu').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sbu']['token_dokumen'] + '</textarea></div>');
-                        } else if (response['row_sbu'].sts_token_dokumen == 2) {
-                            var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_sbu']['file_dokumen'] + '</a>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sbu(\'' + response['row_sbu'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
-                            $('.token_generate_sbu').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sbu']['token_dokumen'] + '</textarea></div>');
-                        }
-                        if (response['row_sbu'].sts_seumur_hidup == 1) {
-                            var tgl_berlaku = '<label>Seumur Hidup</label>'
-                        } else {
-                            var tgl_berlaku = '<label>' + response['row_sbu'].tgl_berlaku + '</label>'
-                        }
-                        html_sbu += '<tr>' +
-                            '<td>' + response['row_sbu'].nomor_surat + '</td>' +
-                            '<td>' + tgl_berlaku + '</td>' +
-                            '<td>' + dokumen + '</td>' +
-                            '<td>' + dekrip + '</td>' +
-                            '<td>' + sts_validasi + '</td>' +
-                            '<td class="text-center">' + tombol_validasi +
-                            '</td>' +
-                            '</tr>';
-                        $('#load_sbu').html(html_sbu);
-
-                        var url_kbli_sbu = $('[name="url_kbli_sbu"]').val()
-                        $(document).ready(function() {
-                            $('#tbl_kbli_sbu').DataTable({
-                                "responsive": true,
-                                "ordering": true,
-                                "processing": true,
-                                "serverSide": true,
-                                "dom": 'Bfrtip',
-                                "bDestroy": true,
-                                "autoWidth": false,
-                                "buttons": ["excel", "pdf", "print", "colvis"],
-                                "order": [],
-                                "ajax": {
-                                    "url": url_kbli_sbu + response['row_sbu'].id_vendor,
-                                    "type": "POST",
-                                },
-                                "columnDefs": [{
-                                    "target": [-1],
-                                    "orderable": false
-                                }],
-                                "oLanguage": {
-                                    "sSearch": "Pencarian : ",
-                                    "sEmptyTable": "Data Tidak Tersedia",
-                                    "sLoadingRecords": "Silahkan Tunggu - loading...",
-                                    "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
-                                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
-                                    "sProcessing": "Memuat Data...."
-                                }
-                            })
-                        });
+                    if (response['row_siup'].sts_seumur_hidup == 1) {
+                        var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
-
+                        var tgl_berlaku = '<label>' + response['row_siup'].tgl_berlaku + '</label>'
                     }
-                    // end sbu
-                    // end sbu
+                    html_siup += '<tr>' +
+                        '<td>' + response['row_siup'].nomor_surat + '</td>' +
+                        '<td>' + tgl_berlaku + '</td>' +
+                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dekrip + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td class="text-center">' + tombol_validasi +
+                        '</td>' +
+                        '</tr>';
+                    $('#load_siup').html(html_siup);
 
-                    //  nib
-                    if (response['row_nib']) {
-                        var html_nib = '';
-                        if (response['row_nib'].sts_validasi == null) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
-                        } else if (response['row_nib'].sts_validasi == 1) {
-                            var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
-                                '<a href="javascript:;" onclick="NonValid_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
-                        } else if (response['row_nib'].sts_validasi == 2) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
-                        }
-                        if (response['row_nib'].sts_token_dokumen == 1) {
-                            var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_nib(\'' + response['row_nib'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
-                            $('.token_generate_nib').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_nib']['token_dokumen'] + '</textarea></div>');
-                        } else if (response['row_nib'].sts_token_dokumen == 2) {
-                            var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_nib']['file_dokumen'] + '</a>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_nib(\'' + response['row_nib'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
-                            $('.token_generate_nib').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_nib']['token_dokumen'] + '</textarea></div>');
-                        }
-                        if (response['row_nib'].sts_seumur_hidup == 1) {
-                            var tgl_berlaku = '<label>Seumur Hidup</label>'
-                        } else {
-                            var tgl_berlaku = '<label>' + response['row_nib'].tgl_berlaku + '</label>'
-                        }
-                        html_nib += '<tr>' +
-                            '<td>' + response['row_nib'].nomor_surat + '</td>' +
-                            '<td>' + tgl_berlaku + '</td>' +
-                            '<td>' + dokumen + '</td>' +
-                            '<td>' + dekrip + '</td>' +
-                            '<td>' + sts_validasi + '</td>' +
-                            '<td class="text-center">' + tombol_validasi +
-                            '</td>' +
-                            '</tr>';
-                        $('#load_nib').html(html_nib);
-
-                        var url_kbli_nib = $('[name="url_kbli_nib"]').val()
-                        $(document).ready(function() {
-                            $('#tbl_kbli_nib').DataTable({
-                                "responsive": true,
-                                "ordering": true,
-                                "processing": true,
-                                "serverSide": true,
-                                "dom": 'Bfrtip',
-                                "bDestroy": true,
-                                "autoWidth": false,
-                                "buttons": ["excel", "pdf", "print", "colvis"],
-                                "order": [],
-                                "ajax": {
-                                    "url": url_kbli_nib + response['row_nib'].id_vendor,
-                                    "type": "POST",
-                                },
-                                "columnDefs": [{
-                                    "target": [-1],
-                                    "orderable": false
-                                }],
-                                "oLanguage": {
-                                    "sSearch": "Pencarian : ",
-                                    "sEmptyTable": "Data Tidak Tersedia",
-                                    "sLoadingRecords": "Silahkan Tunggu - loading...",
-                                    "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
-                                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
-                                    "sProcessing": "Memuat Data...."
-                                }
-                            })
-                        });
-                    } else {
-
-                    }
-                    // end nib
-
-
-                    // akta pendiran
-                    if (response['row_akta_pendirian']) {
-                        var html_akta_pendirian = '';
-                        if (response['row_akta_pendirian'].sts_validasi == null) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
-                        } else if (response['row_akta_pendirian'].sts_validasi == 1) {
-                            var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
-                                '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
-                        } else if (response['row_akta_pendirian'].sts_validasi == 2) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
-                        }
-                        if (response['row_akta_pendirian'].sts_token_dokumen == 1) {
-                            var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
-                            $('.token_generate_akta_pendirian').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_pendirian']['token_dokumen'] + '</textarea></div>');
-                        } else if (response['row_akta_pendirian'].sts_token_dokumen == 2) {
-                            var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_akta_pendirian']['file_dokumen'] + '</a>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
-                            $('.token_generate_akta_pendirian').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_pendirian']['token_dokumen'] + '</textarea></div>');
-                        }
-                        if (response['row_akta_pendirian'].sts_seumur_hidup == 1) {
-                            var tgl_berlaku = '<label>Seumur Hidup</label>'
-                        } else {
-                            var tgl_berlaku = '<label>' + response['row_akta_pendirian'].tgl_berlaku + '</label>'
-                        }
-                        html_akta_pendirian += '<tr>' +
-                            '<td>' + response['row_akta_pendirian'].no_surat + '</td>' +
-                            '<td>' + tgl_berlaku + '</td>' +
-                            '<td>' + response['row_akta_pendirian'].jumlah_setor_modal + '</td>' +
-                            '<td>' + response['row_akta_pendirian'].kualifikasi_usaha + '</td>' +
-                            '<td>' + dokumen + '</td>' +
-                            '<td>' + dekrip + '</td>' +
-                            '<td>' + sts_validasi + '</td>' +
-                            '<td class="text-center">' + tombol_validasi +
-                            '</td>' +
-                            '</tr>';
-                        $('#load_akta_pendirian').html(html_akta_pendirian);
-
-                    } else {
-
-                    }
-                    // end akta pendirian
-
-                    // MANAJERIAL
-
-                    // PEMILIK
-                    if (response['row_pemilik_manajerial']) {
-                        $(document).ready(function() {
-                            var url_get_pemilik_manajerial = $('[name="url_get_pemilik_manajerial"]').val();
-                            $('#tbl_data_pemilik_manajerial').DataTable({
-                                "ordering": true,
-                                "autoWidth": false,
-                                "processing": true,
-                                "serverSide": true,
-                                "bDestroy": true,
-                                "dom": 'Bfrtip',
-                                "buttons": ["excel", "pdf", "print", "colvis"],
-                                "order": [],
-                                "ajax": {
-                                    "url": url_get_pemilik_manajerial + response['row_pemilik_manajerial'].id_vendor,
-                                    "type": "POST",
-                                },
-                                "columnDefs": [{
-                                    "target": [-1],
-                                    "orderable": false
-                                }],
-                                "oLanguage": {
-                                    "sSearch": "Pencarian : ",
-                                    "sEmptyTable": "Data Tidak Tersedia",
-                                    "sLoadingRecords": "Silahkan Tunggu - loading...",
-                                    "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
-                                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
-                                    "sProcessing": "Memuat Data...."
-                                }
-                            }).buttons().container().appendTo('#data_excel_pemilik_manajerial .col-md-6:eq(0)');
-                        });
-                    } else {
-
-                    }
-
-                    // END PEMILIK
-
-                    // PENGURUS
-                    if (response['row_pengurus_manajerial']) {
-                        $(document).ready(function() {
-                            var url_get_pengurus_manajerial = $('[name="url_get_pengurus_manajerial"]').val();
-                            $('#tbl_data_pengurus_manajerial').DataTable({
-                                "ordering": true,
-                                "autoWidth": false,
-                                "processing": true,
-                                "serverSide": true,
-                                "bDestroy": true,
-                                "dom": 'Bfrtip',
-                                "buttons": ["excel", "pdf", "print", "colvis"],
-                                "order": [],
-                                "ajax": {
-                                    "url": url_get_pengurus_manajerial + response['row_pengurus_manajerial'].id_vendor,
-                                    "type": "POST",
-                                },
-                                "columnDefs": [{
-                                    "target": [-1],
-                                    "orderable": false
-                                }],
-                                "oLanguage": {
-                                    "sSearch": "Pencarian : ",
-                                    "sEmptyTable": "Data Tidak Tersedia",
-                                    "sLoadingRecords": "Silahkan Tunggu - loading...",
-                                    "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
-                                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
-                                    "sProcessing": "Memuat Data...."
-                                }
-                            }).buttons().container().appendTo('#data_pengurus_manajerial .col-md-6:eq(0)');
-                        });
-                    } else {
-
-                    }
-
-                    // END PENGURUS
-                    // END MANAJERIAL
-
-                    // akta perubahan
-                    if (response['row_akta_perubahan']) {
-                        var html_akta_perubahan = '';
-                        if (response['row_akta_perubahan'].sts_validasi == null) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
-                        } else if (response['row_akta_perubahan'].sts_validasi == 1) {
-                            var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
-                                '<a href="javascript:;" onclick="NonValid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
-                        } else if (response['row_akta_perubahan'].sts_validasi == 2) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
-                        }
-                        if (response['row_akta_perubahan'].sts_token_dokumen == 1) {
-                            var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
-                            $('.token_generate_akta_perubahan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_perubahan']['token_dokumen'] + '</textarea></div>');
-                        } else if (response['row_akta_perubahan'].sts_token_dokumen == 2) {
-                            var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_akta_perubahan']['file_dokumen'] + '</a>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
-                            $('.token_generate_akta_perubahan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_perubahan']['token_dokumen'] + '</textarea></div>');
-                        }
-                        if (response['row_akta_perubahan'].sts_seumur_hidup == 1) {
-                            var tgl_berlaku = '<label>Seumur Hidup</label>'
-                        } else {
-                            var tgl_berlaku = '<label>' + response['row_akta_perubahan'].tgl_berlaku + '</label>'
-                        }
-                        html_akta_perubahan += '<tr>' +
-                            '<td>' + response['row_akta_perubahan'].no_surat + '</td>' +
-                            '<td>' + tgl_berlaku + '</td>' +
-                            '<td>' + response['row_akta_perubahan'].jumlah_setor_modal + '</td>' +
-                            '<td>' + response['row_akta_perubahan'].kualifikasi_usaha + '</td>' +
-                            '<td>' + dokumen + '</td>' +
-                            '<td>' + dekrip + '</td>' +
-                            '<td>' + sts_validasi + '</td>' +
-                            '<td class="text-center">' + tombol_validasi +
-                            '</td>' +
-                            '</tr>';
-                        $('#load_akta_perubahan').html(html_akta_perubahan);
-
-                    } else {
-
-                    }
-                    // end akta perubahan
-                    if (response['row_pengalaman']) {
-                        $(document).ready(function() {
-                            var url_get_pengalaman = $('[name="url_get_pengalaman"]').val();
-                            $('#tbl_pengalaman').DataTable({
-                                "ordering": true,
-                                "autoWidth": false,
-                                "processing": true,
-                                "serverSide": true,
-                                "bDestroy": true,
-                                "dom": 'Bfrtip',
-                                "buttons": ["excel", "pdf", "print", "colvis"],
-                                "order": [],
-                                "ajax": {
-                                    "url": url_get_pengalaman + response['row_pengalaman'].id_vendor,
-                                    "type": "POST",
-                                },
-                                "columnDefs": [{
-                                    "target": [-1],
-                                    "orderable": false
-                                }],
-                                "oLanguage": {
-                                    "sSearch": "Pencarian : ",
-                                    "sEmptyTable": "Data Tidak Tersedia",
-                                    "sLoadingRecords": "Silahkan Tunggu - loading...",
-                                    "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
-                                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
-                                    "sProcessing": "Memuat Data...."
-                                }
-                            }).buttons().container().appendTo('#data_pengalaman_manajerial .col-md-6:eq(0)');
-                        });
-                    } else {
-
-                    }
-
-                    if (response['row_sppkp'].id_vendor) {
-                        var html_sppkp = '';
-                        if (response['row_sppkp'].sts_validasi == null) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
-                        } else if (response['row_sppkp'].sts_validasi == 1) {
-                            var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
-                                '<a href="javascript:;" onclick="NonValid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
-                        } else if (response['row_sppkp'].sts_validasi == 2) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
-                        }
-                        if (response['row_sppkp'].sts_token_dokumen == 1) {
-                            var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sppkp(\'' + response['row_sppkp'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
-                            $('.token_generate_sppkp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sppkp']['token_dokumen'] + '</textarea></div>');
-                        } else if (response['row_sppkp'].sts_token_dokumen == 2) {
-                            var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_sppkp']['file_dokumen'] + '</a>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sppkp(\'' + response['row_sppkp'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
-                            $('.token_generate_sppkp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sppkp']['token_dokumen'] + '</textarea></div>');
-                        }
-                        if (response['row_sppkp'].sts_seumur_hidup == 1) {
-                            var tgl_berlaku = '<label>Seumur Hidup</label>'
-                        } else {
-                            var tgl_berlaku = '<label>' + response['row_sppkp'].tgl_berlaku + '</label>'
-                        }
-                        html_sppkp += '<tr>' +
-                            '<td>' + response['row_sppkp'].no_surat + '</td>' +
-                            '<td>' + tgl_berlaku + '</td>' +
-                            '<td>' + dokumen + '</td>' +
-                            '<td>' + dekrip + '</td>' +
-                            '<td>' + sts_validasi + '</td>' +
-                            '<td class="text-center">' + tombol_validasi +
-                            '</td>' +
-                            '</tr>';
-                        $('#load_sppkp').html(html_sppkp);
-                    } else {
-
-                    }
-
-                    if (response['row_npwp'].id_vendor) {
-                        var html_npwp = '';
-                        if (response['row_npwp'].sts_validasi == null) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
-                        } else if (response['row_npwp'].sts_validasi == 1) {
-                            var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
-                                '<a href="javascript:;" onclick="NonValid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
-                        } else if (response['row_npwp'].sts_validasi == 2) {
-                            var tombol_validasi = '<a href="javascript:;" onclick="Valid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                                '<a href="javascript:;" onclick="NonValid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                            var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
-                        }
-                        if (response['row_npwp'].sts_token_dokumen == 1) {
-                            var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_npwp(\'' + response['row_npwp'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
-                            $('.token_generate_npwp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_npwp']['token_dokumen'] + '</textarea></div>');
-                        } else if (response['row_npwp'].sts_token_dokumen == 2) {
-                            var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_npwp']['file_dokumen'] + '</a>';
-                            var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_npwp(\'' + response['row_npwp'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
-                            $('.token_generate_npwp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_npwp']['token_dokumen'] + '</textarea></div>');
-                        }
-                        if (response['row_npwp'].sts_seumur_hidup == 1) {
-                            var tgl_berlaku = '<label>Seumur Hidup</label>'
-                        } else {
-                            var tgl_berlaku = '<label>' + response['row_npwp'].tgl_berlaku + '</label>'
-                        }
-                        html_npwp += '<tr>' +
-                            '<td>' + response['row_npwp'].no_surat + '</td>' +
-                            '<td>' + tgl_berlaku + '</td>' +
-                            '<td>' + dokumen + '</td>' +
-                            '<td>' + dekrip + '</td>' +
-                            '<td>' + sts_validasi + '</td>' +
-                            '<td class="text-center">' + tombol_validasi +
-                            '</td>' +
-                            '</tr>';
-                        $('#load_npwp').html(html_npwp);
-                    } else {
-
-                    }
-
-                    if (response['row_spt'].id_vendor) {
-                        $(document).ready(function() {
-                            var url_get_spt = $('[name="url_get_spt"]').val();
-                            $('#tbl_spt').DataTable({
-                                "ordering": true,
-                                "autoWidth": false,
-                                "processing": true,
-                                "serverSide": true,
-                                "bDestroy": true,
-                                "dom": 'Bfrtip',
-                                "buttons": ["excel", "pdf", "print", "colvis"],
-                                "order": [],
-                                "ajax": {
-                                    "url": url_get_spt + response['row_spt'].id_vendor,
-                                    "type": "POST",
-                                },
-                                "columnDefs": [{
-                                    "target": [-1],
-                                    "orderable": false
-                                }],
-                                "oLanguage": {
-                                    "sSearch": "Pencarian : ",
-                                    "sEmptyTable": "Data Tidak Tersedia",
-                                    "sLoadingRecords": "Silahkan Tunggu - loading...",
-                                    "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
-                                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
-                                    "sProcessing": "Memuat Data...."
-                                }
-                            }).buttons().container().appendTo('#data_excel_pemilik_manajerial .col-md-6:eq(0)');
-                        });
-
-                    } else {
-
-                    }
-
+                    var url_kbli_siup = $('[name="url_kbli_siup"]').val()
+                    $(document).ready(function() {
+                        $('#tbl_kbli_siup').DataTable({
+                            "responsive": true,
+                            "ordering": true,
+                            "processing": true,
+                            "serverSide": true,
+                            "dom": 'Bfrtip',
+                            "bDestroy": true,
+                            "autoWidth": false,
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_kbli_siup + response['row_siup'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        })
+                    });
                 } else {
 
+                }
+                //  siujk
+                if (response['row_siujk']) {
+                    var html_siujk = '';
+                    if (response['row_siujk'].sts_validasi == null) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else if (response['row_siujk'].sts_validasi == 1) {
+                        var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
+                            '<a href="javascript:;" onclick="NonValid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                    } else if (response['row_siujk'].sts_validasi == 2) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                    }
+                    if (response['row_siujk'].sts_token_dokumen == 1) {
+                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siujk(\'' + response['row_siujk'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                        $('.token_generate_siujk').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siujk']['token_dokumen'] + '</textarea></div>');
+                    } else if (response['row_siujk'].sts_token_dokumen == 2) {
+                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_siujk']['file_dokumen'] + '</a>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siujk(\'' + response['row_siujk'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                        $('.token_generate_siujk').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siujk']['token_dokumen'] + '</textarea></div>');
+                    }
+                    if (response['row_siujk'].sts_seumur_hidup == 1) {
+                        var tgl_berlaku = '<label>Seumur Hidup</label>'
+                    } else {
+                        var tgl_berlaku = '<label>' + response['row_siujk'].tgl_berlaku + '</label>'
+                    }
+                    html_siujk += '<tr>' +
+                        '<td>' + response['row_siujk'].nomor_surat + '</td>' +
+                        '<td>' + tgl_berlaku + '</td>' +
+                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dekrip + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td class="text-center">' + tombol_validasi +
+                        '</td>' +
+                        '</tr>';
+                    $('#load_siujk').html(html_siujk);
+
+                    var url_kbli_siujk = $('[name="url_kbli_siujk"]').val()
+                    $(document).ready(function() {
+                        $('#tbl_kbli_siujk').DataTable({
+                            "responsive": true,
+                            "ordering": true,
+                            "processing": true,
+                            "serverSide": true,
+                            "dom": 'Bfrtip',
+                            "bDestroy": true,
+                            "autoWidth": false,
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_kbli_siujk + response['row_siujk'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        })
+                    });
+                } else {
 
                 }
 
+                // end siujk
+
+                // sbu
+                // sbu
+                if (response['row_sbu']) {
+                    var html_sbu = '';
+                    if (response['row_sbu'].sts_validasi == null) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else if (response['row_sbu'].sts_validasi == 1) {
+                        var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
+                            '<a href="javascript:;" onclick="NonValid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                    } else if (response['row_sbu'].sts_validasi == 2) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                    }
+                    if (response['row_sbu'].sts_token_dokumen == 1) {
+                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sbu(\'' + response['row_sbu'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                        $('.token_generate_sbu').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sbu']['token_dokumen'] + '</textarea></div>');
+                    } else if (response['row_sbu'].sts_token_dokumen == 2) {
+                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_sbu']['file_dokumen'] + '</a>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sbu(\'' + response['row_sbu'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                        $('.token_generate_sbu').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sbu']['token_dokumen'] + '</textarea></div>');
+                    }
+                    if (response['row_sbu'].sts_seumur_hidup == 1) {
+                        var tgl_berlaku = '<label>Seumur Hidup</label>'
+                    } else {
+                        var tgl_berlaku = '<label>' + response['row_sbu'].tgl_berlaku + '</label>'
+                    }
+                    html_sbu += '<tr>' +
+                        '<td>' + response['row_sbu'].nomor_surat + '</td>' +
+                        '<td>' + tgl_berlaku + '</td>' +
+                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dekrip + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td class="text-center">' + tombol_validasi +
+                        '</td>' +
+                        '</tr>';
+                    $('#load_sbu').html(html_sbu);
+
+                    var url_kbli_sbu = $('[name="url_kbli_sbu"]').val()
+                    $(document).ready(function() {
+                        $('#tbl_kbli_sbu').DataTable({
+                            "responsive": true,
+                            "ordering": true,
+                            "processing": true,
+                            "serverSide": true,
+                            "dom": 'Bfrtip',
+                            "bDestroy": true,
+                            "autoWidth": false,
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_kbli_sbu + response['row_sbu'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        })
+                    });
+                } else {
+
+                }
+                // end sbu
+                // end sbu
+
+                //  nib
+                if (response['row_nib']) {
+                    var html_nib = '';
+                    if (response['row_nib'].sts_validasi == null) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else if (response['row_nib'].sts_validasi == 1) {
+                        var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
+                            '<a href="javascript:;" onclick="NonValid_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                    } else if (response['row_nib'].sts_validasi == 2) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                    }
+                    if (response['row_nib'].sts_token_dokumen == 1) {
+                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_nib(\'' + response['row_nib'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                        $('.token_generate_nib').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_nib']['token_dokumen'] + '</textarea></div>');
+                    } else if (response['row_nib'].sts_token_dokumen == 2) {
+                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_nib']['file_dokumen'] + '</a>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_nib(\'' + response['row_nib'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                        $('.token_generate_nib').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_nib']['token_dokumen'] + '</textarea></div>');
+                    }
+                    if (response['row_nib'].sts_seumur_hidup == 1) {
+                        var tgl_berlaku = '<label>Seumur Hidup</label>'
+                    } else {
+                        var tgl_berlaku = '<label>' + response['row_nib'].tgl_berlaku + '</label>'
+                    }
+                    html_nib += '<tr>' +
+                        '<td>' + response['row_nib'].nomor_surat + '</td>' +
+                        '<td>' + tgl_berlaku + '</td>' +
+                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dekrip + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td class="text-center">' + tombol_validasi +
+                        '</td>' +
+                        '</tr>';
+                    $('#load_nib').html(html_nib);
+
+                    var url_kbli_nib = $('[name="url_kbli_nib"]').val()
+                    $(document).ready(function() {
+                        $('#tbl_kbli_nib').DataTable({
+                            "responsive": true,
+                            "ordering": true,
+                            "processing": true,
+                            "serverSide": true,
+                            "dom": 'Bfrtip',
+                            "bDestroy": true,
+                            "autoWidth": false,
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_kbli_nib + response['row_nib'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        })
+                    });
+                } else {
+
+                }
+                // end nib
+
+
+                // akta pendiran
+                if (response['row_akta_pendirian']) {
+                    var html_akta_pendirian = '';
+                    if (response['row_akta_pendirian'].sts_validasi == null) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else if (response['row_akta_pendirian'].sts_validasi == 1) {
+                        var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
+                            '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                    } else if (response['row_akta_pendirian'].sts_validasi == 2) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                    }
+                    if (response['row_akta_pendirian'].sts_token_dokumen == 1) {
+                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                        $('.token_generate_akta_pendirian').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_pendirian']['token_dokumen'] + '</textarea></div>');
+                    } else if (response['row_akta_pendirian'].sts_token_dokumen == 2) {
+                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_akta_pendirian']['file_dokumen'] + '</a>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                        $('.token_generate_akta_pendirian').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_pendirian']['token_dokumen'] + '</textarea></div>');
+                    }
+                    if (response['row_akta_pendirian'].sts_seumur_hidup == 1) {
+                        var tgl_berlaku = '<label>Seumur Hidup</label>'
+                    } else {
+                        var tgl_berlaku = '<label>' + response['row_akta_pendirian'].tgl_berlaku + '</label>'
+                    }
+                    html_akta_pendirian += '<tr>' +
+                        '<td>' + response['row_akta_pendirian'].no_surat + '</td>' +
+                        '<td>' + tgl_berlaku + '</td>' +
+                        '<td>' + response['row_akta_pendirian'].jumlah_setor_modal + '</td>' +
+                        '<td>' + response['row_akta_pendirian'].kualifikasi_usaha + '</td>' +
+                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dekrip + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td class="text-center">' + tombol_validasi +
+                        '</td>' +
+                        '</tr>';
+                    $('#load_akta_pendirian').html(html_akta_pendirian);
+
+                } else {
+
+                }
+                // end akta pendirian
+
+                // MANAJERIAL
+
+                // PEMILIK
+                if (response['row_pemilik_manajerial']) {
+                    $(document).ready(function() {
+                        var url_get_pemilik_manajerial = $('[name="url_get_pemilik_manajerial"]').val();
+                        $('#tbl_data_pemilik_manajerial').DataTable({
+                            "ordering": true,
+                            "autoWidth": false,
+                            "processing": true,
+                            "serverSide": true,
+                            "bDestroy": true,
+                            "dom": 'Bfrtip',
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_get_pemilik_manajerial + response['row_pemilik_manajerial'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        }).buttons().container().appendTo('#data_excel_pemilik_manajerial .col-md-6:eq(0)');
+                    });
+                } else {
+
+                }
+
+                // END PEMILIK
+
+                // PENGURUS
+                if (response['row_pengurus_manajerial']) {
+                    $(document).ready(function() {
+                        var url_get_pengurus_manajerial = $('[name="url_get_pengurus_manajerial"]').val();
+                        $('#tbl_data_pengurus_manajerial').DataTable({
+                            "ordering": true,
+                            "autoWidth": false,
+                            "processing": true,
+                            "serverSide": true,
+                            "bDestroy": true,
+                            "dom": 'Bfrtip',
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_get_pengurus_manajerial + response['row_pengurus_manajerial'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        }).buttons().container().appendTo('#data_pengurus_manajerial .col-md-6:eq(0)');
+                    });
+                } else {
+
+                }
+
+                // END PENGURUS
+                // END MANAJERIAL
+
+                // akta perubahan
+                if (response['row_akta_perubahan']) {
+                    var html_akta_perubahan = '';
+                    if (response['row_akta_perubahan'].sts_validasi == null) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else if (response['row_akta_perubahan'].sts_validasi == 1) {
+                        var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
+                            '<a href="javascript:;" onclick="NonValid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                    } else if (response['row_akta_perubahan'].sts_validasi == 2) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                    }
+                    if (response['row_akta_perubahan'].sts_token_dokumen == 1) {
+                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                        $('.token_generate_akta_perubahan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_perubahan']['token_dokumen'] + '</textarea></div>');
+                    } else if (response['row_akta_perubahan'].sts_token_dokumen == 2) {
+                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_akta_perubahan']['file_dokumen'] + '</a>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                        $('.token_generate_akta_perubahan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_perubahan']['token_dokumen'] + '</textarea></div>');
+                    }
+                    if (response['row_akta_perubahan'].sts_seumur_hidup == 1) {
+                        var tgl_berlaku = '<label>Seumur Hidup</label>'
+                    } else {
+                        var tgl_berlaku = '<label>' + response['row_akta_perubahan'].tgl_berlaku + '</label>'
+                    }
+                    html_akta_perubahan += '<tr>' +
+                        '<td>' + response['row_akta_perubahan'].no_surat + '</td>' +
+                        '<td>' + tgl_berlaku + '</td>' +
+                        '<td>' + response['row_akta_perubahan'].jumlah_setor_modal + '</td>' +
+                        '<td>' + response['row_akta_perubahan'].kualifikasi_usaha + '</td>' +
+                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dekrip + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td class="text-center">' + tombol_validasi +
+                        '</td>' +
+                        '</tr>';
+                    $('#load_akta_perubahan').html(html_akta_perubahan);
+
+                } else {
+
+                }
+                // end akta perubahan
+                if (response['row_pengalaman']) {
+                    $(document).ready(function() {
+                        var url_get_pengalaman = $('[name="url_get_pengalaman"]').val();
+                        $('#tbl_pengalaman').DataTable({
+                            "ordering": true,
+                            "autoWidth": false,
+                            "processing": true,
+                            "serverSide": true,
+                            "bDestroy": true,
+                            "dom": 'Bfrtip',
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_get_pengalaman + response['row_pengalaman'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        }).buttons().container().appendTo('#data_pengalaman_manajerial .col-md-6:eq(0)');
+                    });
+                } else {
+
+                }
+
+                if (response['row_sppkp'].id_vendor) {
+                    var html_sppkp = '';
+                    if (response['row_sppkp'].sts_validasi == null) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else if (response['row_sppkp'].sts_validasi == 1) {
+                        var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
+                            '<a href="javascript:;" onclick="NonValid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                    } else if (response['row_sppkp'].sts_validasi == 2) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                    }
+                    if (response['row_sppkp'].sts_token_dokumen == 1) {
+                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sppkp(\'' + response['row_sppkp'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                        $('.token_generate_sppkp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sppkp']['token_dokumen'] + '</textarea></div>');
+                    } else if (response['row_sppkp'].sts_token_dokumen == 2) {
+                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_sppkp']['file_dokumen'] + '</a>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sppkp(\'' + response['row_sppkp'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                        $('.token_generate_sppkp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sppkp']['token_dokumen'] + '</textarea></div>');
+                    }
+                    if (response['row_sppkp'].sts_seumur_hidup == 1) {
+                        var tgl_berlaku = '<label>Seumur Hidup</label>'
+                    } else {
+                        var tgl_berlaku = '<label>' + response['row_sppkp'].tgl_berlaku + '</label>'
+                    }
+                    html_sppkp += '<tr>' +
+                        '<td>' + response['row_sppkp'].no_surat + '</td>' +
+                        '<td>' + tgl_berlaku + '</td>' +
+                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dekrip + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td class="text-center">' + tombol_validasi +
+                        '</td>' +
+                        '</tr>';
+                    $('#load_sppkp').html(html_sppkp);
+                } else {
+
+                }
+
+                if (response['row_npwp'].id_vendor) {
+                    var html_npwp = '';
+                    if (response['row_npwp'].sts_validasi == null) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else if (response['row_npwp'].sts_validasi == 1) {
+                        var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
+                            '<a href="javascript:;" onclick="NonValid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                    } else if (response['row_npwp'].sts_validasi == 2) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                    }
+                    if (response['row_npwp'].sts_token_dokumen == 1) {
+                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_npwp(\'' + response['row_npwp'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                        $('.token_generate_npwp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_npwp']['token_dokumen'] + '</textarea></div>');
+                    } else if (response['row_npwp'].sts_token_dokumen == 2) {
+                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_npwp']['file_dokumen'] + '</a>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_npwp(\'' + response['row_npwp'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                        $('.token_generate_npwp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_npwp']['token_dokumen'] + '</textarea></div>');
+                    }
+                    if (response['row_npwp'].sts_seumur_hidup == 1) {
+                        var tgl_berlaku = '<label>Seumur Hidup</label>'
+                    } else {
+                        var tgl_berlaku = '<label>' + response['row_npwp'].tgl_berlaku + '</label>'
+                    }
+                    html_npwp += '<tr>' +
+                        '<td>' + response['row_npwp'].no_surat + '</td>' +
+                        '<td>' + tgl_berlaku + '</td>' +
+                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dekrip + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td class="text-center">' + tombol_validasi +
+                        '</td>' +
+                        '</tr>';
+                    $('#load_npwp').html(html_npwp);
+                } else {
+
+                }
+
+                if (response['row_spt'].id_vendor) {
+                    $(document).ready(function() {
+                        var url_get_spt = $('[name="url_get_spt"]').val();
+                        $('#tbl_spt').DataTable({
+                            "ordering": true,
+                            "autoWidth": false,
+                            "processing": true,
+                            "serverSide": true,
+                            "bDestroy": true,
+                            "dom": 'Bfrtip',
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_get_spt + response['row_spt'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        }).buttons().container().appendTo('#data_excel_pemilik_manajerial .col-md-6:eq(0)');
+                    });
+
+                } else {
+
+                }
+
+                if (response['row_neraca'].id_vendor) {
+                    $(document).ready(function() {
+                        var url_get_neraca = $('[name="url_get_neraca"]').val();
+                        console.log(url_get_neraca + response['row_neraca'].id_vendor);
+                        $('#tbl_neraca').DataTable({
+                            "ordering": true,
+                            "autoWidth": false,
+                            "processing": true,
+                            "serverSide": true,
+                            "bDestroy": true,
+                            "dom": 'Bfrtip',
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_get_neraca + response['row_neraca'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        }).buttons().container().appendTo('#tbl_neraca .col-md-6:eq(0)');
+                    });
+
+                } else {
+
+                }
+
+                if (response['row_keuangan'].id_vendor) {
+                    $(document).ready(function() {
+                        var url_get_keuangan = $('[name="url_get_keuangan"]').val();
+                        console.log(url_get_keuangan + response['row_keuangan'].id_vendor);
+                        $('#tbl_keuangan').DataTable({
+                            "ordering": true,
+                            "autoWidth": false,
+                            "processing": true,
+                            "serverSide": true,
+                            "bDestroy": true,
+                            "dom": 'Bfrtip',
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_get_keuangan + response['row_keuangan'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        }).buttons().container().appendTo('#tbl_keuangan .col-md-6:eq(0)');
+                    });
+
+                } else {
+
+                }
             }
         })
     }
@@ -3386,7 +3451,7 @@
                     },
                     willClose: () => {
                         clearInterval(timerInterval)
-                        $('#modal_valid_pengalaman').modal('hide')
+                        $('#modal_valid_spt').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
                         load_data()
                     }
@@ -3403,7 +3468,7 @@
     var form_nonvalid_spt = $('#form_nonvalid_spt');
     form_nonvalid_spt.on('submit', function(e) {
         e.preventDefault();
-        var url_post = $('[name="url_validasi_pengalaman"]').val()
+        var url_post = $('[name="url_validasi_spt"]').val()
         $.ajax({
             url: url_post,
             method: "POST",
@@ -3427,7 +3492,7 @@
                     },
                     willClose: () => {
                         clearInterval(timerInterval)
-                        $('#modal_nonvalid_pengalaman').modal('hide')
+                        $('#modal_nonvalid_spt').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
                         load_data()
                     }
@@ -3548,4 +3613,537 @@
         location.href = url_download_spt + id_url;
     }
     // end pajak spt
+
+    // pajak neraca
+    function byid_neraca(id, type) {
+        if (type == 'lihat') {
+            saveData = 'lihat';
+        }
+        if (type == 'dekrip') {
+            saveData = 'dekrip';
+        }
+        if (type == 'enkrip') {
+            saveData = 'enkrip';
+        }
+        var url_get_neraca_by_id = $('[name="url_get_neraca_by_id"]').val();
+        var modal_edit_neraca = $('#modal_edit_neraca')
+        var modal_dekrip_neraca = $('#modal_dekrip_neraca');
+        var modal_enkrip_neraca = $('#modal_enkrip_neraca');
+        $.ajax({
+            type: "GET",
+            url: url_get_neraca_by_id + id,
+            dataType: "JSON",
+            success: function(response) {
+                if (type == 'lihat') {
+                    modal_edit_neraca.modal('show')
+                    // $('#nomor_surat').val(response['row_neraca'].nomor_surat)
+                    // $('#tahun_lapor').val(response['row_neraca'].tahun_lapor)
+                    // $('#jenis_neraca').val(response['row_neraca'].jenis_neraca)
+                    // $('#tgl_penyampaian').val(response['row_neraca'].tgl_penyampaian)
+                    $('[name="id_url"]').val(response['row_neraca'].id_url_neraca)
+
+
+                } else if (type == 'dekrip') {
+                    modal_dekrip_neraca.modal('show');
+                    $('[name="id_url_neraca"]').val(response['row_neraca'].id_url_neraca);
+                    $('.button_enkrip_neraca').html('<a href="javascript:;" onclick="DekripEnkrip_neraca(\'' + response['row_neraca'].file_dokumen_neraca + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
+                    var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-info btn-block">' +
+                        response['row_neraca'].file_dokumen_neraca + '</a>';
+                    $('.token_generate_neraca').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_neraca'].id_url_neraca + '</textarea></div>');
+                } else if (type == 'enkrip') {
+                    modal_enkrip_neraca.modal('show');
+                    $('[name="id_url_neraca"]').val(response['row_neraca'].id_url_neraca);
+                    $('.button_enkrip_neraca').html('<a href="javascript:;" onclick="DekripEnkrip_neraca(\'' + response['row_neraca'].id_url_neraca + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
+                    var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_neraca(\'' + response['row_neraca'].id_url_neraca + '\')" class="btn btn-sm btn-warning btn-block">' + response['row_neraca'].file_dokumen_neraca + '</a>';
+                    $('.token_generate_neraca').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_neraca'].id_url_neraca + '</textarea></div>');
+                }
+            }
+        })
+    }
+
+    function Valid_neraca(id_url, type = '') {
+        if (type == 'terima_kbli') {
+            $('#modal_valid_neraca').modal('show')
+            $('[name="url_validasi_neraca"]').val();
+            $('[name="id_url_neraca"]').val(id_url);
+            $('#kbli_valid_neraca').val(type)
+        } else {
+            $('#modal_valid_neraca').modal('show')
+            $('[name="url_validasi_neraca"]').val();
+            $('[name="id_url_neraca"]').val(id_url);
+            $('#kbli_valid_neraca').val('')
+        }
+
+    }
+
+    function NonValid_neraca(id_url, type = '') {
+        if (type == 'tolak_kbli') {
+            $('#modal_nonvalid_neraca').modal('show')
+            $('[name="url_validasi_neraca"]').val();
+            $('[name="id_url_neraca"]').val(id_url);
+            $('#kbli_nonvalid_neraca').val(type)
+        } else {
+            $('#modal_nonvalid_neraca').modal('show')
+            $('[name="url_validasi_neraca"]').val();
+            $('[name="id_url_neraca"]').val(id_url);
+            $('#kbli_nonvalid_neraca').val('')
+        }
+    }
+
+    var form_valid_neraca = $('#form_valid_neraca');
+    form_valid_neraca.on('submit', function(e) {
+        e.preventDefault();
+        var url_post = $('[name="url_validasi_neraca"]').val()
+        $.ajax({
+            url: url_post,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_valid_neraca').modal('hide')
+                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        load_data()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
+
+    var form_nonvalid_neraca = $('#form_nonvalid_neraca');
+    form_nonvalid_neraca.on('submit', function(e) {
+        e.preventDefault();
+        var url_post = $('[name="url_validasi_neraca"]').val()
+        $.ajax({
+            url: url_post,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_nonvalid_neraca').modal('hide')
+                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        load_data()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
+
+
+    function GenerateDekrip_neraca() {
+        var url_encryption_neraca = $('[name="url_encryption_neraca"]').val();
+        var modal_dekrip_neraca = $('#modal_dekrip_neraca');
+        var id_url = $('[name="id_url_neraca"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_neraca + id_url,
+            dataType: "JSON",
+            data: $('#form_dekrip_neraca').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], '', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Deskripsi!',
+                        html: 'Proses Deksripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                            load_data();
+                            $('#button_dekrip_generate').css('display', 'block');
+                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            modal_dekrip_neraca.modal('hide');
+                            $('#form_dekrip_neraca')[0].reset()
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+
+    function GenerateEnkrip_neraca() {
+        var url_encryption_neraca = $('[name="url_encryption_neraca"]').val();
+        var modal_enkrip_neraca = $('#modal_enkrip_neraca');
+        var id_url = $('[name="id_url_neraca"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_neraca + id_url,
+            dataType: "JSON",
+            data: $('#form_enkrip_neraca').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], '', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Deskripsi!',
+                        html: 'Proses Deksripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                            load_data();
+                            $('#button_dekrip_generate').css('display', 'block');
+                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            $('#form_enkrip_neraca')[0].reset()
+                            modal_enkrip_neraca.modal('hide');
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    function DownloadFile_neraca(id_url, type) {
+        var url_download_neraca = $('[name="url_download_neraca"]').val()
+        location.href = url_download_neraca + id_url + '/' + type;
+    }
+
+
+
+
+    // pajak keuangan
+    function byid_keuangan(id, type) {
+        if (type == 'lihat') {
+            saveData = 'lihat';
+        }
+        if (type == 'dekrip') {
+            saveData = 'dekrip';
+        }
+        if (type == 'enkrip') {
+            saveData = 'enkrip';
+        }
+        var url_get_keuangan_by_id = $('[name="url_get_keuangan_by_id"]').val();
+        var modal_edit_keuangan = $('#modal_edit_keuangan')
+        var modal_dekrip_keuangan = $('#modal_dekrip_keuangan');
+        var modal_enkrip_keuangan = $('#modal_enkrip_keuangan');
+        $.ajax({
+            type: "GET",
+            url: url_get_keuangan_by_id + id,
+            dataType: "JSON",
+            success: function(response) {
+                if (type == 'lihat') {
+                    modal_edit_keuangan.modal('show')
+                    // $('#nomor_surat').val(response['row_keuangan'].nomor_surat)
+                    // $('#tahun_lapor').val(response['row_keuangan'].tahun_lapor)
+                    // $('#jenis_keuangan').val(response['row_keuangan'].jenis_keuangan)
+                    // $('#tgl_penyampaian').val(response['row_keuangan'].tgl_penyampaian)
+                    $('[name="id_url"]').val(response['row_keuangan'].id_url)
+
+
+                } else if (type == 'dekrip') {
+                    modal_dekrip_keuangan.modal('show');
+                    $('[name="id_url_keuangan"]').val(response['row_keuangan'].id_url);
+                    $('.button_enkrip_keuangan').html('<a href="javascript:;" onclick="DekripEnkrip_keuangan(\'' + response['row_keuangan'].file_dokumen_keuangan + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
+                    var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-info btn-block">' +
+                        response['row_keuangan'].file_dokumen_keuangan + '</a>';
+                    $('.token_generate_keuangan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_keuangan'].token_dokumen + '</textarea></div>');
+                } else if (type == 'enkrip') {
+                    modal_enkrip_keuangan.modal('show');
+                    $('[name="id_url_keuangan"]').val(response['row_keuangan'].id_url);
+                    $('.button_enkrip_keuangan').html('<a href="javascript:;" onclick="DekripEnkrip_keuangan(\'' + response['row_keuangan'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
+                    var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' + response['row_keuangan'].id_url + '\')" class="btn btn-sm btn-warning btn-block">' + response['row_keuangan'].file_dokumen_keuangan + '</a>';
+                    $('.token_generate_keuangan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_keuangan'].token_dokumen + '</textarea></div>');
+                }
+            }
+        })
+    }
+
+    function Valid_keuangan(id_url, type = '') {
+        if (type == 'terima_kbli') {
+            $('#modal_valid_keuangan').modal('show')
+            $('[name="url_validasi_keuangan"]').val();
+            $('[name="id_url_keuangan"]').val(id_url);
+            $('#kbli_valid_keuangan').val(type)
+        } else {
+            $('#modal_valid_keuangan').modal('show')
+            $('[name="url_validasi_keuangan"]').val();
+            $('[name="id_url_keuangan"]').val(id_url);
+            $('#kbli_valid_keuangan').val('')
+        }
+
+    }
+
+    function NonValid_keuangan(id_url, type = '') {
+        if (type == 'tolak_kbli') {
+            $('#modal_nonvalid_keuangan').modal('show')
+            $('[name="url_validasi_keuangan"]').val();
+            $('[name="id_url_keuangan"]').val(id_url);
+            $('#kbli_nonvalid_keuangan').val(type)
+        } else {
+            $('#modal_nonvalid_keuangan').modal('show')
+            $('[name="url_validasi_keuangan"]').val();
+            $('[name="id_url_keuangan"]').val(id_url);
+            $('#kbli_nonvalid_keuangan').val('')
+        }
+    }
+
+    var form_valid_keuangan = $('#form_valid_keuangan');
+    form_valid_keuangan.on('submit', function(e) {
+        e.preventDefault();
+        var url_post = $('[name="url_validasi_keuangan"]').val()
+        $.ajax({
+            url: url_post,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_valid_keuangan').modal('hide')
+                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        load_data()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
+
+    var form_nonvalid_keuangan = $('#form_nonvalid_keuangan');
+    form_nonvalid_keuangan.on('submit', function(e) {
+        e.preventDefault();
+        var url_post = $('[name="url_validasi_keuangan"]').val()
+        $.ajax({
+            url: url_post,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_nonvalid_keuangan').modal('hide')
+                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        load_data()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
+
+
+    function GenerateDekrip_keuangan() {
+        var url_encryption_keuangan = $('[name="url_encryption_keuangan"]').val();
+        var modal_dekrip_keuangan = $('#modal_dekrip_keuangan');
+        var id_url = $('[name="id_url_keuangan"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_keuangan + id_url,
+            dataType: "JSON",
+            data: $('#form_dekrip_keuangan').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], '', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Deskripsi!',
+                        html: 'Proses Deksripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                            load_data();
+                            $('#button_dekrip_generate').css('display', 'block');
+                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            modal_dekrip_keuangan.modal('hide');
+                            $('#form_dekrip_keuangan')[0].reset()
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+
+    function GenerateEnkrip_keuangan() {
+        var url_encryption_keuangan = $('[name="url_encryption_keuangan"]').val();
+        var modal_enkrip_keuangan = $('#modal_enkrip_keuangan');
+        var id_url = $('[name="id_url_keuangan"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_keuangan + id_url,
+            dataType: "JSON",
+            data: $('#form_enkrip_keuangan').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], '', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Deskripsi!',
+                        html: 'Proses Deksripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                            load_data();
+                            $('#button_dekrip_generate').css('display', 'block');
+                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            $('#form_enkrip_keuangan')[0].reset()
+                            modal_enkrip_keuangan.modal('hide');
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    function DownloadFile_keuangan(id_url, type) {
+        var url_download_keuangan = $('[name="url_download_keuangan"]').val()
+        location.href = url_download_keuangan + id_url + '/' + type;
+    }
 </script>

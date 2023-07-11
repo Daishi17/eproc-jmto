@@ -137,7 +137,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="#"><small><i class="fa-solid fa-user-gear px-1"></i>User Setting</small></a></li>
-                            <li><a class="dropdown-item" href="#"><small><i class="fa-solid fa-right-from-bracket px-1"></i>Log-Out System</small></a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('auth/logout')?>"><small><i class="fa-solid fa-right-from-bracket px-1"></i>Log-Out System</small></a></li>
                         </ul>
                     </div>&nbsp;
                     <div class="flex-shrink-0">

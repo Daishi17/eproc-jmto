@@ -22,7 +22,7 @@
         }
 
         body {
-            background-image: url("<?= base_url('assets/img/vms_logo.png')?>");
+            background-image: url("<?= base_url('assets/img/vms_logo.png') ?>");
             background-color: #cccccc;
             /* Full height */
             height: 100%;
@@ -149,11 +149,14 @@
                 <input type="password" name="password" id="myInput" placeholder="Password">
                 <a href="javascript:;" onclick="myFunction()"><i class="fas fa fa-eye" style="margin-right:10px"></i></a>
             </div>
+            <div class="mt-2" style="margin-left: -25px;">
+                <center>
+                    <?php echo $widget; ?>
+                    <?php echo $script; ?>
+                </center>
+            </div>
             <button class="btn mt-3" type="submit">Login</button>
         </form>
-        <div class="text-center fs-6">
-            <a href="login.php">Login Qr ?</a>
-        </div>
     </div>
 </body>
 <script>
