@@ -64,7 +64,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			}
 
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_dokumen_cek == NULL) {
+			if ($rs->sts_dokumen_cek == null) {
 				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_dokumen_cek == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
@@ -173,7 +173,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			$row[] = $rs->nama_kbli;
 			$row[] = $rs->nama_kualifikasi;
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_kbli_siup == 0 || $rs->sts_kbli_siup == NULL) {
+			if ($rs->sts_kbli_siup == 0 || $rs->sts_kbli_siup == null) {
 				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_kbli_siup == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
@@ -283,6 +283,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$message = "Dokumen dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
+				$type_email = 'SIUP';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -311,6 +314,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$message = "Dokumen dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SIUP Anda";
+				$type_email = 'SIUP';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
 			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
@@ -346,6 +352,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$type_email = 'KBLI-SIUP';
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-". $id_vendor['nama_kbli'] . " Telah Berhasil Di Validasi";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -374,6 +383,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$type_email = 'KBLI-SIUP';
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-". $id_vendor['nama_kbli'] . " Gagal Di Validasi Silahkan Segera Ubah KODE KBLI anda pada dokumen SIUP";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
 			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
@@ -432,7 +444,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			$row[] = $rs->nama_kbli;
 			$row[] = $rs->nama_kualifikasi;
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_kbli_nib == 0 || $rs->sts_kbli_nib == NULL) {
+			if ($rs->sts_kbli_nib == 0 || $rs->sts_kbli_nib == null) {
 				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_kbli_nib == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
@@ -528,6 +540,18 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'NIB',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_nib'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -544,7 +568,20 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'NIB',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_nib'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			}
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 			$data = $this->M_Rekanan_tervalidasi->update_enkrip_nib($where, $data);
 		} else {
@@ -566,6 +603,18 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_nib'],
+					'jenis_dokumen' => 'NIB-KBLI',
+					'nomor_kbli' => $id_vendor['kode_kbli'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_nib'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -582,7 +631,20 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_nib'],
+					'jenis_dokumen' => 'NIB-KBLI',
+					'nomor_kbli' => $id_vendor['kode_kbli'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_nib'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			}
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 			$data = $this->M_Rekanan_tervalidasi->update_enkrip_kbli_nib($where, $data);
 		}
@@ -638,7 +700,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			$row[] = $rs->ket_kbli_sbu;
 			$row[] = $rs->nama_kualifikasi;
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_kbli_sbu == 0 || $rs->sts_kbli_sbu == NULL) {
+			if ($rs->sts_kbli_sbu == 0 || $rs->sts_kbli_sbu == null) {
 				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_kbli_sbu == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
@@ -734,6 +796,18 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'SBU',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_sbu'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -750,7 +824,20 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'SBU',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_sbu'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			}
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 			$data = $this->M_Rekanan_tervalidasi->update_enkrip_sbu($where, $data);
 		} else {
@@ -772,6 +859,18 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_sbu'],
+					'jenis_dokumen' => 'KODE-SBU',
+					'nomor_kbli' => $id_vendor['kode_sbu'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_sbu'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -788,7 +887,20 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_sbu'],
+					'jenis_dokumen' => 'KODE-SBU',
+					'nomor_kbli' => $id_vendor['kode_sbu'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_sbu'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			}
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 			$data = $this->M_Rekanan_tervalidasi->update_enkrip_kbli_sbu($where, $data);
 		}
@@ -844,7 +956,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			$row[] = $rs->nama_kbli;
 			$row[] = $rs->nama_kualifikasi;
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_kbli_siujk == 0 || $rs->sts_kbli_siujk == NULL) {
+			if ($rs->sts_kbli_siujk == 0 || $rs->sts_kbli_siujk == null) {
 				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_kbli_siujk == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
@@ -937,6 +1049,18 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'SIUJK',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_siujk'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -953,8 +1077,21 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'SIUJK',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_siujk'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			}
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$data = $this->M_Rekanan_tervalidasi->update_enkrip_siujk($where, $data);
 		} else {
 			$id_vendor = $this->M_Rekanan_tervalidasi->get_row_siujk_kbli_url($id_url);
@@ -975,6 +1112,18 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_siujk'],
+					'jenis_dokumen' => 'SIUJK-KBLI',
+					'nomor_kbli' => $id_vendor['kode_kbli'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_siujk'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -991,8 +1140,21 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_siujk'],
+					'jenis_dokumen' => 'SIUJK-KBLI',
+					'nomor_kbli' => $id_vendor['kode_kbli'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_siujk'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
 			}
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$data = $this->M_Rekanan_tervalidasi->update_enkrip_kbli_siujk($where, $data);
 		}
 
@@ -1385,7 +1547,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			$row[] = $rs->warganegara;
 			$row[] = $rs->alamat_pemilik;
 			$row[] = $rs->saham;
-			if ($rs->sts_validasi == 0 || $rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
@@ -1393,7 +1555,7 @@ class Rekanan_tervalidasi extends CI_Controller
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
 
-			if ($rs->sts_validasi == 0 || $rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<center><a  href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pemilik_manajerial(' . "'" . $rs->id_pemilik . "','edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a><a  href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_pemilik(' . "'" . $rs->id_pemilik . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a  href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_pemilik(' . "'" . $rs->id_pemilik . "',''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a> </center>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<center><a  href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pemilik_manajerial(' . "'" . $rs->id_pemilik . "','edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a><button type="button" class="btn btn-success btn-sm" disabled><i class="fa-solid fa-square-check px-1"></i> Valid</button><a  href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_pemilik(' . "'" . $rs->id_pemilik . "',''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a> </center>';
@@ -1543,7 +1705,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			$row[] = $rs->jabatan_pengurus;
 			$row[] = $rs->jabatan_mulai;
 			$row[] = $rs->jabatan_selesai;
-			if ($rs->sts_validasi == 0 || $rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
@@ -1551,7 +1713,7 @@ class Rekanan_tervalidasi extends CI_Controller
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
 
-			if ($rs->sts_validasi == 0 || $rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<center><a href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pengurus_manajerial(' . "'" . $rs->id_pengurus . "' ,'edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a><a  href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_pengurus(' . "'" . $rs->id_pengurus . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_pengurus(' . "'" . $rs->id_pengurus . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a> </center>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<center><a href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pengurus_manajerial(' . "'" . $rs->id_pengurus . "' ,'edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a><button type="button" class="btn btn-success btn-sm" disabled><i class="fa-solid fa-square-check px-1"></i> Valid</button><a  href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_pengurus(' . "'" . $rs->id_pengurus . "',''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a> </center>';
@@ -1696,7 +1858,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			$row[] = $rs->id_jenis_usaha;
 			$row[] = $rs->instansi_pemberi;
 			$row[] = $rs->lokasi_pekerjaan;
-			if ($rs->sts_validasi == 0 || $rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
@@ -1704,7 +1866,7 @@ class Rekanan_tervalidasi extends CI_Controller
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
 
-			if ($rs->sts_validasi == 0 || $rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<center><a href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pengalaman(' . "'" . $rs->id_pengalaman . "' ,'edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a>
 				<a  href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_pengalaman(' . "'" . $rs->id_pengalaman . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_pengalaman(' . "'" . $rs->id_pengalaman . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a> </center>';
 			} else if ($rs->sts_validasi == 1) {
@@ -2105,14 +2267,14 @@ class Rekanan_tervalidasi extends CI_Controller
             	<a href="javascript:;" class="btn btn-warning btn-sm shadow-lg" onClick="byid_spt(' . "'" . $rs->id_url . "','dekrip'" . ')"> <i class="fa-solid fa-lock-open px-1"></i> Dekrip</a></center>';
 			}
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == null) {
 				$row[] = '<small><span class="badge bg-secondary">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
 			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
-			if ($rs->sts_validasi == 0 || $rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<a href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_spt(' . "'" . $rs->id_url . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_spt(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<button type="button" disabled class="btn btn-success btn-sm" ><i class="fa-solid fa-square-check px-1"></i> Valid</button><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_spt(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
@@ -2317,14 +2479,14 @@ class Rekanan_tervalidasi extends CI_Controller
             	<a href="javascript:;" class="btn btn-warning btn-sm shadow-lg" onClick="byid_neraca(' . "'" . $rs->id_url_neraca . "','dekrip'" . ')"> <i class="fa-solid fa-lock-open px-1"></i> Dekrip</a></center>';
 			}
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == null) {
 				$row[] = '<small><span class="badge bg-secondary">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
 			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
-			if ($rs->sts_validasi == 0 || $rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<a href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_neraca(' . "'" . $rs->id_url_neraca . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_neraca(' . "'" . $rs->id_url_neraca . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<button type="button" disabled class="btn btn-success btn-sm" ><i class="fa-solid fa-square-check px-1"></i> Valid</button><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_neraca(' . "'" . $rs->id_url_neraca . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
@@ -2541,14 +2703,14 @@ class Rekanan_tervalidasi extends CI_Controller
 					<a href="javascript:;" class="btn btn-warning btn-sm shadow-lg" onClick="byid_keuangan(' . "'" . $rs->id_url . "','dekrip'" . ')"> <i class="fa-solid fa-lock-open px-1"></i> Dekrip</a></center>';
 			}
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == null) {
 				$row[] = '<small><span class="badge bg-secondary">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
 			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
-			if ($rs->sts_validasi == 0 || $rs->sts_validasi == NULL) {
+			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<a href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_keuangan(' . "'" . $rs->id_url . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_keuangan(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<button type="button" disabled class="btn btn-success btn-sm" ><i class="fa-solid fa-square-check px-1"></i> Valid</button><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_keuangan(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';

@@ -260,6 +260,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_vendor_kbli_nib');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_nib.id_kbli = tbl_kbli.id_kbli', 'left');
         $this->db->where('tbl_vendor_kbli_nib.id_url_kbli_nib', $id_url);
         $query = $this->db->get();
         return $query->row_array();
@@ -375,6 +376,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_vendor_kbli_sbu');
+        $this->db->join('tbl_sbu', 'tbl_vendor_kbli_sbu.id_sbu = tbl_sbu.id_sbu', 'left');
         $this->db->where('tbl_vendor_kbli_sbu.id_url_kbli_sbu', $id_url);
         $query = $this->db->get();
         return $query->row_array();
@@ -490,6 +492,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_vendor_kbli_siujk');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_siujk.id_kbli = tbl_kbli.id_kbli', 'left');
         $this->db->where('tbl_vendor_kbli_siujk.id_url_kbli_siujk', $id_url);
         $query = $this->db->get();
         return $query->row_array();
