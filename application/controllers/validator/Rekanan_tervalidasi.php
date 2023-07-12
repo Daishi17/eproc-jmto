@@ -44,6 +44,75 @@ class Rekanan_tervalidasi extends CI_Controller
 		$data = [];
 		$no = $_POST['start'];
 		foreach ($result as $rs) {
+			// izin usaha
+			$cek_siup = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_siup($rs->id_vendor);
+			$cek_kbli_siup = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_kbli_siup($rs->id_vendor);
+			$cek_nib = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_nib($rs->id_vendor);
+			$cek_kbli_nib = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_kbli_nib($rs->id_vendor);
+			$cek_sbu = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_sbu($rs->id_vendor);
+			$cek_kbli_sbu = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_kbli_sbu($rs->id_vendor);
+			$cek_siujk = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_siujk($rs->id_vendor);
+			$cek_kbli_siujk = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_kbli_siujk($rs->id_vendor);
+
+			// akta
+			$cek_akta_pendirian = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_akta_pendirian($rs->id_vendor);
+			$cek_akta_perubahan = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_akta_perubahan($rs->id_vendor);
+			// end akta
+
+			// manajerial
+			$cek_pemilik = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_pemilik($rs->id_vendor);
+			$cek_pengurus = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_pengurus($rs->id_vendor);
+			// end manajerial
+
+			// pengalaman
+			$cek_pengalaman = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_pengalaman($rs->id_vendor);
+			// end pengalaman
+
+			// pajak
+			$cek_sppkp = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_sppkp($rs->id_vendor);
+			$cek_npwp = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_npwp($rs->id_vendor);
+			$cek_spt = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_spt($rs->id_vendor);
+			$cek_neraca_keuangan = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_neraca_keuangan($rs->id_vendor);
+			$cek_keuangan = $this->M_Rekanan_tervalidasi->cek_vendor_tervalidasi_keuangan($rs->id_vendor);
+			// end pajak
+
+			// tidak valid
+			$cek_tdk_valid_siup = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_siup($rs->id_vendor);
+			$cek_tdk_valid_kbli_siup = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_kbli_siup($rs->id_vendor);
+			$cek_tdk_valid_nib = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_nib($rs->id_vendor);
+			$cek_tdk_valid_kbli_nib = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_kbli_nib($rs->id_vendor);
+			$cek_tdk_valid_sbu = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_sbu($rs->id_vendor);
+			$cek_tdk_valid_kbli_sbu = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_kbli_sbu($rs->id_vendor);
+			$cek_tdk_valid_siujk = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_siujk($rs->id_vendor);
+			$cek_tdk_valid_kbli_siujk = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_kbli_siujk($rs->id_vendor);
+
+			// akta
+			$cek_tdk_valid_akta_pendirian = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_akta_pendirian($rs->id_vendor);
+			$cek_tdk_valid_akta_perubahan = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_akta_perubahan($rs->id_vendor);
+			// end akta
+
+			// manajerial
+			$cek_tdk_valid_pemilik = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_pemilik($rs->id_vendor);
+			$cek_tdk_valid_pengurus = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_pengurus($rs->id_vendor);
+			// end manajerial
+
+			// pengalaman
+			$cek_tdk_valid_pengalaman = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_pengalaman($rs->id_vendor);
+			// end pengalaman
+
+			// pajak
+			$cek_tdk_valid_sppkp = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_sppkp($rs->id_vendor);
+			$cek_tdk_valid_npwp = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_npwp($rs->id_vendor);
+			$cek_tdk_valid_spt = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_spt($rs->id_vendor);
+			$cek_tdk_valid_neraca_keuangan = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_neraca_keuangan($rs->id_vendor);
+			$cek_tdk_valid_keuangan = $this->M_Rekanan_tervalidasi->cek_vendor_tdk_valid_keuangan($rs->id_vendor);
+			// end pajak
+
+			$test = $cek_siup + $cek_kbli_siup + $cek_nib + $cek_kbli_nib + $cek_sbu + $cek_kbli_sbu + $cek_siujk + $cek_kbli_siujk + $cek_akta_pendirian + $cek_akta_perubahan + $cek_pemilik + $cek_pengurus + $cek_pengalaman + $cek_sppkp + $cek_npwp + $cek_spt + $cek_neraca_keuangan + $cek_keuangan;
+
+			$test2 = $cek_tdk_valid_siup + $cek_tdk_valid_kbli_siup + $cek_tdk_valid_nib + $cek_tdk_valid_kbli_nib + $cek_tdk_valid_sbu + $cek_tdk_valid_kbli_sbu + $cek_tdk_valid_siujk + $cek_tdk_valid_kbli_siujk + $cek_tdk_valid_akta_pendirian + $cek_tdk_valid_akta_perubahan + $cek_tdk_valid_pemilik + $cek_tdk_valid_pengurus + $cek_tdk_valid_pengalaman + $cek_tdk_valid_sppkp + $cek_tdk_valid_npwp + $cek_tdk_valid_spt + $cek_tdk_valid_neraca_keuangan + $cek_tdk_valid_keuangan;
+
+
 			$id_jenis_usaha = str_split($rs->id_jenis_usaha);
 			$jenis_izin = array();
 			foreach ($id_jenis_usaha as $key => $value) {
@@ -67,10 +136,29 @@ class Rekanan_tervalidasi extends CI_Controller
 			if ($rs->sts_dokumen_cek == null) {
 				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_dokumen_cek == 1) {
-				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
-			} else if ($rs->sts_dokumen_cek == 2) {
-				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
+				if ($cek_siup == 1 && $cek_kbli_siup == 1 && $cek_nib == 1 && $cek_kbli_nib && $cek_sbu == 1 && $cek_kbli_sbu && $cek_siujk == 1 && $cek_kbli_siujk == 1 && $cek_akta_pendirian == 1 && $cek_akta_perubahan && $cek_pemilik == 1 && $cek_pengurus == 1 && $cek_pengalaman == 1 && $cek_sppkp == 1 && $cek_npwp == 1 && $cek_spt == 1 && $cek_neraca_keuangan == 1 && $cek_keuangan == 1) {
+					if ($cek_tdk_valid_siup == 1 || $cek_tdk_valid_kbli_siup == 1 || $cek_tdk_valid_nib == 1 || $cek_tdk_valid_kbli_nib || $cek_tdk_valid_sbu == 1 || $cek_tdk_valid_kbli_sbu || $cek_tdk_valid_siujk == 1 || $cek_tdk_valid_kbli_siujk == 1 || $cek_tdk_valid_akta_pendirian == 1 || $cek_tdk_valid_akta_perubahan || $cek_tdk_valid_pemilik == 1 || $cek_tdk_valid_pengurus == 1 || $cek_tdk_valid_pengalaman == 1 || $cek_tdk_valid_sppkp == 1 || $cek_tdk_valid_npwp == 1 || $cek_tdk_valid_spt == 1 || $cek_tdk_valid_neraca_keuangan == 1 || $cek_tdk_valid_keuangan == 1) {
+						$row[] = '<small><span class="badge bg-danger text-white">Tidak Lengkap</span></small>';
+					} else {
+						$row[] = '<small><span class="badge bg-success text-white">Sudah Lengkap</span></small>';
+					}
+				} else {
+					$row[] = '<small><span class="badge bg-danger text-white">Tidak Lengkap</span></small>';
+				}
+			} else {
+					if ($cek_siup == 1 && $cek_kbli_siup == 1 && $cek_nib == 1 && $cek_kbli_nib && $cek_sbu == 1 && $cek_kbli_sbu && $cek_siujk == 1 && $cek_kbli_siujk == 1 && $cek_akta_pendirian == 1 && $cek_akta_perubahan && $cek_pemilik == 1 && $cek_pengurus == 1 && $cek_pengalaman == 1 && $cek_sppkp == 1 && $cek_npwp == 1 && $cek_spt == 1 && $cek_neraca_keuangan == 1 && $cek_keuangan == 1) {
+					if ($cek_tdk_valid_siup == 1 || $cek_tdk_valid_kbli_siup == 1 || $cek_tdk_valid_nib == 1 || $cek_tdk_valid_kbli_nib || $cek_tdk_valid_sbu == 1 || $cek_tdk_valid_kbli_sbu || $cek_tdk_valid_siujk == 1 || $cek_tdk_valid_kbli_siujk == 1 || $cek_tdk_valid_akta_pendirian == 1 || $cek_tdk_valid_akta_perubahan || $cek_tdk_valid_pemilik == 1 || $cek_tdk_valid_pengurus == 1 || $cek_tdk_valid_pengalaman == 1 || $cek_tdk_valid_sppkp == 1 || $cek_tdk_valid_npwp == 1 || $cek_tdk_valid_spt == 1 || $cek_tdk_valid_neraca_keuangan == 1 || $cek_tdk_valid_keuangan == 1) {
+						$row[] = '<small><span class="badge bg-danger text-white">Tidak Lengkap</span></small>';
+					} else {
+						$row[] = '<small><span class="badge bg-success text-white">Sudah Lengkap</span></small>';
+					}
+				} else {
+					$row[] = '<small><span class="badge bg-danger text-white">Tidak Lengkap</span></small>';
+				}
 			}
+			// else if ($rs->sts_dokumen_cek == 2) {
+			// 	$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
+			// }
 
 			$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Cek Dokumen</a><br>
             <a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','terima'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-primary btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','tolak'" . ')"> <i class="fa-solid fa-paper-plane px-1"></i> Undang</a>';
@@ -180,7 +268,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			} else if ($rs->sts_kbli_siup == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
-
+			$row[] = $rs->nama_validator;
 			if ($rs->sts_kbli_siup == 1) {
 				$row[] = '<center><button type="button" disabled class="btn btn-success btn-block btn-sm shadow-lg" onClick="Valid_siup(' . "'" . $rs->id_url_kbli_siup . "','terima_kbli'" . ')"> <i class="fa-solid fa-square-check px-1"></i> Valid</button> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="NonValid_siup(' . "'" . $rs->id_url_kbli_siup . "','tolak_kbli'" . ')"> <i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			} else {
@@ -283,7 +371,7 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
-				$message = "Dokumen dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
+				$message = "Dokumen SIUP dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
 				$type_email = 'SIUP';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
@@ -314,7 +402,7 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
-				$message = "Dokumen dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SIUP Anda";
+				$message = "Dokumen SIUP dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SIUP Anda";
 				$type_email = 'SIUP';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
@@ -353,7 +441,7 @@ class Rekanan_tervalidasi extends CI_Controller
 					'notifikasi' => 1
 				];
 				$type_email = 'KBLI-SIUP';
-				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-". $id_vendor['nama_kbli'] . " Telah Berhasil Di Validasi";
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Telah Berhasil Di Validasi";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
 				$data = [
@@ -384,7 +472,7 @@ class Rekanan_tervalidasi extends CI_Controller
 					'notifikasi' => 1
 				];
 				$type_email = 'KBLI-SIUP';
-				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-". $id_vendor['nama_kbli'] . " Gagal Di Validasi Silahkan Segera Ubah KODE KBLI anda pada dokumen SIUP";
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Gagal Di Validasi Silahkan Segera Ubah KODE KBLI anda pada dokumen SIUP";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
 			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
@@ -451,7 +539,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			} else if ($rs->sts_kbli_nib == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
-
+			$row[] = $rs->nama_validator;
 			if ($rs->sts_kbli_nib == 1) {
 				$row[] = '<center><button disabled type="button" class="btn btn-success btn-block btn-sm shadow-lg" onClick="Valid_nib(' . "'" . $rs->id_url_kbli_nib . "' ,'terima_kbli'" . ')"> <i class="fa-solid fa-square-check px-1"></i> Valid</button disabled> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="NonValid_nib(' . "'" . $rs->id_url_kbli_nib . "','tolak_kbli'" . ')"> <i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			} else {
@@ -552,6 +640,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$message = "Dokumen NIB dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
+				$type_email = 'NIB';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -580,6 +671,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$message = "Dokumen NIB dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen NIB Anda";
+				$type_email = 'NIB';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
 			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
@@ -615,6 +709,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$type_email = 'KBLI-NIB';
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Telah Berhasil Di Validasi";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -643,6 +740,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$type_email = 'KBLI-NIB';
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Gagal Di Validasi Silahkan Segera Ubah KODE KBLI anda pada dokumen NIB";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
 			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
@@ -707,7 +807,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			} else if ($rs->sts_kbli_sbu == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
-
+			$row[] = $rs->nama_validator;
 			if ($rs->sts_kbli_sbu == 1) {
 				$row[] = '<center><button disabled type="button" class="btn btn-success btn-block btn-sm shadow-lg" onClick="Valid_sbu(' . "'" . $rs->id_url_kbli_sbu . "' ,'terima_kbli'" . ')"> <i class="fa-solid fa-square-check px-1"></i> Valid</button disabled> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="NonValid_sbu(' . "'" . $rs->id_url_kbli_sbu . "','tolak_kbli'" . ')"> <i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			} else {
@@ -808,6 +908,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$message = "Dokumen SBU dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
+				$type_email = 'SBU';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -836,6 +939,10 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+
+				$message = "Dokumen SBU dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SBU Anda";
+				$type_email = 'SBU';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
 			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
@@ -871,6 +978,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$type_email = 'KODE-SBU';
+				$message = "Jenis SBU dengan kode SBU "  . $id_vendor['kode_sbu'] . "-" . $id_vendor['nama_sbu'] . " Telah Berhasil Di Validasi";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -899,6 +1009,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$type_email = 'KODE-SBU';
+				$message = "Jenis SBU dengan kode SBU "  . $id_vendor['kode_sbu'] . "-" . $id_vendor['nama_sbu'] . " Gagal Di Validasi Silahkan Segera Ubah KODE sbu anda pada dokumen SIUP";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
 			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
@@ -963,7 +1076,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			} else if ($rs->sts_kbli_siujk == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
-
+			$row[] = $rs->nama_validator;
 			if ($rs->sts_kbli_siujk == 1) {
 				$row[] = '<center><button disabled type="button" class="btn btn-success btn-block btn-sm shadow-lg" onClick="Valid_siujk(' . "'" . $rs->id_url_kbli_siujk . "' ,'terima_kbli'" . ')"> <i class="fa-solid fa-square-check px-1"></i> Valid</button disabled> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="NonValid_siujk(' . "'" . $rs->id_url_kbli_siujk . "','tolak_kbli'" . ')"> <i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			} else {
@@ -1061,6 +1174,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$message = "Dokumen SIUJK dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
+				$type_email = 'SIUJK';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -1089,6 +1205,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$message = "Dokumen SIUJK dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SIUJK Anda";
+				$type_email = 'SIUJK';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
@@ -1124,6 +1243,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$type_email = 'KBLI-SIUJK';
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Telah Berhasil Di Validasi";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -1152,6 +1274,9 @@ class Rekanan_tervalidasi extends CI_Controller
 					'tgl_periksa' => date('Y-m-d H:i'),
 					'notifikasi' => 1
 				];
+				$type_email = 'KBLI-SIUJK';
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Gagal Di Validasi Silahkan Segera Ubah KODE KBLI anda pada dokumen SIUJK";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
@@ -1266,6 +1391,21 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'AKTA-PENDIRIAN',
+					'nomor_surat' => $id_vendor['no_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_akta_pendirian'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$message = "Dokumen AKTA-PENDIRIAN dengan nomor surat "  . $id_vendor['no_surat'] . " Telah Berhasil Di Validasi";
+				$type_email = 'AKTA-PENDIRIAN';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -1282,7 +1422,23 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'AKTA-PENDIRIAN',
+					'nomor_surat' => $id_vendor['no_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_akta_pendirian'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$message = "Dokumen AKTA-PENDIRIAN dengan nomor surat "  . $id_vendor['no_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen AKTA-PENDIRIAN Anda";
+				$type_email = 'AKTA-PENDIRIAN';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 			$data = $this->M_Rekanan_tervalidasi->update_enkrip_akta_pendirian($where, $data);
 		} else {
@@ -1434,6 +1590,21 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'AKTA-PERUBAHAN',
+					'nomor_surat' => $id_vendor['no_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_akta_perubahan'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$message = "Dokumen AKTA-PERUBAHAN dengan nomor surat "  . $id_vendor['no_surat'] . " Telah Berhasil Di Validasi";
+				$type_email = 'AKTA-PERUBAHAN';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -1450,7 +1621,23 @@ class Rekanan_tervalidasi extends CI_Controller
 				$where_vendor = [
 					'id_vendor' => $get_vendor
 				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'AKTA-PERUBAHAN',
+					'nomor_surat' => $id_vendor['no_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_akta_perubahan'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$message = "Dokumen AKTA-PERUBAHAN dengan nomor surat "  . $id_vendor['no_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen AKTA-PERUBAHAN Anda";
+				$type_email = 'AKTA-PERUBAHAN';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			}
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 			$data = $this->M_Rekanan_tervalidasi->update_enkrip_akta_perubahan($where, $data);
 		} else {
@@ -1554,7 +1741,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
-
+			$row[] = $rs->nama_validator;
 			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<center><a  href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pemilik_manajerial(' . "'" . $rs->id_pemilik . "','edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a><a  href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_pemilik(' . "'" . $rs->id_pemilik . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a  href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_pemilik(' . "'" . $rs->id_pemilik . "',''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a> </center>';
 			} else if ($rs->sts_validasi == 1) {
@@ -1562,6 +1749,8 @@ class Rekanan_tervalidasi extends CI_Controller
 			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<center><a  href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pemilik_manajerial(' . "'" . $rs->id_pemilik . "','edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a><a  href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_pemilik(' . "'" . $rs->id_pemilik . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a  href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_pemilik(' . "'" . $rs->id_pemilik . "',''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a> </center>';
 			}
+
+
 
 			$data[] = $row;
 		}
@@ -1656,6 +1845,21 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'PEMILIK',
+				'nomor_surat' => $id_vendor['nik'],
+				'id_dokumen' => $id_vendor['id_pemilik'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 1,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen PEMILIK dengan nomor NIK/PASPOR "  . $id_vendor['nik'] . " Telah Berhasil Di Validasi";
+			$type_email = 'PEMILIK';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -1672,7 +1876,23 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'PEMILIK',
+				'nomor_surat' => $id_vendor['nik'],
+				'id_dokumen' => $id_vendor['id_pemilik'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 2,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen PEMILIK dengan nomor NIK/PASPOR "  . $id_vendor['nik'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen PEMILIK Anda";
+			$type_email = 'PEMILIK';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		}
+		$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 		$data = $this->M_Rekanan_tervalidasi->update_pemilik_manajerial_enkription($where, $data);
 
@@ -1712,7 +1932,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
-
+			$row[] = $rs->nama_validator;
 			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<center><a href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pengurus_manajerial(' . "'" . $rs->id_pengurus . "' ,'edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a><a  href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_pengurus(' . "'" . $rs->id_pengurus . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_pengurus(' . "'" . $rs->id_pengurus . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a> </center>';
 			} else if ($rs->sts_validasi == 1) {
@@ -1807,6 +2027,21 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'PENGURUS',
+				'nomor_surat' => $id_vendor['nik'],
+				'id_dokumen' => $id_vendor['id_pengurus'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 1,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen PENGURUS dengan nomor NIK/PASPOR "  . $id_vendor['nik'] . " Telah Berhasil Di Validasi";
+			$type_email = 'PENGURUS';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -1823,7 +2058,23 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'PENGURUS',
+				'nomor_surat' => $id_vendor['nik'],
+				'id_dokumen' => $id_vendor['id_pengurus'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 2,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen PENGURUS dengan nomor NIK/PASPOR "  . $id_vendor['nik'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen PENGURUS Anda";
+			$type_email = 'PENGURUS';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		}
+		$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 		$data = $this->M_Rekanan_tervalidasi->update_pengurus_manajerial_enkription($where, $data);
 
@@ -1865,7 +2116,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
-
+			$row[] = $rs->nama_validator;
 			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<center><a href="javascript:;" class="btn btn-info btn-sm" onClick="by_id_pengalaman(' . "'" . $rs->id_pengalaman . "' ,'edit'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a>
 				<a  href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_pengalaman(' . "'" . $rs->id_pengalaman . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_pengalaman(' . "'" . $rs->id_pengalaman . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a> </center>';
@@ -1916,6 +2167,21 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'PENGALAMAN',
+				'nomor_surat' => $id_vendor['no_kontrak'],
+				'id_dokumen' => $id_vendor['id_pengalaman'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 1,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen PENGALAMAN dengan NOMOR KONTRAK "  . $id_vendor['no_kontrak'] . " Telah Berhasil Di Validasi Silahkan Segera Upload Ulang Dokumen PENGALAMAN Anda";
+			$type_email = 'PENGALAMAN';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -1932,10 +2198,25 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'PENGALAMAN',
+				'nomor_surat' => $id_vendor['no_kontrak'],
+				'id_dokumen' => $id_vendor['id_pengalaman'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 2,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen PENGALAMAN dengan NOMOR KONTRAK "  . $id_vendor['no_kontrak'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen PENGALAMAN Anda";
+			$type_email = 'PENGALAMAN';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		}
+		$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 		$data = $this->M_Rekanan_tervalidasi->update_pengalaman_enkription($where, $data);
-
 
 		if ($data) {
 			$response = [
@@ -2056,6 +2337,21 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'SPPKP',
+				'nomor_surat' => $id_vendor['no_surat'],
+				'id_dokumen' => $id_vendor['id_vendor_sppkp'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 1,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen SPPKP dengan nomor surat "  . $id_vendor['no_surat'] . " Telah Berhasil Di Validasi";
+			$type_email = 'SPPKP';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2072,7 +2368,23 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'SPPKP',
+				'nomor_surat' => $id_vendor['no_surat'],
+				'id_dokumen' => $id_vendor['id_vendor_sppkp'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 2,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen SPPKP dengan nomor surat "  . $id_vendor['no_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SPPKP Anda";
+			$type_email = 'SPPKP';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		}
+		$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 		$data = $this->M_Rekanan_tervalidasi->update_enkrip_sppkp($where, $data);
 
@@ -2182,6 +2494,21 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'NPWP',
+				'nomor_surat' => $id_vendor['no_npwp'],
+				'id_dokumen' => $id_vendor['id_vendor_npwp'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 1,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen NPWP dengan nomor NPWP "  . $id_vendor['no_npwp'] . " Telah Berhasil Di Validasi";
+			$type_email = 'NPWP';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2198,7 +2525,23 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'NPWP',
+				'nomor_surat' => $id_vendor['no_npwp'],
+				'id_dokumen' => $id_vendor['id_vendor_npwp'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 2,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen NPWP dengan nomor NPWP "  . $id_vendor['no_npwp'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen NPWP Anda";
+			$type_email = 'NPWP';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		}
+		$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 		$data = $this->M_Rekanan_tervalidasi->update_enkrip_npwp($where, $data);
 
@@ -2228,7 +2571,7 @@ class Rekanan_tervalidasi extends CI_Controller
 
 		// Locate.
 		$file_name = $get_row_enkrip['file_dokumen'];
-		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/npwp-' . $date . '/' . $get_row_enkrip['file_dokumen'];
+		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/NPWP-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
 		// Configure.
 		header('Content-Type: application/octet-stream');
@@ -2274,6 +2617,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
+			$row[] = $rs->nama_validator;
 			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<a href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_spt(' . "'" . $rs->id_url . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_spt(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			} else if ($rs->sts_validasi == 1) {
@@ -2390,6 +2734,21 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'SPT',
+				'nomor_surat' => $id_vendor['nomor_surat'],
+				'id_dokumen' => $id_vendor['id_vendor_spt'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 1,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen SPT dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
+			$type_email = 'SPT';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2406,11 +2765,25 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'SPT',
+				'nomor_surat' => $id_vendor['nomor_surat'],
+				'id_dokumen' => $id_vendor['id_vendor_spt'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 2,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen SPT dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SPT Anda";
+			$type_email = 'SPT';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		}
+		$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 		$data = $this->M_Rekanan_tervalidasi->update_spt($where, $data);
-
-
 		if ($data) {
 			$response = [
 				'message' => 'Berhasil!'
@@ -2486,6 +2859,8 @@ class Rekanan_tervalidasi extends CI_Controller
 			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
+
+			$row[] = $rs->nama_validator;
 			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<a href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_neraca(' . "'" . $rs->id_url_neraca . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_neraca(' . "'" . $rs->id_url_neraca . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			} else if ($rs->sts_validasi == 1) {
@@ -2606,6 +2981,20 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url_neraca'],
+				'jenis_dokumen' => 'NERACA-KEUANGAN',
+				'id_dokumen' => $id_vendor['id_neraca'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 1,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen Neraca Keuangan Telah Berhasil Di Validasi";
+			$type_email = 'NERACA-KEUANGAN';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2622,7 +3011,22 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url_neraca'],
+				'jenis_dokumen' => 'NERACA-KEUANGAN',
+				'id_dokumen' => $id_vendor['id_neraca'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 2,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen Neraca Keuangan Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen Neraca Keuangan";
+			$type_email = 'NERACA-KEUANGAN';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		}
+		$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 		$data = $this->M_Rekanan_tervalidasi->update_neraca($where, $data);
 
@@ -2710,6 +3114,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			}
+			$row[] = $rs->nama_validator;
 			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
 				$row[] = '<a href="javascript:;" class="btn btn-success btn-sm" onClick="Valid_keuangan(' . "'" . $rs->id_url . "',''" . ')"><i class="fa-solid fa-square-check px-1"></i> Valid</a><a href="javascript:;" class="btn btn-danger btn-sm" onClick="NonValid_keuangan(' . "'" . $rs->id_url . "' ,''" . ')"><i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
 			} else if ($rs->sts_validasi == 1) {
@@ -2832,6 +3237,20 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'LAPORAN-KEUANGAN',
+				'id_dokumen' => $id_vendor['id_vendor_keuangan'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 1,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen Laporan Keuangan Telah Berhasil Di Validasi";
+			$type_email = 'LAPORAN-KEUANGAN';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2848,7 +3267,22 @@ class Rekanan_tervalidasi extends CI_Controller
 			$where_vendor = [
 				'id_vendor' => $get_vendor
 			];
+			$data_monitoring = [
+				'id_vendor' => $id_vendor['id_vendor'],
+				'id_url' => $id_vendor['id_url'],
+				'jenis_dokumen' => 'LAPORAN-KEUANGAN',
+				'id_dokumen' => $id_vendor['id_vendor_keuangan'],
+				'alasan_validator' => $alasan_validator,
+				'sts_validasi' => 2,
+				'nama_validator' => $nm_validator,
+				'tgl_periksa' => date('Y-m-d H:i'),
+				'notifikasi' => 1
+			];
+			$message = "Dokumen Laporan Keuangan Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen Laporan Keuangan Anda";
+			$type_email = 'LAPORAN-KEUANGAN';
+			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 		}
+		$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
 		$data = $this->M_Rekanan_tervalidasi->update_keuangan($where, $data);
 

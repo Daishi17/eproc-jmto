@@ -40,20 +40,45 @@ class Email_send
         $this->ci->email->to($email); // Ganti dengan email tujuan
 
         // Subject email
+        $this->ci->email->subject("E-PROCUREMENT JMTO : VALIDASI DOKUMEN SIUP");
         if ($type == 'SIUP') {
-            $this->ci->email->subject("E-PROCUREMENT JMTO : VALIDASI DOKUMEN SIUP");
-
             // Isi email
-            $this->ci->email->message("Dokumen $message ");
-
-            $this->ci->email->send();
+            $this->ci->email->message("$message ");
         } else if ($type == 'KBLI-SIUP') {
-            $this->ci->email->subject('E-PROCUREMENT JMTO :  REGISTRASI');
-
-            // Isi email
-            $this->ci->email->message("Silakan Klik Link Ini $base_url Untuk Melakukan Prosess Pendaftaran Selanjutnya ");
-
-            $this->ci->email->send();
+            $this->ci->email->message("$message ");
+        } else if ($type == 'NIB') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'KBLI-NIB') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'SBU') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'KODE-SBU') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'SIUJK') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'KBLI-SIUJK') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'AKTA-PENDIRIAN') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'AKTA-PERUBAHAN') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'PEMILIK') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'PENGURUS') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'PENGALAMAN') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'SPPKP') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'NPWP') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'SPT') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'NERACA-KEUANGAN') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'LAPORAN-KEUANGAN') {
+            $this->ci->email->message("$message ");
         }
+        $this->ci->email->send();
     }
 }

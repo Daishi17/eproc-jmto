@@ -6,11 +6,11 @@
                     <div class="flex-grow-1 bd-highlight">
                         <span class="text-white">
                             <i class="fa-solid fa-table px-1"></i>
-                            <small><strong>Check Data - Dokumen Rekanan Tervalidasi</strong></small>
+                            <small><strong>Check Data - Dokumen Rekanan Terundang</strong></small>
                         </span>
                     </div>
                     <div class="bd-highlight">
-                        <a class="btn btn-primary btn-sm shadow-lg" href="<?= base_url() ?>validator/rekanan_tervalidasi" role="button">
+                        <a class="btn btn-primary btn-sm shadow-lg" href="<?= base_url() ?>validator/rekanan_terundang" role="button">
                             << Kembali Kemenu Sebelumnya </a> </div> </div> <div class="card-body">
                                 <div class="card border-dark shadow-lg">
                                     <div class="card-header border-dark bg-danger d-flex justify-content-between align-items-center">
@@ -63,8 +63,8 @@
                                     <div class="card-header">
                                         <div class="nav nav-tabs mb-3 bg-warning" id="nav-tab" role="tablist">
 
-                                            <input type="hidden" name="url_get_vendor" value="<?= base_url('validator/rekanan_tervalidasi/get_dokumen_vendor/') ?>">
-                                            <input type="hidden" name="url_download_siup" value="<?= base_url('validator/rekanan_tervalidasi/url_download_siup/') ?>">
+                                            <input type="hidden" name="url_get_vendor" value="<?= base_url('validator/rekanan_terundang/get_dokumen_vendor/') ?>">
+                                            <input type="hidden" name="url_download_siup" value="<?= base_url('validator/rekanan_terundang/url_download_siup/') ?>">
 
                                             <button class="nav-link active" id="nav-siup-tab" data-bs-toggle="tab" data-bs-target="#nav-siup" type="button" role="tab" aria-controls="nav-siup" aria-selected="true">
                                                 <i class="fa-regular fa-file-powerpoint"></i>
@@ -72,28 +72,28 @@
                                             </button>
 
 
-                                            <input type="hidden" name="url_download_nib" value="<?= base_url('validator/rekanan_tervalidasi/url_download_nib/') ?>">
+                                            <input type="hidden" name="url_download_nib" value="<?= base_url('validator/rekanan_terundang/url_download_nib/') ?>">
                                             <button class="nav-link" id="nav-nib-tab" data-bs-toggle="tab" data-bs-target="#nav-nib" type="button" role="tab" aria-controls="nav-nib" aria-selected="false">
                                                 <i class="fa-regular fa-file-word"></i>
                                                 <small><b>NIB/TDP</b></small>
                                             </button>
 
 
-                                            <input type="hidden" name="url_download_sbu" value="<?= base_url('validator/rekanan_tervalidasi/url_download_sbu/') ?>">
+                                            <input type="hidden" name="url_download_sbu" value="<?= base_url('validator/rekanan_terundang/url_download_sbu/') ?>">
                                             <button class="nav-link" id="nav-sbu-tab" data-bs-toggle="tab" data-bs-target="#nav-sbu" type="button" role="tab" aria-controls="nav-sbu" aria-selected="false">
                                                 <i class="fa-regular fa-file-excel"></i>
                                                 <small><b>SBU</b></small>
                                             </button>
 
 
-                                            <input type="hidden" name="url_download_siujk" value="<?= base_url('validator/rekanan_tervalidasi/url_download_siujk/') ?>">
+                                            <input type="hidden" name="url_download_siujk" value="<?= base_url('validator/rekanan_terundang/url_download_siujk/') ?>">
                                             <button class="nav-link" id="nav-siujk-tab" data-bs-toggle="tab" data-bs-target="#nav-siujk" type="button" role="tab" aria-controls="nav-siujk" aria-selected="false">
                                                 <i class="fa-regular fa-file-pdf"></i>
                                                 <small><b>SIUJK</b></small>
                                             </button>
 
-                                            <input type="hidden" name="url_download_akta_pendirian" value="<?= base_url('validator/rekanan_tervalidasi/url_download_akta_pendirian/') ?>">
-                                            <input type="hidden" name="url_download_akta_perubahan" value="<?= base_url('validator/rekanan_tervalidasi/url_download_akta_perubahan/') ?>">
+                                            <input type="hidden" name="url_download_akta_pendirian" value="<?= base_url('validator/rekanan_terundang/url_download_akta_pendirian/') ?>">
+                                            <input type="hidden" name="url_download_akta_perubahan" value="<?= base_url('validator/rekanan_terundang/url_download_akta_perubahan/') ?>">
                                             <button class="nav-link" id="nav-akta-tab" data-bs-toggle="tab" data-bs-target="#nav-akta" type="button" role="tab" aria-controls="nav-akta" aria-selected="true">
                                                 <i class="fa-regular fa-file-powerpoint"></i>
                                                 <small><b>Akta</b></small>
@@ -102,13 +102,13 @@
                                                 <i class="fa-regular fa-file-powerpoint"></i>
                                                 <small><b>Manajerial</b></small>
                                             </button>
-                                            <input type="hidden" name="url_download_spt" value="<?= base_url('validator/rekanan_tervalidasi/url_download_spt/') ?>">
+                                            <input type="hidden" name="url_download_spt" value="<?= base_url('validator/rekanan_terundang/url_download_spt/') ?>">
                                             <button class="nav-link" id="nav-pengalaman-tab" data-bs-toggle="tab" data-bs-target="#nav-pengalaman" type="button" role="tab" aria-controls="nav-pengalaman" aria-selected="true">
                                                 <i class="fa-regular fa-file-powerpoint"></i>
                                                 <small><b>Pengalaman</b></small>
                                             </button>
-                                            <input type="hidden" name="url_download_neraca" value="<?= base_url('validator/rekanan_tervalidasi/url_download_neraca/') ?>">
-                                            <input type="hidden" name="url_download_keuangan" value="<?= base_url('validator/rekanan_tervalidasi/url_download_keuangan/') ?>">
+                                            <input type="hidden" name="url_download_neraca" value="<?= base_url('validator/rekanan_terundang/url_download_neraca/') ?>">
+                                            <input type="hidden" name="url_download_keuangan" value="<?= base_url('validator/rekanan_terundang/url_download_keuangan/') ?>">
                                             <button class="nav-link" id="nav-pajak-tab" data-bs-toggle="tab" data-bs-target="#nav-pajak" type="button" role="tab" aria-controls="nav-pajak" aria-selected="true">
                                                 <i class="fa-regular fa-file-powerpoint"></i>
                                                 <small><b>Pajak</b></small>
@@ -119,7 +119,7 @@
                                             <div class="tab-pane fade active show" id="nav-siup" role="tabpanel" aria-labelledby="nav-siup-tab">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <input type="hidden" name="url_kbli_siup" value="<?= base_url('validator/rekanan_tervalidasi/get_kbli_siup/') ?>">
+                                                        <input type="hidden" name="url_kbli_siup" value="<?= base_url('validator/rekanan_terundang/get_kbli_siup/') ?>">
                                                         <table class="table table-bordered table-sm">
                                                             <thead class="bg-info">
                                                                 <tr>
@@ -175,7 +175,7 @@
                                             <div class="tab-pane fade" id="nav-nib" role="tabpanel" aria-labelledby="nav-nib-tab">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <input type="hidden" name="url_kbli_nib" value="<?= base_url('validator/rekanan_tervalidasi/get_kbli_nib/') ?>">
+                                                        <input type="hidden" name="url_kbli_nib" value="<?= base_url('validator/rekanan_terundang/get_kbli_nib/') ?>">
                                                         <table class="table table-bordered table-sm">
                                                             <thead class="bg-danger">
                                                                 <tr>
@@ -242,7 +242,7 @@
                                             <div class="tab-pane fade" id="nav-sbu" role="tabpanel" aria-labelledby="nav-sbu-tab">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <input type="hidden" name="url_kbli_sbu" value="<?= base_url('validator/rekanan_tervalidasi/get_kbli_sbu/') ?>">
+                                                        <input type="hidden" name="url_kbli_sbu" value="<?= base_url('validator/rekanan_terundang/get_kbli_sbu/') ?>">
                                                         <table class="table table-bordered table-sm">
                                                             <thead class="bg-info">
                                                                 <tr>
@@ -296,7 +296,7 @@
 
                                                             </tbody>
                                                         </table>
-                                                        <input type="hidden" name="url_kbli_siujk" value="<?= base_url('validator/rekanan_tervalidasi/get_kbli_siujk/') ?>">
+                                                        <input type="hidden" name="url_kbli_siujk" value="<?= base_url('validator/rekanan_terundang/get_kbli_siujk/') ?>">
                                                         <table class="table table-bordered table-sm" id="tbl_kbli_siujk">
                                                             <thead class="bg-info">
                                                                 <tr>
@@ -420,17 +420,17 @@
                                                     <div class="card border-danger shadow-sm">
                                                         <div class="card-header">
                                                             <div class="nav nav-tabs mb-3 bg-danger" id="nav-tab" role="tablist">
-                                                                <input type="hidden" name="url_get_pemilik_manajerial" value="<?= base_url('validator/rekanan_tervalidasi/get_data_pemilik_manajerial/') ?>">
-                                                                <input type="hidden" name="url_by_id_pemilik_manajerial" value="<?= base_url('validator/rekanan_tervalidasi/by_id_pemilik_manajerial/') ?>">
-                                                                <input type="hidden" name="url_encryption_pemilik" value="<?= base_url('validator/rekanan_tervalidasi/dekrip_enkrip_pemilik/') ?>">
+                                                                <input type="hidden" name="url_get_pemilik_manajerial" value="<?= base_url('validator/rekanan_terundang/get_data_pemilik_manajerial/') ?>">
+                                                                <input type="hidden" name="url_by_id_pemilik_manajerial" value="<?= base_url('validator/rekanan_terundang/by_id_pemilik_manajerial/') ?>">
+                                                                <input type="hidden" name="url_encryption_pemilik" value="<?= base_url('validator/rekanan_terundang/dekrip_enkrip_pemilik/') ?>">
                                                                 <button class="nav-link active" id="nav-pemilik-tab" data-bs-toggle="tab" data-bs-target="#nav-pemilik" type="button" role="tab" aria-controls="nav-pemilik" aria-selected="true">
                                                                     <small class="text-dark"><i class="fa-regular fa-file-powerpoint px-1"></i>
                                                                         <b>Pemilik Perusahaan</b>
                                                                     </small>
                                                                 </button>
-                                                                <input type="hidden" name="url_get_pengurus_manajerial" value="<?= base_url('validator/rekanan_tervalidasi/get_data_pengurus_manajerial/') ?>">
-                                                                <input type="hidden" name="url_by_id_pengurus_manajerial" value="<?= base_url('validator/rekanan_tervalidasi/by_id_pengurus_manajerial/') ?>">
-                                                                <input type="hidden" name="url_encryption_pengurus" value="<?= base_url('validator/rekanan_tervalidasi/dekrip_enkrip_pengurus/') ?>">
+                                                                <input type="hidden" name="url_get_pengurus_manajerial" value="<?= base_url('validator/rekanan_terundang/get_data_pengurus_manajerial/') ?>">
+                                                                <input type="hidden" name="url_by_id_pengurus_manajerial" value="<?= base_url('validator/rekanan_terundang/by_id_pengurus_manajerial/') ?>">
+                                                                <input type="hidden" name="url_encryption_pengurus" value="<?= base_url('validator/rekanan_terundang/dekrip_enkrip_pengurus/') ?>">
                                                                 <button class="nav-link" id="nav-pengurus-tab" data-bs-toggle="tab" data-bs-target="#nav-pengurus" type="button" role="tab" aria-controls="nav-pengurus" aria-selected="false">
                                                                     <small class="text-dark"><i class="fa-regular fa-file-pdf px-1"></i>
                                                                         <b>Pengurus Perusahaan</b>
@@ -534,9 +534,9 @@
                                             <div class="tab-pane fade" id="nav-pengalaman" role="tabpanel" aria-labelledby="nav-pengalaman-tab">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <input type="hidden" name="url_get_pengalaman" value="<?= base_url('validator/rekanan_tervalidasi/get_data_pengalaman/') ?>">
-                                                        <input type="hidden" name="url_by_id_pengalaman" value="<?= base_url('validator/rekanan_tervalidasi/by_id_pengalaman/') ?>">
-                                                        <input type="hidden" name="url_encryption_pengalaman" value="<?= base_url('validator/rekanan_tervalidasi/dekrip_enkrip_pengalaman/') ?>">
+                                                        <input type="hidden" name="url_get_pengalaman" value="<?= base_url('validator/rekanan_terundang/get_data_pengalaman/') ?>">
+                                                        <input type="hidden" name="url_by_id_pengalaman" value="<?= base_url('validator/rekanan_terundang/by_id_pengalaman/') ?>">
+                                                        <input type="hidden" name="url_encryption_pengalaman" value="<?= base_url('validator/rekanan_terundang/dekrip_enkrip_pengalaman/') ?>">
                                                         <table style="font-size: 13px;" id="tbl_pengalaman" class="table table-sm table-bordered table-striped">
                                                             <thead class="bg-danger">
                                                                 <tr>
@@ -571,7 +571,7 @@
                                             <div class="tab-pane fade" id="nav-pajak" role="tabpanel" aria-labelledby="nav-pajak-tab">
                                                 <div class="card-header">
                                                     <div class="nav nav-tabs mb-3 bg-danger" id="nav-tab" role="tablist">
-                                                        <input type="hidden" name="url_download_sppkp" value="<?= base_url('validator/rekanan_tervalidasi/url_download_sppkp/') ?>">
+                                                        <input type="hidden" name="url_download_sppkp" value="<?= base_url('validator/rekanan_terundang/url_download_sppkp/') ?>">
                                                         <button class="nav-link active" id="nav-sppkp-tab" data-bs-toggle="tab" data-bs-target="#nav-sppkp" type="button" role="tab" aria-controls="nav-sppkp" aria-selected="true">
                                                             <span class="text-dark">
                                                                 <i class="fa-regular fa-file-powerpoint"></i>
@@ -579,7 +579,7 @@
                                                             </span>
                                                         </button>
 
-                                                        <input type="hidden" name="url_download_npwp" value="<?= base_url('validator/rekanan_tervalidasi/url_download_npwp/') ?>">
+                                                        <input type="hidden" name="url_download_npwp" value="<?= base_url('validator/rekanan_terundang/url_download_npwp/') ?>">
                                                         <button class="nav-link" id="nav-npwp-tab" data-bs-toggle="tab" data-bs-target="#nav-npwp" type="button" role="tab" aria-controls="nav-npwp" aria-selected="false">
                                                             <span class="text-dark">
                                                                 <i class="fa-regular fa-file-word"></i>
@@ -587,24 +587,24 @@
                                                             </span>
                                                         </button>
 
-                                                        <input type="hidden" name="url_get_spt" value="<?= base_url('validator/rekanan_tervalidasi/get_data_spt/') ?>">
-                                                        <input type="hidden" name="url_by_id_spt" value="<?= base_url('validator/rekanan_tervalidasi/by_id_spt/') ?>">
+                                                        <input type="hidden" name="url_get_spt" value="<?= base_url('validator/rekanan_terundang/get_data_spt/') ?>">
+                                                        <input type="hidden" name="url_by_id_spt" value="<?= base_url('validator/rekanan_terundang/by_id_spt/') ?>">
                                                         <button class="nav-link" id="nav-spt-tab" data-bs-toggle="tab" data-bs-target="#nav-spt" type="button" role="tab" aria-controls="nav-spt" aria-selected="false">
                                                             <span class="text-dark">
                                                                 <i class="fa-regular fa-file-word"></i>
                                                                 <small><b>SPT</b></small>
                                                             </span>
                                                         </button>
-                                                        <input type="hidden" name="url_get_neraca" value="<?= base_url('validator/rekanan_tervalidasi/get_data_neraca/') ?>">
-                                                        <input type="hidden" name="url_by_id_neraca" value="<?= base_url('validator/rekanan_tervalidasi/by_id_neraca/') ?>">
+                                                        <input type="hidden" name="url_get_neraca" value="<?= base_url('validator/rekanan_terundang/get_data_neraca/') ?>">
+                                                        <input type="hidden" name="url_by_id_neraca" value="<?= base_url('validator/rekanan_terundang/by_id_neraca/') ?>">
                                                         <button class="nav-link" id="nav-neraca-tab" data-bs-toggle="tab" data-bs-target="#nav-neraca" type="button" role="tab" aria-controls="nav-neraca" aria-selected="false">
                                                             <span class="text-dark">
                                                                 <i class="fa-regular fa-file-word"></i>
                                                                 <small><b>Neraca Keuangan</b></small>
                                                             </span>
                                                         </button>
-                                                        <input type="hidden" name="url_get_keuangan" value="<?= base_url('validator/rekanan_tervalidasi/get_data_keuangan/') ?>">
-                                                        <input type="hidden" name="url_by_id_keuangan" value="<?= base_url('validator/rekanan_tervalidasi/by_id_keuangan/') ?>">
+                                                        <input type="hidden" name="url_get_keuangan" value="<?= base_url('validator/rekanan_terundang/get_data_keuangan/') ?>">
+                                                        <input type="hidden" name="url_by_id_keuangan" value="<?= base_url('validator/rekanan_terundang/by_id_keuangan/') ?>">
                                                         <button class="nav-link" id="nav-keuangan-tab" data-bs-toggle="tab" data-bs-target="#nav-keuangan" type="button" role="tab" aria-controls="nav-keuangan" aria-selected="false">
                                                             <span class="text-dark">
                                                                 <i class="fa-regular fa-file-word"></i>
@@ -682,8 +682,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="card-body">
-                                                                    <input type="hidden" name="get_spt" value="<?= base_url('validator/rekanan_tervalidasi/get_data_spt/') ?>">
-                                                                    <input type="hidden" name="url_get_spt_by_id" value="<?= base_url('validator/rekanan_tervalidasi/get_spt_by_id/') ?>">
+                                                                    <input type="hidden" name="get_spt" value="<?= base_url('validator/rekanan_terundang/get_data_spt/') ?>">
+                                                                    <input type="hidden" name="url_get_spt_by_id" value="<?= base_url('validator/rekanan_terundang/get_spt_by_id/') ?>">
                                                                     <table id="tbl_spt" class="table table-sm table-bordered table-striped">
                                                                         <thead class="bg-dark">
                                                                             <tr class="shadow-lg">
@@ -732,8 +732,8 @@
 
                                                                 </div>
                                                                 <div class="card-body">
-                                                                    <input type="hidden" name="get_keuangan" value="<?= base_url('validator/rekanan_tervalidasi/get_keuangan/') ?>">
-                                                                    <input type="hidden" name="url_get_keuangan_by_id" value="<?= base_url('validator/rekanan_tervalidasi/get_keuangan_by_id/') ?>">
+                                                                    <input type="hidden" name="get_keuangan" value="<?= base_url('validator/rekanan_terundang/get_keuangan/') ?>">
+                                                                    <input type="hidden" name="url_get_keuangan_by_id" value="<?= base_url('validator/rekanan_terundang/get_keuangan_by_id/') ?>">
                                                                     <div style="overflow-x:auto">
                                                                         <table id="tbl_keuangan" class="table table-sm table-bordered table-striped">
                                                                             <thead class="bg-dark">
@@ -785,8 +785,8 @@
 
                                                                 </div>
                                                                 <div class="card-body">
-                                                                    <input type="hidden" name="get_neraca" value="<?= base_url('validator/rekanan_tervalidasi/get_data_neraca/') ?>">
-                                                                    <input type="hidden" name="url_get_neraca_by_id" value="<?= base_url('validator/rekanan_tervalidasi/get_neraca_by_id/') ?>">
+                                                                    <input type="hidden" name="get_neraca" value="<?= base_url('validator/rekanan_terundang/get_data_neraca/') ?>">
+                                                                    <input type="hidden" name="url_get_neraca_by_id" value="<?= base_url('validator/rekanan_terundang/get_neraca_by_id/') ?>">
                                                                     <table id="tbl_neraca" class="table table-sm table-bordered table-striped">
                                                                         <thead class="bg-dark">
                                                                             <tr class="shadow-lg">
@@ -829,4 +829,4 @@
         </div>
 </main>
 
-<?php $this->load->view('validator/data_rekanan/modal'); ?>
+<?php $this->load->view('validator/data_rekanan/modal_terundang'); ?>
