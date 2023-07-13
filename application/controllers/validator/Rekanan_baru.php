@@ -39,7 +39,7 @@ class Rekanan_baru extends CI_Controller
             $row[] = $rs->bentuk_usaha;
             $row[] = $rs->kualifikasi_usaha;
             $row[] = date('d-m-Y', strtotime($rs->tgl_daftar));
-            $row[] = '<a href="' . base_url('') . '" class="btn btn-info btn-sm" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','lihat'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a>
+            $row[] = '<a href="javascript:;" class="btn btn-info btn-sm" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','lihat'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a>
             <a href="javascript:;" class="btn btn-success btn-sm" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','terima'" . ')"><i class="fa-solid fa-square-check px-1"></i> Terima</a>
             <a href="javascript:;" class="btn btn-danger btn-sm" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','tolak'" . ')"><i class="fa-solid fa-times px-1"></i> Tolak</a>';
 
@@ -83,6 +83,9 @@ class Rekanan_baru extends CI_Controller
             'sts_aktif' => 1
         ];
         $this->M_Rekanan_baru->update_vendor($data, $where);
+        $type_email = 'TERIMA-VENDOR';
+        $message = 'Selamat! Akun Anda Telah Aktif Pada Aplikasi E-PROCUREMENT PT. Jasamarga Tollroad Operator Silahkan Login Sebagai Penyedia https://e-tender-jmto.kintekindo.net/';
+        $this->email_send->sen_row_email($type_email, $id_url_vendor, $message);
         $response = [
             'message' => 'success'
         ];

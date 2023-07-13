@@ -60,8 +60,10 @@
                     $('#bentuk_usaha').text(response['row_vendor'].bentuk_usaha)
                     $('#alamat').text(response['row_vendor'].alamat)
                     $('#nama_provinsi').text(response['row_vendor'].nama_provinsi)
+                    $('[name="id_vendor"]').val(response['row_vendor'].id_url_vendor)
+                    $('[name="nama_usaha"]').val(response['row_vendor'].nama_usaha)
                 } else if (type == 'terima') {
-                    Question_kbli_nib(id_vendor, response['row_vendor'].nama_usaha)
+                    Question_terima(id_vendor, response['row_vendor'].nama_usaha)
                 } else {
 
                 }
@@ -70,8 +72,46 @@
 
     }
 
+    function Question_terima_modal() {
+        var id_vendor = $('[name="id_vendor"]').val()
+        var url_terima_rekanan_baru = $('[name="url_terima_rekanan_baru"]').val()
+        var nama_usaha = $('[name="nama_usaha"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Terima Penyedia? ' + nama_usaha,
+            text: "Penyedia Yang Sudah Di Terima Tidak Bisa Di Tolak Kembali!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Terima!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_terima_rekanan_baru,
+                    data: {
+                        id_vendor: id_vendor,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response['message'] == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Penyedia ' + nama_usaha + ' Berhasil Di Terima!',
+                                'success'
+                            )
+                            Reload_table_rekanan_baru();
+                            $('#modal-xl-view').modal('hide')
+                        }
+                    }
+                })
 
-    function Question_kbli_nib(id_vendor, nm_vendor) {
+            }
+        })
+    }
+
+    function Question_terima(id_vendor, nm_vendor) {
         var url_terima_rekanan_baru = $('[name="url_terima_rekanan_baru"]').val()
         Swal.fire({
             title: 'Apakah Anda Yakin Terima Penyedia? ' + nm_vendor,

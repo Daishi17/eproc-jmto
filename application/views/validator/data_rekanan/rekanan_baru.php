@@ -130,6 +130,8 @@
                                     <div class="row">
                                         <div class="col">
                                             <table class="table table-bordered table-sm">
+                                                <input type="hidden" name="id_vendor">
+                                                <input type="hidden" name="nama_usaha">
                                                 <tr>
                                                     <th class="bg-light"><small>Nama Perusahaan / Perorangan</small></th>
                                                     <td>
@@ -204,7 +206,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th class="bg-light" colspan="2">
-                                                        <button type="button" class="btn btn-success btn-sm shadow-lg">
+                                                        <button type="button" onclick="Question_terima_modal()" class="btn btn-success btn-sm shadow-lg">
                                                             <i class="fa-solid fa-square-check px-1"></i>
                                                             <small>Terima</small>
                                                         </button>

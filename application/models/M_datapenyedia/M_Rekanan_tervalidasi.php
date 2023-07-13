@@ -14,28 +14,29 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->join('tbl_kecamatan', 'tbl_vendor.id_kecamatan = tbl_kecamatan.id_kecamatan', 'left');
         $this->db->join('tbl_kabupaten', 'tbl_vendor.id_kabupaten = tbl_kabupaten.id_kabupaten', 'left');
         $this->db->where('tbl_vendor.sts_aktif', 1);
+        $this->db->where('tbl_vendor.sts_terundang', NULL);
         $i = 0;
         foreach ($this->order as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
             {
-                if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-                    {
 
-                        if ($i === 0) // looping awal
-                            {
-                                $this->db->group_start();
-                                $this->db->like($item, $_POST['search']['value']);
-                            } else {
-                            $this->db->or_like(
-                                $item,
-                                $_POST['search']['value']
-                            );
-                        }
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
 
-                        if (count($this->order) - 1 == $i)
-                            $this->db->group_end();
-                    }
-                $i++;
+                if (count($this->order) - 1 == $i)
+                    $this->db->group_end();
             }
+            $i++;
+        }
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
@@ -67,7 +68,8 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->join('tbl_provinsi', 'tbl_vendor.id_provinsi = tbl_provinsi.id_provinsi', 'left');
         $this->db->join('tbl_kecamatan', 'tbl_vendor.id_kecamatan = tbl_kecamatan.id_kecamatan', 'left');
         $this->db->join('tbl_kabupaten', 'tbl_vendor.id_kabupaten = tbl_kabupaten.id_kabupaten', 'left');
-        $this->db->where('tbl_vendor.sts_aktif', null);
+        $this->db->where('tbl_vendor.sts_aktif', NULL);
+        $this->db->where('tbl_vendor.sts_terundang', NULL);
         return $this->db->count_all_results();
     }
 
@@ -173,26 +175,26 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->where('tbl_vendor_kbli_siup.id_vendor', $id_vendor);
         $i = 0;
         foreach ($this->order_kbli_siup as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
             {
-                if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-                    {
 
-                        if ($i === 0) // looping awal
-                            {
-                                $this->db->group_start();
-                                $this->db->like($item, $_POST['search']['value']);
-                            } else {
-                            $this->db->or_like(
-                                $item,
-                                $_POST['search']['value']
-                            );
-                        }
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
 
-                        if (count($this->order_kbli_siup) - 1 == $i)
-                            $this->db->group_end();
-                    }
-                $i++;
+                if (count($this->order_kbli_siup) - 1 == $i)
+                    $this->db->group_end();
             }
+            $i++;
+        }
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_kbli_siup[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
@@ -288,26 +290,26 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->where('tbl_vendor_kbli_nib.id_vendor', $id_vendor);
         $i = 0;
         foreach ($this->order_kbli_nib as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
             {
-                if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-                    {
 
-                        if ($i === 0) // looping awal
-                            {
-                                $this->db->group_start();
-                                $this->db->like($item, $_POST['search']['value']);
-                            } else {
-                            $this->db->or_like(
-                                $item,
-                                $_POST['search']['value']
-                            );
-                        }
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
 
-                        if (count($this->order_kbli_nib) - 1 == $i)
-                            $this->db->group_end();
-                    }
-                $i++;
+                if (count($this->order_kbli_nib) - 1 == $i)
+                    $this->db->group_end();
             }
+            $i++;
+        }
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_kbli_nib[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
@@ -405,26 +407,26 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->where('tbl_vendor_kbli_sbu.id_vendor', $id_vendor);
         $i = 0;
         foreach ($this->order_kbli_sbu as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
             {
-                if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-                    {
 
-                        if ($i === 0) // looping awal
-                            {
-                                $this->db->group_start();
-                                $this->db->like($item, $_POST['search']['value']);
-                            } else {
-                            $this->db->or_like(
-                                $item,
-                                $_POST['search']['value']
-                            );
-                        }
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
 
-                        if (count($this->order_kbli_sbu) - 1 == $i)
-                            $this->db->group_end();
-                    }
-                $i++;
+                if (count($this->order_kbli_sbu) - 1 == $i)
+                    $this->db->group_end();
             }
+            $i++;
+        }
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_kbli_sbu[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
@@ -521,26 +523,26 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->where('tbl_vendor_kbli_siujk.id_vendor', $id_vendor);
         $i = 0;
         foreach ($this->order_kbli_siujk as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
             {
-                if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-                    {
 
-                        if ($i === 0) // looping awal
-                            {
-                                $this->db->group_start();
-                                $this->db->like($item, $_POST['search']['value']);
-                            } else {
-                            $this->db->or_like(
-                                $item,
-                                $_POST['search']['value']
-                            );
-                        }
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
 
-                        if (count($this->order_kbli_siujk) - 1 == $i)
-                            $this->db->group_end();
-                    }
-                $i++;
+                if (count($this->order_kbli_siujk) - 1 == $i)
+                    $this->db->group_end();
             }
+            $i++;
+        }
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_kbli_siujk[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
@@ -658,26 +660,26 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->order_by('tbl_vendor_pemilik.id_pemilik', 'DESC');
         $i = 0;
         foreach ($this->order_pemilik as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
             {
-                if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-                    {
 
-                        if ($i === 0) // looping awal
-                            {
-                                $this->db->group_start();
-                                $this->db->like($item, $_POST['search']['value']);
-                            } else {
-                            $this->db->or_like(
-                                $item,
-                                $_POST['search']['value']
-                            );
-                        }
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
 
-                        if (count($this->order_pemilik) - 1 == $i)
-                            $this->db->group_end();
-                    }
-                $i++;
+                if (count($this->order_pemilik) - 1 == $i)
+                    $this->db->group_end();
             }
+            $i++;
+        }
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_pemilik[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
@@ -744,26 +746,26 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->order_by('tbl_vendor_pengurus.id_pengurus', 'DESC');
         $i = 0;
         foreach ($this->order_pengurus as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
             {
-                if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-                    {
 
-                        if ($i === 0) // looping awal
-                            {
-                                $this->db->group_start();
-                                $this->db->like($item, $_POST['search']['value']);
-                            } else {
-                            $this->db->or_like(
-                                $item,
-                                $_POST['search']['value']
-                            );
-                        }
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
 
-                        if (count($this->order_pengurus) - 1 == $i)
-                            $this->db->group_end();
-                    }
-                $i++;
+                if (count($this->order_pengurus) - 1 == $i)
+                    $this->db->group_end();
             }
+            $i++;
+        }
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_pengurus[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
@@ -843,26 +845,26 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->order_by('tbl_vendor_pengalaman.id_pengalaman', 'DESC');
         $i = 0;
         foreach ($this->order_pengalaman as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
             {
-                if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-                    {
 
-                        if ($i === 0) // looping awal
-                            {
-                                $this->db->group_start();
-                                $this->db->like($item, $_POST['search']['value']);
-                            } else {
-                            $this->db->or_like(
-                                $item,
-                                $_POST['search']['value']
-                            );
-                        }
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
 
-                        if (count($this->order_pengalaman) - 1 == $i)
-                            $this->db->group_end();
-                    }
-                $i++;
+                if (count($this->order_pengalaman) - 1 == $i)
+                    $this->db->group_end();
             }
+            $i++;
+        }
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_pengalaman[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
@@ -1035,26 +1037,26 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->order_by('tbl_vendor_spt.id_vendor_spt', 'DESC');
         $i = 0;
         foreach ($this->order_spt as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
             {
-                if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-                    {
 
-                        if ($i === 0) // looping awal
-                            {
-                                $this->db->group_start();
-                                $this->db->like($item, $_POST['search']['value']);
-                            } else {
-                            $this->db->or_like(
-                                $item,
-                                $_POST['search']['value']
-                            );
-                        }
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
 
-                        if (count($this->order_spt) - 1 == $i)
-                            $this->db->group_end();
-                    }
-                $i++;
+                if (count($this->order_spt) - 1 == $i)
+                    $this->db->group_end();
             }
+            $i++;
+        }
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_spt[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
@@ -1154,26 +1156,26 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->order_by('tbl_vendor_neraca_keuangan.id_vendor', 'DESC');
         $i = 0;
         foreach ($this->order_neraca as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
             {
-                if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-                    {
 
-                        if ($i === 0) // looping awal
-                            {
-                                $this->db->group_start();
-                                $this->db->like($item, $_POST['search']['value']);
-                            } else {
-                            $this->db->or_like(
-                                $item,
-                                $_POST['search']['value']
-                            );
-                        }
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
 
-                        if (count($this->order_neraca) - 1 == $i)
-                            $this->db->group_end();
-                    }
-                $i++;
+                if (count($this->order_neraca) - 1 == $i)
+                    $this->db->group_end();
             }
+            $i++;
+        }
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_neraca[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
@@ -1274,26 +1276,26 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->order_by('tbl_vendor_keuangan.id_vendor_keuangan', 'DESC');
         $i = 0;
         foreach ($this->order_keuangan as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
             {
-                if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
-                    {
 
-                        if ($i === 0) // looping awal
-                            {
-                                $this->db->group_start();
-                                $this->db->like($item, $_POST['search']['value']);
-                            } else {
-                            $this->db->or_like(
-                                $item,
-                                $_POST['search']['value']
-                            );
-                        }
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
 
-                        if (count($this->order_keuangan) - 1 == $i)
-                            $this->db->group_end();
-                    }
-                $i++;
+                if (count($this->order_keuangan) - 1 == $i)
+                    $this->db->group_end();
             }
+            $i++;
+        }
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_keuangan[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {

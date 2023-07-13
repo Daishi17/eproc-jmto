@@ -14,7 +14,13 @@ class Email_send
 
     public function sen_row_email($type, $data, $message)
     {
-        $data = $this->ci->M_Rekanan_tervalidasi->get_id_vendor($data);
+        if ($type == 'TERIMA-VENDOR') {
+            $data = $this->ci->M_Rekanan_tervalidasi->get_row_vendor($data);
+        } else {
+            $data = $this->ci->M_Rekanan_tervalidasi->get_id_vendor($data);
+        }
+
+
 
         // var_dump($type, $data,$message);
         // die;
@@ -77,6 +83,8 @@ class Email_send
         } else if ($type == 'NERACA-KEUANGAN') {
             $this->ci->email->message("$message ");
         } else if ($type == 'LAPORAN-KEUANGAN') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'TERIMA-VENDOR') {
             $this->ci->email->message("$message ");
         }
         $this->ci->email->send();
