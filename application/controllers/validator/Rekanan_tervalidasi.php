@@ -2638,12 +2638,14 @@ class Rekanan_tervalidasi extends CI_Controller
             	<a href="javascript:;" class="btn btn-warning btn-sm shadow-lg" onClick="byid_spt(' . "'" . $rs->id_url . "','dekrip'" . ')"> <i class="fa-solid fa-lock-open px-1"></i> Dekrip</a></center>';
 			}
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_validasi == null) {
+			if ($rs->sts_validasi == null || $rs->sts_validasi == 0) {
 				$row[] = '<small><span class="badge bg-secondary">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
 			} else if ($rs->sts_validasi == 2) {
 				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
+			} else if ($rs->sts_validasi == 3) {
+				$row[] = '<small><span class="badge bg-warning text-white">Revisi</span></small>';
 			}
 			$row[] = $rs->nama_validator;
 			if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {

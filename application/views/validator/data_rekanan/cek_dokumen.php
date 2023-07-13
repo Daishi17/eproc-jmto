@@ -791,8 +791,8 @@
                                                                         <thead class="bg-dark">
                                                                             <tr class="shadow-lg">
                                                                                 <th style="width:5%;" class="text-white">No</th>
-                                                                                <th style="width:10%;"><small class="text-white">Tanggal Laporan</small></th>
-                                                                                <th style="width:20%;"><small class="text-white">Nama Akuntan Publik</small></th>
+                                                                                <!-- <th style="width:10%;"><small class="text-white">Tanggal Laporan</small></th>
+                                                                                <th style="width:20%;"><small class="text-white">Nama Akuntan Publik</small></th> -->
                                                                                 <th style="width:5%;"><small class="text-white">File Neraca Keuangan</small></th>
                                                                                 <th style="width:5%;"><small class="text-white">File Sertifikat</small></th>
                                                                                 <th style="width:15%;"><small class="text-white">
