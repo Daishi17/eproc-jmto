@@ -40,9 +40,8 @@ class Rekanan_baru extends CI_Controller
             $row[] = $rs->kualifikasi_usaha;
             $row[] = date('d-m-Y', strtotime($rs->tgl_daftar));
             $row[] = '<a href="javascript:;" class="btn btn-info btn-sm" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','lihat'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i> Lihat</a>
-            <a href="javascript:;" class="btn btn-success btn-sm" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','terima'" . ')"><i class="fa-solid fa-square-check px-1"></i> Terima</a>
-            <a href="javascript:;" class="btn btn-danger btn-sm" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','tolak'" . ')"><i class="fa-solid fa-times px-1"></i> Tolak</a>';
-
+            <a href="javascript:;" class="btn btn-success btn-sm" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','terima'" . ')"><i class="fa-solid fa-square-check px-1"></i> Terima</a>';
+            // <a href="javascript:;" class="btn btn-danger btn-sm" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','tolak'" . ')"><i class="fa-solid fa-times px-1"></i> Tolak</a>
             $data[] = $row;
         }
         $output = array(
