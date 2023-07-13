@@ -132,7 +132,7 @@
                             <small class="text-white">Validator & Panitia</small>
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a class="dropdown-item" href="#"><small>Validator Dev</small></a></li>
+                            <li><a class="dropdown-item" href="#"><small><?= $this->session->userdata('nama_pegawai'); ?></small></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

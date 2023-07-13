@@ -37,39 +37,127 @@
         if (type == 'lihat') {
             saveData = 'lihat';
         }
-        if (type == 'terima') {
-            saveData = 'terima';
+        if (type == 'undang') {
+            saveData = 'undang';
         }
-        if (type == 'tolak') {
-            saveData = 'tolak';
+        if (type == 'pesan') {
+            saveData = 'pesan';
         }
         var url_get_rekanan_tervalidasi_by_id = $('[name="url_get_rekanan_tervalidasi_by_id"]').val();
-        var modal_rekanan_baru = $('#modal-xl-view')
+        var modal_pesan = $('#modal_pesan')
+        var modal_undang = $('#modal_undang')
         $.ajax({
             type: "GET",
             url: url_get_rekanan_tervalidasi_by_id + id_vendor,
             dataType: "JSON",
             success: function(response) {
-                if (type == 'lihat') {
-                    modal_rekanan_baru.modal('show')
+                if (type == 'pesan') {
+                    $('[name="id_url_vendor"]').val(id_vendor)
+                    modal_pesan.modal('show')
+                } else if (type == 'undang') {
+                    modal_undang.modal('show')
+                    $('[name="id_url_vendor"]').val(id_vendor)
                     $('#nama_usaha').text(response['row_vendor'].nama_usaha)
-                    $('#id_jenis_usaha').text(response['jenis_izin'])
-                    $('#kualifikasi_usaha').text(response['row_vendor'].kualifikasi_usaha)
-                    $('#npwp').text(response['row_vendor'].npwp)
-                    $('#email').text(response['row_vendor'].email)
-                    $('#bentuk_usaha').text(response['row_vendor'].bentuk_usaha)
-                    $('#alamat').text(response['row_vendor'].alamat)
-                    $('#nama_provinsi').text(response['row_vendor'].nama_provinsi)
-                } else if (type == 'terima') {
-                    Question_kbli_nib(id_vendor, response['row_vendor'].nama_usaha)
                 } else {
 
                 }
             }
         })
-
     }
 
+    var form_pesan = $('#form_pesan');
+    form_pesan.on('submit', function(e) {
+        var pesan = $('[name="pesan"]').val()
+        e.preventDefault();
+        if (pesan == '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Isi Pesan Terlebih Dahulu Ya!'
+            })
+        } else {
+            var url_post = $('[name="url_kirim_pesan"]').val()
+            $.ajax({
+                url: url_post,
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(response) {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Mengirim Pesan!',
+                        html: 'Harap Tunggu <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            $('#modal_pesan').modal('hide')
+                            Swal.fire('Pesan Berhasil Terkirim!', '', 'success')
+                            Reload_table_rekanan_baru()
+                            form_pesan[0].reset();
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            })
+        }
+
+    })
+
+    var form_undang = $('#form_undang')
+    form_undang.on('submit', function(e) {
+        e.preventDefault();
+        var post = $('[name="url_kirim_undangan"]').val()
+        $.ajax({
+            url: post,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Mengirim Undangan!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_undang').modal('hide')
+                        Swal.fire('Undangan Berhasil Terkirim!', '', 'success')
+                        Reload_table_rekanan_baru()
+                        form_undang[0].reset();
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
 
     function Question_kbli_nib(id_vendor, nm_vendor) {
         var url_terima_rekanan_baru = $('[name="url_terima_rekanan_baru"]').val()

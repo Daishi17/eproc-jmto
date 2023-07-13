@@ -10,20 +10,16 @@ class Email_send
     {
         $this->ci = &get_instance();
         $this->ci->load->model('M_datapenyedia/M_Rekanan_tervalidasi');
+        
     }
 
     public function sen_row_email($type, $data, $message)
     {
-        if ($type == 'TERIMA-VENDOR') {
+        if ($type == 'TERIMA-VENDOR' || $type == 'KIRIM-PESAN' || $type == 'KIRIM-UNDANGAN') {
             $data = $this->ci->M_Rekanan_tervalidasi->get_row_vendor($data);
         } else {
             $data = $this->ci->M_Rekanan_tervalidasi->get_id_vendor($data);
         }
-
-
-
-        // var_dump($type, $data,$message);
-        // die;
 
         $email = $data['email'];
         $config = array(
@@ -85,6 +81,10 @@ class Email_send
         } else if ($type == 'LAPORAN-KEUANGAN') {
             $this->ci->email->message("$message ");
         } else if ($type == 'TERIMA-VENDOR') {
+            $this->ci->email->message("$message ");
+        } else if ($type == 'KIRIM-PESAN') {
+            $this->ci->email->message("$message ");
+        }  else if ($type == 'KIRIM-UNDANGAN') {
             $this->ci->email->message("$message ");
         }
         $this->ci->email->send();

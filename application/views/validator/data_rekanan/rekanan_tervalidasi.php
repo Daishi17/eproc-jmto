@@ -100,3 +100,98 @@
         </div>
     </div>
 </main>
+
+<!-- modal pesan -->
+<div class="modal fade" id="modal_pesan" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white">Kirim Pesan</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="form_pesan" method="post">
+                <div class="modal-body">
+
+                    <input type="hidden" name="url_kirim_pesan" value="<?= base_url('validator/rekanan_tervalidasi/pesan/') ?>">
+                    <input type="hidden" name="id_url_vendor">
+                    <center>
+                        <img src="<?= base_url('assets/img/private.jpg') ?>" width="100%" alt="">
+                        <p>Silakan Masukan Pesan Anda </p>
+
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-paper-plane px-1"></i> </span>
+                            <textarea name="pesan" class="form-control"></textarea>
+                        </div>
+                    </center>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Batal!</button>
+                    <button type="submit" class="btn btn-success"> <i class="fas fa fa-check"> </i> Kirim!</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- modal undang -->
+<div class="modal fade" id="modal_undang" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white">Kirim Undangan Pembuktian Fisik</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="form_undang">
+                <div class="modal-body">
+
+                    <input type="hidden" name="url_kirim_undangan" value="<?= base_url('validator/rekanan_tervalidasi/undang/') ?>">
+                    <input type="hidden" name="id_url_vendor">
+                    <!-- <center>
+                        <img src="<?= base_url('assets/img/private.jpg') ?>" width="100%" alt="">
+                        <p>Silakan Isi Hari dan Tanggal Untuk Undang Penyedia </p>
+                    </center> -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <i>
+                                Kepada Yth.
+                                <br>
+                                <b id="nama_usaha"> </b>
+                                <br>
+                            </i>
+                            <i>
+                                dokumen anda sudah tervalidasi silahkan lakukan pembuktian dokumen pada
+                            </i>
+                            <br>
+                            <label class="col-form-label" style="text-align: right;">Hari<span style="color:red;">*</span></label>
+                            <select name="hari" id="" class="form-control form-control-sm">
+                                <option value="Senin">Senin</option>
+                                <option value="Selasa">Selasa</option>
+                                <option value="Rabu">Rabu</option>
+                                <option value="Kamis">Kamis</option>
+                                <option value="Jum'at">Jum'at</option>
+                                <option value="Sabtu">Sabtu</option>
+                                <option value="Minggu">Minggu</option>
+                            </select>
+                            <label class="col-form-label" style="text-align: right;">Tanggal<span style="color:red;">*</span></label>
+                            <input class="tanggal_mulai form-control form-control-sm" type="date" name="tanggal" required="">
+                            <br>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa fa-ban"> </i> Batal!</button>
+                    <button type="submit" class="btn btn-success"> <i class="fas fa fa-check"> </i> Kirim!</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -20,6 +20,34 @@ class Rekanan_tervalidasi extends CI_Controller
 		$this->load->view('validator/data_rekanan/file_public_tervalidasi');
 	}
 
+	public function pesan()
+	{
+		$id_url_vendor = $this->input->post('id_url_vendor');
+		$pesan = $this->input->post('pesan');
+		$type_email = 'KIRIM-PESAN';
+		$this->email_send->sen_row_email($type_email, $id_url_vendor, $pesan);
+	}
+
+	public function undang()
+	{
+		$id_url_vendor = $this->input->post('id_url_vendor');
+		$hari = $this->input->post('hari');
+		$tanggal = $this->input->post('tanggal');
+		$where = [
+			'id_url_vendor' => $id_url_vendor
+		];
+		$data = [
+			'sts_terundang' => 1
+		];
+		$this->M_Rekanan_tervalidasi->update_vendor($data, $where);
+
+		$data = $this->M_Rekanan_tervalidasi->get_row_vendor($id_url_vendor);
+
+		$type_email = 'KIRIM-UNDANGAN';
+		$pesan = '<i>Kepada Yth.<br><b id="nama_usaha">' . $data['nama_usaha'] . '</b><br></i><i>dokumen anda sudah tervalidasi silahkan lakukan pembuktian dokumen pada</i><br>' . 'Hari	: ' . $hari . '<br><br>' . 'Tanggal	: ' . $tanggal;
+		$this->email_send->sen_row_email($type_email, $id_url_vendor, $pesan);
+	}
+
 
 	public function cek_dokumen($id_url_vendor)
 	{
@@ -161,7 +189,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			// }
 
 			$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
-            <a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','terima'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-primary btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','tolak'" . ')"> <i class="fa-solid fa-paper-plane px-1"></i> Undang</a>';
+            <a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-primary btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','undang'" . ')"> <i class="fa-solid fa-paper-plane px-1"></i> Undang</a>';
 
 			$data[] = $row;
 		}

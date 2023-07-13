@@ -20,7 +20,41 @@ class Rekanan_terundang extends CI_Controller
 		$this->load->view('validator/data_rekanan/file_public_terundang');
 	}
 
+	public function pesan()
+	{
+		$id_url_vendor = $this->input->post('id_url_vendor');
+		$pesan = $this->input->post('pesan');
+		$type_email = 'KIRIM-PESAN';
+		$this->email_send->sen_row_email($type_email, $id_url_vendor, $pesan);
+	}
 
+	public function undang()
+	{
+		$id_url_vendor = $this->input->post('id_url_vendor');
+		$hari = $this->input->post('hari');
+		$tanggal = $this->input->post('tanggal');
+		$data = $this->M_Rekanan_terundang->get_row_vendor($id_url_vendor);
+		$type_email = 'KIRIM-UNDANGAN';
+		$pesan = '<i>Kepada Yth.<br><b id="nama_usaha">' . $data['nama_usaha'] . '</b><br></i><i>dokumen anda sudah tervalidasi silahkan lakukan pembuktian dokumen pada</i><br>' . 'Hari	: ' . $hari . '<br><br>' . 'Tanggal	: ' . $tanggal;
+		$this->email_send->sen_row_email($type_email, $id_url_vendor, $pesan);
+	}
+
+	function tidak_valid()
+	{
+		$id_url_vendor =  $this->input->post('id_vendor');
+
+		$where = [
+			'id_url_vendor' => $id_url_vendor
+		];
+		$data = [
+			'sts_terundang' => (NULL)
+		];
+		$this->M_Rekanan_terundang->update_vendor($data, $where);
+		$response = [
+			'message' => 'success'
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
 	public function cek_dokumen($id_url_vendor)
 	{
 		$data['vendor'] = $this->M_Rekanan_terundang->get_row_vendor($id_url_vendor);
@@ -134,22 +168,22 @@ class Rekanan_terundang extends CI_Controller
 			} else if ($rs->sts_dokumen_cek == 1) {
 				if ($cek_siup == 1 && $cek_kbli_siup == 1 && $cek_nib == 1 && $cek_kbli_nib && $cek_sbu == 1 && $cek_kbli_sbu && $cek_siujk == 1 && $cek_kbli_siujk == 1 && $cek_akta_pendirian == 1 && $cek_akta_perubahan && $cek_pemilik == 1 && $cek_pengurus == 1 && $cek_pengalaman == 1 && $cek_sppkp == 1 && $cek_npwp == 1 && $cek_spt == 1 && $cek_neraca_keuangan == 1 && $cek_keuangan == 1) {
 					if ($cek_tdk_valid_siup == 1 || $cek_tdk_valid_kbli_siup == 1 || $cek_tdk_valid_nib == 1 || $cek_tdk_valid_kbli_nib || $cek_tdk_valid_sbu == 1 || $cek_tdk_valid_kbli_sbu || $cek_tdk_valid_siujk == 1 || $cek_tdk_valid_kbli_siujk == 1 || $cek_tdk_valid_akta_pendirian == 1 || $cek_tdk_valid_akta_perubahan || $cek_tdk_valid_pemilik == 1 || $cek_tdk_valid_pengurus == 1 || $cek_tdk_valid_pengalaman == 1 || $cek_tdk_valid_sppkp == 1 || $cek_tdk_valid_npwp == 1 || $cek_tdk_valid_spt == 1 || $cek_tdk_valid_neraca_keuangan == 1 || $cek_tdk_valid_keuangan == 1) {
-						$row[] = '<small><span class="badge bg-danger text-white">Tidak Lengkap</span></small>';
+						$row[] = '<small><span class="badge bg-danger text-white">Revisi</span></small>';
 					} else {
-						$row[] = '<small><span class="badge bg-success text-white">Sudah Lengkap</span></small>';
+						$row[] = '<small><span class="badge bg-success text-white">Valid </span></small>';
 					}
 				} else {
-					$row[] = '<small><span class="badge bg-danger text-white">Tidak Lengkap</span></small>';
+					$row[] = '<small><span class="badge bg-warning text-white">Revisi</span></small>';
 				}
 			} else {
 				if ($cek_siup == 1 && $cek_kbli_siup == 1 && $cek_nib == 1 && $cek_kbli_nib && $cek_sbu == 1 && $cek_kbli_sbu && $cek_siujk == 1 && $cek_kbli_siujk == 1 && $cek_akta_pendirian == 1 && $cek_akta_perubahan && $cek_pemilik == 1 && $cek_pengurus == 1 && $cek_pengalaman == 1 && $cek_sppkp == 1 && $cek_npwp == 1 && $cek_spt == 1 && $cek_neraca_keuangan == 1 && $cek_keuangan == 1) {
 					if ($cek_tdk_valid_siup == 1 || $cek_tdk_valid_kbli_siup == 1 || $cek_tdk_valid_nib == 1 || $cek_tdk_valid_kbli_nib || $cek_tdk_valid_sbu == 1 || $cek_tdk_valid_kbli_sbu || $cek_tdk_valid_siujk == 1 || $cek_tdk_valid_kbli_siujk == 1 || $cek_tdk_valid_akta_pendirian == 1 || $cek_tdk_valid_akta_perubahan || $cek_tdk_valid_pemilik == 1 || $cek_tdk_valid_pengurus == 1 || $cek_tdk_valid_pengalaman == 1 || $cek_tdk_valid_sppkp == 1 || $cek_tdk_valid_npwp == 1 || $cek_tdk_valid_spt == 1 || $cek_tdk_valid_neraca_keuangan == 1 || $cek_tdk_valid_keuangan == 1) {
-						$row[] = '<small><span class="badge bg-danger text-white">Tidak Lengkap</span></small>';
+						$row[] = '<small><span class="badge bg-warning text-white">Revisi</span></small>';
 					} else {
 						$row[] = '<small><span class="badge bg-success text-white">Sudah Lengkap</span></small>';
 					}
 				} else {
-					$row[] = '<small><span class="badge bg-danger text-white">Tidak Lengkap</span></small>';
+					$row[] = '<small><span class="badge bg-warning text-white">Revisi</span></small>';
 				}
 			}
 			// else if ($rs->sts_dokumen_cek == 2) {
@@ -157,7 +191,7 @@ class Rekanan_terundang extends CI_Controller
 			// }
 
 			$row[] = '<a href="' . base_url('validator/rekanan_terundang/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
-            <a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','terima'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-primary btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','tolak'" . ')"> <i class="fa-solid fa-paper-plane px-1"></i> Undang</a>';
+            <a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','tidak_valid'" . ')"> <i class="fa-solid fa-rectangle-xmark px-1"></i>Tidak Valid</a>';
 
 			$data[] = $row;
 		}
