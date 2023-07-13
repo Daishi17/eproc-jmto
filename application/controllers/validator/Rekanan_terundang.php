@@ -2748,7 +2748,7 @@ class Rekanan_terundang extends CI_Controller
             	<a href="javascript:;" class="btn btn-warning btn-sm shadow-lg" onClick="byid_spt(' . "'" . $rs->id_url . "','dekrip'" . ')"> <i class="fa-solid fa-lock-open px-1"></i> Dekrip</a></center>';
 			}
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_validasi == null) {
+			if ($rs->sts_validasi == null || $rs->sts_validasi == 0) {
 				$row[] = '<small><span class="badge bg-secondary">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
@@ -2967,8 +2967,6 @@ class Rekanan_terundang extends CI_Controller
 		foreach ($result as $rs) {
 			$row = array();
 			$row[] = ++$no;
-			$row[] = $rs->tangga_laporan;
-			$row[] = $rs->nama_akuntan_public;
 			if ($rs->sts_token_dokumen == 1) {
 				$row[] = '<label for="" style="white-space: nowrap; 
 				width: 100px; 
@@ -3246,7 +3244,7 @@ class Rekanan_terundang extends CI_Controller
 					<a href="javascript:;" class="btn btn-warning btn-sm shadow-lg" onClick="byid_keuangan(' . "'" . $rs->id_url . "','dekrip'" . ')"> <i class="fa-solid fa-lock-open px-1"></i> Dekrip</a></center>';
 			}
 			// nanti main kondisi hitung dokumen dimari
-			if ($rs->sts_validasi == null) {
+			if ($rs->sts_validasi == null || $rs->sts_validasi == 0) {
 				$row[] = '<small><span class="badge bg-secondary">Belum Di Periksa</span></small>';
 			} else if ($rs->sts_validasi == 1) {
 				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
