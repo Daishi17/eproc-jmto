@@ -749,6 +749,10 @@
                                                                                             <div class="text-center">File Keuangan</div>
                                                                                         </small>
                                                                                     </th>
+                                                                                    <th style="width:10%;"><small class="text-white">
+                                                                                            <div class="text-center">Jenis Audit</div>
+                                                                                        </small>
+                                                                                    </th>
                                                                                     <th style="width:15%;"><small class="text-white">
                                                                                             <div class="text-center">Enkrip/Dekrip File</div>
                                                                                         </small></th>
@@ -794,7 +798,7 @@
                                                                                 <!-- <th style="width:10%;"><small class="text-white">Tanggal Laporan</small></th>
                                                                                 <th style="width:20%;"><small class="text-white">Nama Akuntan Publik</small></th> -->
                                                                                 <th style="width:5%;"><small class="text-white">File Neraca Keuangan</small></th>
-                                                                                <th style="width:5%;"><small class="text-white">File Sertifikat</small></th>
+                                                                                <!-- <th style="width:5%;"><small class="text-white">File Sertifikat</small></th> -->
                                                                                 <th style="width:15%;"><small class="text-white">
                                                                                         <div class="text-center">Enkrip/Dekrip File</div>
                                                                                     </small></th>

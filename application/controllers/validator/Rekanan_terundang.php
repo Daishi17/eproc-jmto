@@ -173,17 +173,25 @@ class Rekanan_terundang extends CI_Controller
 						$row[] = '<small><span class="badge bg-success text-white">Valid </span></small>';
 					}
 				} else {
-					$row[] = '<small><span class="badge bg-warning text-white">Revisi</span></small>';
+					if ($cek_tdk_valid_siup == 1 || $cek_tdk_valid_kbli_siup == 1 || $cek_tdk_valid_nib == 1 || $cek_tdk_valid_kbli_nib || $cek_tdk_valid_sbu == 1 || $cek_tdk_valid_kbli_sbu || $cek_tdk_valid_siujk == 1 || $cek_tdk_valid_kbli_siujk == 1 || $cek_tdk_valid_akta_pendirian == 1 || $cek_tdk_valid_akta_perubahan || $cek_tdk_valid_pemilik == 1 || $cek_tdk_valid_pengurus == 1 || $cek_tdk_valid_pengalaman == 1 || $cek_tdk_valid_sppkp == 1 || $cek_tdk_valid_npwp == 1 || $cek_tdk_valid_spt == 1 || $cek_tdk_valid_neraca_keuangan == 1 || $cek_tdk_valid_keuangan == 1) {
+						$row[] = '<small><span class="badge bg-danger text-white">Revisi</span></small>';
+					} else {
+						$row[] = '<small><span class="badge bg-success text-white">Valid </span></small>';
+					}
 				}
 			} else {
 				if ($cek_siup == 1 && $cek_kbli_siup == 1 && $cek_nib == 1 && $cek_kbli_nib && $cek_sbu == 1 && $cek_kbli_sbu && $cek_siujk == 1 && $cek_kbli_siujk == 1 && $cek_akta_pendirian == 1 && $cek_akta_perubahan && $cek_pemilik == 1 && $cek_pengurus == 1 && $cek_pengalaman == 1 && $cek_sppkp == 1 && $cek_npwp == 1 && $cek_spt == 1 && $cek_neraca_keuangan == 1 && $cek_keuangan == 1) {
 					if ($cek_tdk_valid_siup == 1 || $cek_tdk_valid_kbli_siup == 1 || $cek_tdk_valid_nib == 1 || $cek_tdk_valid_kbli_nib || $cek_tdk_valid_sbu == 1 || $cek_tdk_valid_kbli_sbu || $cek_tdk_valid_siujk == 1 || $cek_tdk_valid_kbli_siujk == 1 || $cek_tdk_valid_akta_pendirian == 1 || $cek_tdk_valid_akta_perubahan || $cek_tdk_valid_pemilik == 1 || $cek_tdk_valid_pengurus == 1 || $cek_tdk_valid_pengalaman == 1 || $cek_tdk_valid_sppkp == 1 || $cek_tdk_valid_npwp == 1 || $cek_tdk_valid_spt == 1 || $cek_tdk_valid_neraca_keuangan == 1 || $cek_tdk_valid_keuangan == 1) {
 						$row[] = '<small><span class="badge bg-warning text-white">Revisi</span></small>';
 					} else {
-						$row[] = '<small><span class="badge bg-success text-white">Sudah Lengkap</span></small>';
+						$row[] = '<small><span class="badge bg-success text-white">Valid</span></small>';
 					}
 				} else {
-					$row[] = '<small><span class="badge bg-warning text-white">Revisi</span></small>';
+					if ($cek_tdk_valid_siup == 1 || $cek_tdk_valid_kbli_siup == 1 || $cek_tdk_valid_nib == 1 || $cek_tdk_valid_kbli_nib || $cek_tdk_valid_sbu == 1 || $cek_tdk_valid_kbli_sbu || $cek_tdk_valid_siujk == 1 || $cek_tdk_valid_kbli_siujk == 1 || $cek_tdk_valid_akta_pendirian == 1 || $cek_tdk_valid_akta_perubahan || $cek_tdk_valid_pemilik == 1 || $cek_tdk_valid_pengurus == 1 || $cek_tdk_valid_pengalaman == 1 || $cek_tdk_valid_sppkp == 1 || $cek_tdk_valid_npwp == 1 || $cek_tdk_valid_spt == 1 || $cek_tdk_valid_neraca_keuangan == 1 || $cek_tdk_valid_keuangan == 1) {
+						$row[] = '<small><span class="badge bg-warning text-white">Revisi</span></small>';
+					} else {
+						$row[] = '<small><span class="badge bg-success text-white">Valid</span></small>';
+					}
 				}
 			}
 			// else if ($rs->sts_dokumen_cek == 2) {
@@ -537,16 +545,18 @@ class Rekanan_terundang extends CI_Controller
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
 
 		// Locate.
-		$file_name = $get_row_enkrip['file_dokumen'];
-		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SIUP-' . $date . '/' . $get_row_enkrip['file_dokumen'];
+		// $file_name = $get_row_enkrip['file_dokumen'];
+		// $file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SIUP-' . $date . '/' . $get_row_enkrip['file_dokumen'];
+
+		$url = $this->url_dokumen_vendor . 'url_download_siup/' . $id_url;
 
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// end siup
 
@@ -811,13 +821,15 @@ class Rekanan_terundang extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/NIB-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_nib/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// end nib
 
@@ -1082,13 +1094,15 @@ class Rekanan_terundang extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SBU-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_sbu/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// end sbu
 
@@ -1349,13 +1363,15 @@ class Rekanan_terundang extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SIUJK-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_siujk/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// end siujk
 
@@ -1547,13 +1563,15 @@ class Rekanan_terundang extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/Akta_Pendirian-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_akta_pendirian/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 
 	// END AKTA PENDIRIAN
@@ -1746,13 +1764,15 @@ class Rekanan_terundang extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/Akta_Perubahan-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_akta_perubahan/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 
 	// END AKTA perubahan
@@ -1947,6 +1967,33 @@ class Rekanan_terundang extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
+	public function url_download_pemilik($id_url)
+	{
+		if ($id_url == '') {
+			// tendang not found
+		}
+		$get_row_enkrip = $this->M_Rekanan_terundang->get_row_pemilik_manajerial_enkription($id_url);
+		$id_vendor = $get_row_enkrip['id_vendor'];
+		$row_vendor = $this->M_Rekanan_terundang->get_id_vendor($id_vendor);
+		$date = date('Y');
+		// $nama_file = $get_row_enkrip['nomor_surat'];
+		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
+
+		// Locate.
+		// $file_name = $get_row_enkrip['file_dokumen'];
+		// $file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SIUP-' . $date . '/' . $get_row_enkrip['file_dokumen'];
+
+		$url = $this->url_dokumen_vendor . 'url_download_pemilik/' . $id_url;
+
+		// Configure.
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+
+		// Actual download.
+		redirect($url);
+	}
+
 	// pengurus
 	public function get_data_pengurus_manajerial($id_vendor)
 	{
@@ -2128,6 +2175,33 @@ class Rekanan_terundang extends CI_Controller
 		}
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
+
+	public function url_download_pengurus($id_url)
+	{
+		if ($id_url == '') {
+			// tendang not found
+		}
+		$get_row_enkrip = $this->M_Rekanan_terundang->get_row_pengurus_manajerial_enkription($id_url);
+		$id_vendor = $get_row_enkrip['id_vendor'];
+		$row_vendor = $this->M_Rekanan_terundang->get_id_vendor($id_vendor);
+		$date = date('Y');
+		// $nama_file = $get_row_enkrip['nomor_surat'];
+		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
+
+		// Locate.
+		// $file_name = $get_row_enkrip['file_dokumen'];
+		// $file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SIUP-' . $date . '/' . $get_row_enkrip['file_dokumen'];
+
+		$url = $this->url_dokumen_vendor . 'url_download_pengurus/' . $id_url;
+
+		// Configure.
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+
+		// Actual download.
+		redirect($url);
+	}
 	// end pengurus
 	// END MANAJERIAL
 
@@ -2304,6 +2378,33 @@ class Rekanan_terundang extends CI_Controller
 			'row_pengalaman_manajerial' => $this->M_Rekanan_terundang->get_row_pengalaman_id($get_row_enkrip['id_pengalaman']),
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	public function url_download_pengalaman($id_url)
+	{
+		if ($id_url == '') {
+			// tendang not found
+		}
+		$get_row_enkrip = $this->M_Rekanan_terundang->get_row_pengalaman_enkription($id_url);
+		$id_vendor = $get_row_enkrip['id_vendor'];
+		$row_vendor = $this->M_Rekanan_terundang->get_id_vendor($id_vendor);
+		$date = date('Y');
+		// $nama_file = $get_row_enkrip['nomor_surat'];
+		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
+
+		// Locate.
+		// $file_name = $get_row_enkrip['file_dokumen'];
+		// $file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SIUP-' . $date . '/' . $get_row_enkrip['file_dokumen'];
+
+		$url = $this->url_dokumen_vendor . 'url_download_pengalaman/' . $id_url;
+
+		// Configure.
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+
+		// Actual download.
+		redirect($url);
 	}
 	// end pengalaman
 
@@ -2873,13 +2974,13 @@ class Rekanan_terundang extends CI_Controller
 				width: 100px; 
 				overflow: hidden;
 				text-overflow: ellipsis;">' . $rs->file_dokumen_neraca . '</label>';
-				$row[] = '<label for="" style="white-space: nowrap; 
-				width: 100px; 
-				overflow: hidden;
-				text-overflow: ellipsis;">' . $rs->file_dokumen_sertifikat . '</label>';
+				// $row[] = '<label for="" style="white-space: nowrap; 
+				// width: 100px; 
+				// overflow: hidden;
+				// text-overflow: ellipsis;">' . $rs->file_dokumen_sertifikat . '</label>';
 			} else {
 				$row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_neraca(\'' . $rs->id_url_neraca . '\'' . ',' . '\'' . 'neraca_dokumen' . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_dokumen_neraca . '</a>';
-				$row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_neraca(\'' . $rs->id_url_neraca . '\'' . ',' . '\'' . 'neraca_sertifikat' . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_dokumen_sertifikat . '</a>';
+				// $row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_neraca(\'' . $rs->id_url_neraca . '\'' . ',' . '\'' . 'neraca_sertifikat' . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_dokumen_sertifikat . '</a>';
 			}
 			if ($rs->sts_token_dokumen == 2) {
 				$row[] = '<center>
@@ -3136,6 +3237,7 @@ class Rekanan_terundang extends CI_Controller
 				$row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' . $rs->id_url . '\'' . ',' . '\'' . 'keuangan_dokumen' . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_laporan_auditor . '</a>';
 				$row[] = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' . $rs->id_url . '\'' . ',' . '\'' . 'keuangan_sertifikat' . '\')" class="btn btn-sm btn-warning btn-block">' . $rs->file_laporan_keuangan . '</a>';
 			}
+			$row[] = $rs->jenis_audit;
 			if ($rs->sts_token_dokumen == 2) {
 				$row[] = '<center>
 					<a href="javascript:;" class="btn btn-success btn-sm shadow-lg" onClick="byid_keuangan(' . "'" . $rs->id_url . "','enkrip'" . ')"> <i class="fa-solid fa-lock px-1"></i> Enkrip</a></center>';

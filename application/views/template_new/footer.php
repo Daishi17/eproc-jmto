@@ -2,7 +2,7 @@
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                 <div class="col-md-4 d-flex align-items-center">
                     <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                        <img src="<?php echo base_url(); ?>/assets/brand/bootstrap-logo.svg" alt="" width="29" height="24" class="d-inline-block align-text-top">
+                        <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
                     </a>
                     <span class="mb-3 mb-md-0 text-muted">Copy Right &copy; 2023 <b>Procurement, JMTO</b></span>
                 </div>
@@ -21,7 +21,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- ChartJS -->
         <script src="<?php echo base_url(); ?>/assets/plugins-lte/chart.js/Chart.min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/chart_validator.js"></script> <!-- DataTables  & Plugins -->
+        <script src="<?php echo base_url(); ?>/assets/js//chart_validator.js"></script> <!-- DataTables  & Plugins -->
         <script src="<?php echo base_url(); ?>/assets/plugins-lte/datatables/jquery.dataTables.min.js"></script>
         <script src="<?php echo base_url(); ?>/assets/plugins-lte/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
         <script src="<?php echo base_url(); ?>/assets/plugins-lte/datatables-responsive/js/dataTables.responsive.min.js"></script>
