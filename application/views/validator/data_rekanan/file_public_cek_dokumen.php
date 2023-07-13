@@ -15,7 +15,7 @@
                 var html = '';
                 if (response['row_siup']) {
                     var html_siup = '';
-                    if (response['row_siup'].sts_validasi == null) {
+                    if (response['row_siup'].sts_validasi == null || response['row_siup'].sts_validasi == 0) {
                         var tombol_validasi = '<a href="javascript:;" onclick="Valid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
                             '<a href="javascript:;" onclick="NonValid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
                         var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
@@ -46,13 +46,18 @@
                     } else {
                         var tgl_berlaku = '<label>' + response['row_siup'].tgl_berlaku + '</label>'
                     }
+                    if (response['row_siup'].nama_validator) {
+                        var nama_validator = response['row_siup'].nama_validator
+                    } else {
+                        var nama_validator = '-'
+                    }
                     html_siup += '<tr>' +
                         '<td>' + response['row_siup'].nomor_surat + '</td>' +
                         '<td>' + tgl_berlaku + '</td>' +
                         '<td>' + dokumen + '</td>' +
                         '<td>' + dekrip + '</td>' +
                         '<td>' + sts_validasi + '</td>' +
-                        '<td>' + response['row_siup'].nama_validator + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
                         '<td class="text-center">' + tombol_validasi +
                         '</td>' +
                         '</tr>';
@@ -94,7 +99,7 @@
                 //  siujk
                 if (response['row_siujk']) {
                     var html_siujk = '';
-                    if (response['row_siujk'].sts_validasi == null) {
+                    if (response['row_siujk'].sts_validasi == null || response['row_siujk'].sts_validasi == 0) {
                         var tombol_validasi = '<a href="javascript:;" onclick="Valid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
                             '<a href="javascript:;" onclick="NonValid_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
                         var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
@@ -125,13 +130,18 @@
                     } else {
                         var tgl_berlaku = '<label>' + response['row_siujk'].tgl_berlaku + '</label>'
                     }
+                    if (response['row_siujk'].nama_validator) {
+                        var nama_validator = response['row_siujk'].nama_validator
+                    } else {
+                        var nama_validator = '-'
+                    }
                     html_siujk += '<tr>' +
                         '<td>' + response['row_siujk'].nomor_surat + '</td>' +
                         '<td>' + tgl_berlaku + '</td>' +
                         '<td>' + dokumen + '</td>' +
                         '<td>' + dekrip + '</td>' +
                         '<td>' + sts_validasi + '</td>' +
-                        '<td>' + response['row_siujk'].nama_validator + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
                         '<td class="text-center">' + tombol_validasi +
                         '</td>' +
                         '</tr>';
@@ -177,7 +187,7 @@
                 // sbu
                 if (response['row_sbu']) {
                     var html_sbu = '';
-                    if (response['row_sbu'].sts_validasi == null) {
+                    if (response['row_sbu'].sts_validasi == null || response['row_sbu'].sts_validasi == 0) {
                         var tombol_validasi = '<a href="javascript:;" onclick="Valid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
                             '<a href="javascript:;" onclick="NonValid_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
                         var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
@@ -208,13 +218,18 @@
                     } else {
                         var tgl_berlaku = '<label>' + response['row_sbu'].tgl_berlaku + '</label>'
                     }
+                    if (response['row_sbu'].nama_validator) {
+                        var nama_validator = response['row_sbu'].nama_validator;
+                    } else {
+                        var nama_validator = ''
+                    }
                     html_sbu += '<tr>' +
                         '<td>' + response['row_sbu'].nomor_surat + '</td>' +
                         '<td>' + tgl_berlaku + '</td>' +
                         '<td>' + dokumen + '</td>' +
                         '<td>' + dekrip + '</td>' +
                         '<td>' + sts_validasi + '</td>' +
-                        '<td>' + response['row_sbu'].nama_validator + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
                         '<td class="text-center">' + tombol_validasi +
                         '</td>' +
                         '</tr>';
@@ -290,13 +305,18 @@
                     } else {
                         var tgl_berlaku = '<label>' + response['row_nib'].tgl_berlaku + '</label>'
                     }
+                    if (response['row_nib'].nama_validator) {
+                        var nama_validator = response['row_nib'].nama_validator;
+                    } else {
+                        var nama_validator = '-';
+                    }
                     html_nib += '<tr>' +
                         '<td>' + response['row_nib'].nomor_surat + '</td>' +
                         '<td>' + tgl_berlaku + '</td>' +
                         '<td>' + dokumen + '</td>' +
                         '<td>' + dekrip + '</td>' +
                         '<td>' + sts_validasi + '</td>' +
-                        '<td>' + response['row_nib'].nama_validator + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
                         '<td class="text-center">' + tombol_validasi +
                         '</td>' +
                         '</tr>';
@@ -341,7 +361,7 @@
                 // akta pendiran
                 if (response['row_akta_pendirian']) {
                     var html_akta_pendirian = '';
-                    if (response['row_akta_pendirian'].sts_validasi == null) {
+                    if (response['row_akta_pendirian'].sts_validasi == null || response['row_akta_pendirian'].sts_validasi == 0) {
                         var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
                             '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
                         var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
@@ -372,6 +392,11 @@
                     } else {
                         var tgl_berlaku = '<label>' + response['row_akta_pendirian'].tgl_berlaku + '</label>'
                     }
+                    if (response['row_akta_pendirian'].nama_validator) {
+                        var nama_validator = response['row_akta_pendirian'].nama_validator
+                    } else {
+                        var nama_validator = ''
+                    }
                     html_akta_pendirian += '<tr>' +
                         '<td>' + response['row_akta_pendirian'].no_surat + '</td>' +
                         '<td>' + tgl_berlaku + '</td>' +
@@ -380,7 +405,7 @@
                         '<td>' + dokumen + '</td>' +
                         '<td>' + dekrip + '</td>' +
                         '<td>' + sts_validasi + '</td>' +
-                        '<td>' + response['row_akta_pendirian'].nama_validator + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
                         '<td class="text-center">' + tombol_validasi +
                         '</td>' +
                         '</tr>';
@@ -471,7 +496,7 @@
                 // akta perubahan
                 if (response['row_akta_perubahan']) {
                     var html_akta_perubahan = '';
-                    if (response['row_akta_perubahan'].sts_validasi == null) {
+                    if (response['row_akta_perubahan'].sts_validasi == null || response['row_akta_perubahan'].sts_validasi == 0) {
                         var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
                             '<a href="javascript:;" onclick="NonValid_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
                         var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
@@ -502,6 +527,11 @@
                     } else {
                         var tgl_berlaku = '<label>' + response['row_akta_perubahan'].tgl_berlaku + '</label>'
                     }
+                    if (response['row_akta_perubahan'].nama_validator) {
+                        var nama_validator = response['row_akta_perubahan'].nama_validator
+                    } else {
+                        var nama_validator = ''
+                    }
                     html_akta_perubahan += '<tr>' +
                         '<td>' + response['row_akta_perubahan'].no_surat + '</td>' +
                         '<td>' + tgl_berlaku + '</td>' +
@@ -510,7 +540,7 @@
                         '<td>' + dokumen + '</td>' +
                         '<td>' + dekrip + '</td>' +
                         '<td>' + sts_validasi + '</td>' +
-                        '<td>' + response['row_akta_perubahan'].nama_validator + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
                         '<td class="text-center">' + tombol_validasi +
                         '</td>' +
                         '</tr>';
@@ -556,7 +586,7 @@
 
                 if (response['row_sppkp']) {
                     var html_sppkp = '';
-                    if (response['row_sppkp'].sts_validasi == null) {
+                    if (response['row_sppkp'].sts_validasi == null || response['row_sppkp'].sts_validasi == 0) {
                         var tombol_validasi = '<a href="javascript:;" onclick="Valid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
                             '<a href="javascript:;" onclick="NonValid_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
                         var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
@@ -587,13 +617,18 @@
                     } else {
                         var tgl_berlaku = '<label>' + response['row_sppkp'].tgl_berlaku + '</label>'
                     }
+                    if (response['row_sppkp'].nama_validator) {
+                        var nama_validator = response['row_sppkp'].nama_validator
+                    } else {
+                        var nama_validator = '-'
+                    }
                     html_sppkp += '<tr>' +
                         '<td>' + response['row_sppkp'].no_surat + '</td>' +
                         '<td>' + tgl_berlaku + '</td>' +
                         '<td>' + dokumen + '</td>' +
                         '<td>' + dekrip + '</td>' +
                         '<td>' + sts_validasi + '</td>' +
-                        '<td>' + response['row_sppkp'].nama_validator + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
                         '<td class="text-center">' + tombol_validasi +
                         '</td>' +
                         '</tr>';
@@ -604,7 +639,7 @@
 
                 if (response['row_npwp']) {
                     var html_npwp = '';
-                    if (response['row_npwp'].sts_validasi == null) {
+                    if (response['row_npwp'].sts_validasi == null || response['row_npwp'].sts_validasi == 0) {
                         var tombol_validasi = '<a href="javascript:;" onclick="Valid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
                             '<a href="javascript:;" onclick="NonValid_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
                         var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
@@ -635,13 +670,18 @@
                     } else {
                         var tgl_berlaku = '<label>' + response['row_npwp'].tgl_berlaku + '</label>'
                     }
+                    if (response['row_npwp'].nama_validator ) {
+                        var nama_validator = response['row_npwp'].nama_validator 
+                    } else {
+                        var nama_validator = '-'
+                    }
                     html_npwp += '<tr>' +
                         '<td>' + response['row_npwp'].no_npwp + '</td>' +
                         '<td>' + tgl_berlaku + '</td>' +
                         '<td>' + dokumen + '</td>' +
                         '<td>' + dekrip + '</td>' +
                         '<td>' + sts_validasi + '</td>' +
-                        '<td>' + response['row_npwp'].nama_validator + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
                         '<td class="text-center">' + tombol_validasi +
                         '</td>' +
                         '</tr>';

@@ -4,7 +4,7 @@ date_default_timezone_set("Asia/Jakarta");
 class Rekanan_tervalidasi extends CI_Controller
 {
 	// URL GLOBAL
-	var $url_dokumen_vendor = 'http://localhost/vms-jmto/';
+	var $url_dokumen_vendor = 'https://jmto-vms.kintekindo.net/datapenyedia/';
 
 	public function __construct()
 	{
@@ -533,16 +533,18 @@ class Rekanan_tervalidasi extends CI_Controller
 		// $file_dokumen =  $get_row_enkrip['file_dokumen'];
 
 		// Locate.
-		$file_name = $get_row_enkrip['file_dokumen'];
-		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SIUP-' . $date . '/' . $get_row_enkrip['file_dokumen'];
+		// $file_name = $get_row_enkrip['file_dokumen'];
+		// $file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SIUP-' . $date . '/' . $get_row_enkrip['file_dokumen'];
+
+		$url = $this->url_dokumen_vendor . 'url_download_siup/' . $id_url;
 
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// end siup
 
@@ -805,13 +807,15 @@ class Rekanan_tervalidasi extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/NIB-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_nib/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// end nib
 
@@ -1074,13 +1078,15 @@ class Rekanan_tervalidasi extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SBU-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_sbu/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// end sbu
 
@@ -1339,13 +1345,15 @@ class Rekanan_tervalidasi extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SIUJK-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_siujk/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// end siujk
 
@@ -1537,13 +1545,15 @@ class Rekanan_tervalidasi extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/Akta_Pendirian-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_akta_pendirian/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 
 	// END AKTA PENDIRIAN
@@ -1736,13 +1746,15 @@ class Rekanan_tervalidasi extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/Akta_Perubahan-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_akta_perubahan/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 
 	// END AKTA perubahan
@@ -2444,13 +2456,15 @@ class Rekanan_tervalidasi extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SPPKP-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_sppkp/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($$url);
 	}
 	// end sppkp
 
@@ -2601,13 +2615,15 @@ class Rekanan_tervalidasi extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/NPWP-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_npwp/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// end pajak npwp
 
@@ -2839,13 +2855,15 @@ class Rekanan_tervalidasi extends CI_Controller
 		$file_name = $get_row_enkrip['file_dokumen'];
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SPT-' . $date . '/' . $get_row_enkrip['file_dokumen'];
 
+		$url = $this->url_dokumen_vendor . 'url_download_spt/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// end pajak spt
 
@@ -3098,13 +3116,15 @@ class Rekanan_tervalidasi extends CI_Controller
 		// Locate.
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/Neraca-' . $date . '/' . $fileDownload;
 
+		$url = $this->url_dokumen_vendor . 'url_download_neraca/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $fileDownload . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// pajak keuangan
 	function get_data_keuangan($id_vendor)
@@ -3355,17 +3375,16 @@ class Rekanan_tervalidasi extends CI_Controller
 		// Locate.
 		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/Keuangan-' . $date . '/' . $fileDownload;
 
+		$url = $this->url_dokumen_vendor . 'url_download_keuangan/' . $id_url;
+
 		// Configure.
-		header('Content-Type: application/octet-stream');
-		header("Content-Transfer-Encoding: Binary");
-		header("Content-disposition: attachment; filename=\"" . $fileDownload . "\"");
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
 
 		// Actual download.
-		readfile($file_url);
+		redirect($url);
 	}
 	// end pajak keuangan
-
-
-
 
 }
